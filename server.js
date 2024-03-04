@@ -6,7 +6,7 @@ const http = require('http'),
 // HTTP Module
 http.createServer((request, response) => {
     let addr = request.url,
-        q = new URL(addr, 'http://localhost:8080' + request.headers.host),
+        q = new URL(addr, 'http://' + request.headers.host),
         filePath = '';
 
     fs.appendFile('log.txt', 'URL: ' + addr + '\nTimestamp: ' + new Date() + '\n\n', (err) => {
@@ -35,12 +35,3 @@ http.createServer((request, response) => {
     });
 }).listen(8080);
 console.log('My first Node test server is running on Port 8080.');
-
-// File System Module 
-fs.readFile('input.txt', (err, data) => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('File content: ' + data.toString());
-    }
-});
