@@ -1,4 +1,14 @@
 {
+  "name": "Movie API", 
+  "version": "1.0.0",
+  "description": "The web application allows users to acces detailed information about featured films, including casts, producers, directors, and genres. Users will be able to create a personal account, and will have the ability to customize their own list of favorite movies and wish list of movies they would like to watch.",
+  "main": "index.js", 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.3",
