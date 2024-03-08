@@ -15,6 +15,50 @@ let requestTime = (req, res, next) => {
 app.use(myLogger);
 app.use(requestTime);
 
+//define topMovies
+let topMovies = [
+    {
+        title: 'Harry Potter and the Sorcerer\'s Stone',
+        genre: 'Action',
+    },
+    {
+        title: 'How to Train Your Dragon',
+        genre: 'Kids Animation',
+    },
+    {
+        title: 'Bourne Identity',
+        genre: 'Action',
+    },
+    {
+        title: 'Love Actually',
+        genre: 'Romantic Comedy',
+    },
+    {
+        title: 'The Lion King',
+        genre: 'Kids Animation',
+    },
+    {
+        title: 'The Princess Diaries',
+        genre: 'Romantic Comedy',
+    },
+    {
+        title: 'The Santa Clause',
+        genre: 'Holiday',
+    },
+    {
+        title: 'The Lord of the Rings',
+        genre: 'Action, Adventure, Fantasy',
+    },
+    {
+        title: 'Casablanca',
+        genre: 'Romance, Action',
+    },
+    {
+        title: 'The Martian',
+        genre: 'Action',
+    },
+]
+
 app.get('/', (req, res) => {
     let responseText = 'Your Top Movies';
     responseText += '<small>Requested at: ' + req.requestTime + '</small>';
@@ -27,7 +71,7 @@ app.get('/secreturl', (req, res) => {
     res.send(responseText);
 });
 
-app.get('documentation', (req, res) => {
+app.get('/documentation', (req, res) => {
     res.sendFile('public/documentation.html', { root: __dirname });
 });
 
@@ -41,6 +85,9 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
+app.listen(8080, () => {
+    console.log('Your app is listening on port 8080.');
+});
 app.listen(8080, () => {
     console.log('Your app is listening on port 8080.');
 });
