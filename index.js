@@ -229,8 +229,8 @@ let topMovies = [
     },
 ]
 
-// define User
-let user = {
+// define Users
+let users = {
         userId: '00aaa0000a0000a0',
         userName: 'TestUser',
         password: '0000',
