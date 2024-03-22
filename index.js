@@ -412,9 +412,9 @@ app.delete('/users/:userName/movies/:movieID', (req, res) => {
         let movieId = req.params.movieId;
         if (user.favoriteMovies.includes(movieId)) {
             user.favoriteMovies = user.favoriteMovies.filter(id => id !== movieId);
-            res.status(200).send('Movie ' + movieId + ' was removied from favorites for user ' + req.params.userName);
+            res.status(200).send('Movie ' + movieId + ' was removied from favorites for user. ' + req.params.userName);
         } else {
-            res.status(400).send('Movie ' + movieId + ' is not in favorites for user ' + req.params.userName);
+            res.status(400).send('Movie ' + movieId + ' is not in favorites for user. ' + req.params.userName);
         }
     }
 });
