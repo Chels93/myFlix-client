@@ -1,5 +1,9 @@
 const express = require("express");
-const app = express ();
+const app = express();
+const uuid = require("uuid");
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 //Log Requests (Morgan Middleware)
 let myLogger = (req, res, next) => {
@@ -8,8 +12,8 @@ let myLogger = (req, res, next) => {
 };
 
 let requestTime = (req, res, next) => {
-    req. requestTime = Date.now();
-    next ();
+    req.requestTime = Date.now();
+    next();
 };
 
 app.use(myLogger);
@@ -18,7 +22,7 @@ app.use(requestTime);
 //define topMovies
 let topMovies = [
     {
-        movieId: '1',
+        movieId: '01',
         title: 'Harry Potter and the Sorcerer\'s Stone',
         synopsis: 'Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful wizards and possesses unique magical powers of his own. He is summoned from his life as an unwanted child to become a student at Hogwarts, an English boarding school for wizards. There, he meets several friends who become his closest allies and help him discover the truth about his parents and their mysterious deaths.',
         imagePath: 'image.png',
@@ -34,12 +38,12 @@ let topMovies = [
         genre: 
             { 
                 genreId: '0001',
-                name: 'Fantasy',
-                description: 'Fantasy films are films that belong to the fantasy genre with fantastic themes, usually magic, supernatural events, mythology, folklore, or exotic fantasy worlds. The genre is considered a form of speculative fiction alongside science fiction films and horror films, although the genres do overlap.',
+                name: 'Adventure Fantasy',
+                description: 'A type of adventure film where the action takes place in imaginary lands with strange beasts, wizards and witches. These films contain many of the elements of the sword-and-sorcery film, but are not necessarily bound to the conventions of the sword and magic.',
             },
     },
     {
-        movieId: 2,
+        movieId: '02',
         title: 'Inside Out',
         synopsis: 'Riley (Kaitlyn Dias) is a happy, hockey-loving 11-year-old Midwestern girl, but her world turns upside-down when she and her parents move to San Francisco. Rileys emotions -- led by Joy (Amy Poehler) -- try to guide her through this difficult, life-changing event. However, the stress of the move brings Sadness (Phyllis Smith) to the forefront. When Joy and Sadness are inadvertently swept into the far reaches of Rileys mind, the only emotions left in Headquarters are Anger, Fear and Disgust.',
         imagePath: 'image.png',
@@ -55,12 +59,12 @@ let topMovies = [
         genre: 
             { 
                 genreId: '0002',
-                name: 'Comedy/Fantasy',
+                name: 'Fantasy Comedy',
                 description: 'Fantasy comedy films are types of films that uses magic, supernatural and or mythological figures for comic purposes. Most fantasy comedy includes an element of parody, or satire, turning many of the fantasy conventions on their head such as the hero becoming a cowardly fool, the princess being a klutz.',
             },
     },
     {
-        movieId: '3',
+        movieId: '03',
         title: 'Bourne Identity',
         synopsis: 'The story of a man (Matt Damon), salvaged, near death, from the ocean by an Italian fishing boat. When he recuperates, the man suffers from total amnesia, without identity or background... except for a range of extraordinary talents in fighting, linguistic skills and self-defense that speak of a dangerous past. He sets out on a desperate search-assisted by the initially rebellious Marie (Franka Potente) - to discover who he really is, and why he is being lethally pursued by assassins.',
         imagePath: 'image.png',
@@ -76,12 +80,12 @@ let topMovies = [
         genre: 
             { 
                 genreId: '0003',
-                name: 'Action/Thriller',
+                name: 'Action Thriller',
                 description: 'Action thriller is a blend of both action and thriller film in which the protagonist confronts dangerous adversaries, obstacles, or situations which he/she must conquer, normally in an action setting.',
             },
     },
     {
-        movieId: '4',
+        movieId: '04',
         title: 'Love Actually',
         synopsis: 'Nine intertwined stories examine the complexities of the one emotion that connects us all: love. Among the characters explored are David (Hugh Grant), the handsome newly elected British prime minister who falls for a young junior staffer (Martine McCutcheon), Sarah (Laura Linney), a graphic designer whose devotion to her mentally ill brother complicates her love life, and Harry (Alan Rickman), a married man tempted by his attractive new secretary.',
         imagePath: 'image.png',
@@ -102,7 +106,7 @@ let topMovies = [
             },
     },
     {
-        movieId: '5',
+        movieId: '05',
         title: 'What A Girl Wants',
         synopsis: 'On a whim, American teenager Daphne (Amanda Bynes) boards a plane to England to find the father she never met. Upon arriving there, though, she makes a startling discovery: The man she is looking for is Lord Henry Dashwood (Colin Firth), a member of the British upper class, who is running for political office. Lord Henry did not know Daphne existed, but he welcomes her into his life. However, she is not so sure -- and his family and his current betrothed look on her disapprovingly.',
         imagePath: 'image.png',
@@ -123,7 +127,7 @@ let topMovies = [
             },
     },
     {
-        movieId: '6',
+        movieId: '06',
         title: 'The Princess Diaries',
         synopsis: 'Shy San Francisco teenager Mia Thermopolis (Anne Hathaway) is thrown for a loop when, from out of the blue, she learns the astonishing news that she is a real-life princess! As the heir apparent to the crown of the small European principality of Genovia, Mia begins a comical journey toward the throne when her strict and formidable grandmother, Queen Clarisse Renaldi (Julie Andrews), shows up to give her princess lessons.',
         imagePath: 'image.png',
@@ -144,7 +148,7 @@ let topMovies = [
             },
     },
     {
-        movieId: '7',
+        movieId: '07',
         title: 'The Santa Clause',
         synopsis: 'Divorced dad Scott (Tim Allen) has custody of his son (Eric Lloyd) on Christmas Eve. After he accidentally kills a man in a Santa suit, they are magically transported to the North Pole, where an elf explains that Scott must take Santas place before the next Christmas arrives. Scott thinks hes dreaming, but over the next several months he gains weight and grows an inexplicably white beard. Maybe that night at the North Pole was not a dream after all -- and maybe Scott has a lot of work to do.',
         imagePath: 'image.png',
@@ -165,7 +169,7 @@ let topMovies = [
             },
     },
     {
-        movieId: '8',
+        movieId: '08',
         title: 'The Lord of the Rings',
         synopsis: 'In the Second Age of Middle-earth, the lords of Elves, Dwarves, and Men are given Rings of Power. Unbeknownst to them, the Dark Lord Sauron forges the One Ring in Mount Doom, instilling into it a great part of his power, to dominate the other Rings and conquer Middle-earth.',
         imagePath: 'image.png',
@@ -186,7 +190,7 @@ let topMovies = [
             },
     },
     {
-        movieId: '9',
+        movieId: '09',
         title: 'Casablanca',
         synopsis: 'Rick Blaine (Humphrey Bogart), who owns a nightclub in Casablanca, discovers his old flame Ilsa (Ingrid Bergman) is in town with her husband, Victor Laszlo (Paul Henreid). Laszlo is a famed rebel, and with Germans on his tail, Ilsa knows Rick can help them get out of the country.',
         imagePath: 'image.png',
@@ -223,14 +227,15 @@ let topMovies = [
         genre: 
             { 
                 genreId: '0010',
-                name: 'SciFi/Adventure',
+                name: 'Science Fiction',
                 description: 'Science fiction is a genre of speculative fiction dealing with imaginative concepts such as futuristic science and technology, space travel, time travel, faster than light travel, parallel universes and extraterrestrial life.',
             },
     },
-]
+];
 
 // define Users
-let users = {
+let users = [
+    {
         userId: '00aaa0000a0000a0',
         userName: 'TestUser',
         password: '0000',
@@ -240,6 +245,7 @@ let users = {
           '1', '2'
         ]
 }
+];
 
 app.get('/', (req, res) => {
     let responseText = 'Your Top Movies';
@@ -264,80 +270,164 @@ app.get('/movies' , (req, res) => {
 
 // Returns data (description, genre, director, image URL) about a single movie by title
 app.get('/movies/:title', (req, res) => {
-    res.json(topMovies.find((title) => 
-    { return movie.title === req.params.title }));
+    res.json(topMovies.find((movie) => movie.title === req.params.title));
 });
 
 // Returns data about a genre by name/title
 app.get('/movies/genres/:genreName', (req, res) => {
-    res.json(topMovies.find((genreName) => 
-    { return movie.genreName === req.params.genreName }));
+    const genreName = req.params.genreName;
+    const movies = topMovies.filter((movie) => movie.genre.name === genreName);
+
+    if (movies.length > 0) {
+        const genreInfo = {
+            genreName: genreName,
+            description: movies[0].genre.description,
+            movies: movies.map(movie => ({
+                title: movie.title,
+            }))
+        };
+        res.json(genreInfo);
+    } else {
+        res.status(404).send('Genre with the name ' + genreName + ' was not found.');
+    }
 });
 
 // Returns data about a director (bio, birth year, death year) by name
 app.get('/movies/directors/:directorName', (req, res) => {
-    res.json(movies.find((movie) =>
-    { return movie.directorName === req.params.directorName }));
+    const directorName = req.params.directorName;
+    const director = topMovies.find((movie) => movie.director.name === directorName)?.director;
+
+    if (director) {
+        const directorInfo = {
+            name: director.name,
+            bio: director.bio,
+            birthyear: director.birthyear,
+            deathyear: director.deathyear
+        };
+        res.json(directorInfo);
+    } else {
+        res.status(404).send('Director with the name ' + directorName + ' was not found.');
+    }
 });
 
 // Allows new users to register
 app.post('/users', (req, res) => {
     let newUser = req.body;
 
-    if (!newUser.name) {
-        const message = 'Missing in request body.';
-        res.status(400).send(message);
-    } else {
-        newUser.id = uuid.v4();
-        users.push(newUser);
-        res.status(201).send(newUser);
+    if (!isValidUser(newUser)) {
+        return res.status(400).json({ error: 'Invalid user data.' });
     }
+    newUser.userId = generateUUID();
+    users.push(newUser);
+    res.status(201).json({ message: 'User created successfully.', userId: newUser.userId });
 });
 
+function isValidUser(user) {
+    return user && 
+        typeof user.userName === 'string' &&
+        typeof user.password === 'string' &&
+        typeof user.email === 'string' &&
+        typeof user.birthday === 'string';
+}
+
+function generateUUID() {
+    return uuid.v4();
+}
+   
 // Allows users to update their user info (birthday)
-app.put('users/:userName', (req, res) => {
-    let user = users.find((user) => { return user.name === req.params.name });
+app.put('/users/:userName', (req, res) => {
+    const userId = req.params.userId;
+    const updatedFields = req.body;
 
-    if (user) {
-        user.birthday[req.params.birthday] = parseInt(req.params.birthday);
-        res.status(201).send('User ' + req.params.name + 'updated their birthday to ' + req.params.birthday);
-    } else {
-        res.status(404).send('User with the name ' + req.params.name + 'was not found.');
+    const userIndex = users.findIndex(user => user.userId === userId);
+
+    if (userIndex === -1) {
+        return res.status(404).json({ error: 'User with the ID `${userId}` was not found.' });
     }
+
+    const user = users[userIndex];
+
+    // Update user's information
+    for (const field in updatedFields) {
+        if (Object.prototype.hasOwnProperty.call(updatedFields, field)) {
+            switch (field) {
+                case 'userName':
+                    user.userName = updatedFields.userName;
+                    break;
+                case 'password':
+                    user.password = updatedFields.password;
+                    break;
+                case 'email':
+                    user.email = updatedFields.email;
+                    break;
+                case 'birthday':
+                    if (!isValidDateFormat(updatedFields.birthday)) {
+                        return res.status(400).json({ error: 'Invalid birthday format. Please provide a valid date in format MM/DD/YYYY.'});
+                    }
+                    user.birthday = updatedFields.birthday;
+                    break;
+                case 'favortieMovies':
+                    user.favoriteMovies = updatedFields.favoriteMovies;
+                    break;
+                default:
+                    // Ignore unknown fields
+                    break;
+            }
+        }
+    }
+    // Sucess response
+    res.status(200).json({ message: 'User with ID `${userId}` was updated successfully.'});
 });
 
+// Function validates date format (MM/DD/YYYY)
+function isValidDateFormat(dateString) {
+    const regex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/\d{4}$/;
+    return regex.test(dateString);
+}
 
 // Allows users to add a movie to their list of favorites
 app.post('/users/:userName/movies/:movieID', (req, res) => {
-    let newFavorite = req.body;
+    let user = users.find((user) => user.userName === req.params.userName);
 
-    if (!newFavorite.name) {
-        const message = 'Missing name in request body';
-        res.status(400).send(message);
+    if (!user) {
+        res.status(404).send('User with the name ' + req.params.userName + ' was not found.');
     } else {
-        newFavorite.id = uuid.v4();
-        users.push(newFavorite);
-        res.status(201).send(newFavorite);
+        let movieId = req.params.movieId;
+        if (!user.favoriteMovies.includes(movieId)) {
+            user.favoriteMovies.push(movieId);
+            res.status(201).send('Movie ' + movieId + ' was added to favorites for user ' + req.params.userName);
+        } else {
+            res.status(400).send('Movie ' + movieId + ' is already in favorties for user ' + req.params.userName);
+        }
     }
 });
 
 // Allows users to remove a movie from their list of favorites
 app.delete('/users/:userName/movies/:movieID', (req, res) => {
-    let user = users.find((user) => { return user.id === req.params.id });
+    let user = users.find((user) => user.userName === req.params.userName );
 
-    if (user) {
-        users = users.filter ((obj) => { return obj.id !== req.params.id });
-        res.status(201).send('Movie ' + req.params.id + 'was deleted.');
+    if (!user) {
+        res.status(404).send('User with the name ' + req.params.userName + ' was not found.');
+    } else {
+        let movieId = req.params.movieId;
+        if (user.favoriteMovies.includes(movieId)) {
+            user.favoriteMovies = user.favoriteMovies.filter(id => id !== movieId);
+            res.status(200).send('Movie ' + movieId + ' was removied from favorites for user ' + req.params.userName);
+        } else {
+            res.status(400).send('Movie ' + movieId + ' is not in favorites for user ' + req.params.userName);
+        }
     }
 });
 
 // Allows existing users to deregister 
 app.delete('/users/:userName', (req, res) => {
-    let user = users.find((userName) => { return user.id === req.params.id});
+    let index = users.findIndex((user) => user.userName === req.params.userName);
 
-    if (user) {
-        users = users.filter((obj) => { return obj.id !== req.params.id });
-        res.status(201).send('User ' + req.params.id + 'was deleted.');
+    if (index !== -1) {
+        users.splice(index, 1);
+        res.status(200).send('User ' + req.params.userName + ' was deleted.');
+    } else {
+        res.status(404).send('User with the name ' + req.params.userName + ' was not found.');
     }
 });
 
