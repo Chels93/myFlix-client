@@ -142,7 +142,7 @@ let topMovies = [
             },
         genre: 
             { 
-                genreId: '0006',
+                genreId: '0005',
                 name: 'Comedy',
                 description: 'Comedy is a genre of fiction that consists of discourses or works intended to be humourous or amusing by inducing laughter.',
             },
@@ -163,7 +163,7 @@ let topMovies = [
             },
         genre: 
             { 
-                genreId: '0007',
+                genreId: '0005',
                 name: 'Comedy',
                 description: 'Comedy is a genre of fiction that consists of discourses or works intended to be humourous or amusing by inducing laughter.',
             },
@@ -184,7 +184,7 @@ let topMovies = [
             },
         genre: 
             {
-                genreId: '0008',
+                genreId: '0001',
                 name: 'Adventure Fantasy',
                 description: 'A type of adventure film where the action takes place in imaginary lands with strange beasts, wizards and witches. These films contain many of the elements of the sword-and-sorcery film, but are not necessarily bound to the conventions of the sword and magic.',
             },
@@ -205,7 +205,7 @@ let topMovies = [
             },
         genre: 
             { 
-                genreId: '0009',
+                genreId: '0006',
                 name: 'Romance',
                 description: 'This genre focuses on the relationship and romantic love between two people, typically with an emotionally satisfying and optimistic ending,',
             },
@@ -226,7 +226,7 @@ let topMovies = [
             },
         genre: 
             { 
-                genreId: '0010',
+                genreId: '0007',
                 name: 'Science Fiction',
                 description: 'Science fiction is a genre of speculative fiction dealing with imaginative concepts such as futuristic science and technology, space travel, time travel, faster than light travel, parallel universes and extraterrestrial life.',
             },
@@ -412,9 +412,9 @@ app.delete('/users/:userName/movies/:movieID', (req, res) => {
         let movieId = req.params.movieId;
         if (user.favoriteMovies.includes(movieId)) {
             user.favoriteMovies = user.favoriteMovies.filter(id => id !== movieId);
-            res.status(200).send('Movie ' + movieId + ' was removied from favorites for user. ' + req.params.userName);
+            res.status(200).send('Movie ' + movieId + ' was removied from favorites for user ' + req.params.userName);
         } else {
-            res.status(400).send('Movie ' + movieId + ' is not in favorites for user. ' + req.params.userName);
+            res.status(400).send('Movie ' + movieId + ' is not in favorites for user ' + req.params.userName);
         }
     }
 });
