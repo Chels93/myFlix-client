@@ -23,7 +23,7 @@ app.use(requestTime);
 let topMovies = [
     {
         movieId: '01',
-        title: 'Harry Potter and the Sorcerer\'s Stone',
+        title: 'Harry Potter and the Sorcerer`s Stone',
         synopsis: 'Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful wizards and possesses unique magical powers of his own. He is summoned from his life as an unwanted child to become a student at Hogwarts, an English boarding school for wizards. There, he meets several friends who become his closest allies and help him discover the truth about his parents and their mysterious deaths.',
         imagePath: 'image.png',
         year: '2001',
@@ -32,7 +32,7 @@ let topMovies = [
                 directorId: '001',
                 name: 'Chris Columbus',
                 bio: 'Chris Joseph Columbus is an American filmmaker. Born in Spangler, Pennsylvania, Columbus studied film at Tisch School of the Arts where he developed an interest in filmmaking.',
-                birthyear: '1958',
+                birthyear: '1958-09-10',
                 deathyear: 'N/A',
             },
         genre: 
@@ -45,7 +45,7 @@ let topMovies = [
     {
         movieId: '02',
         title: 'Inside Out',
-        synopsis: 'Riley (Kaitlyn Dias) is a happy, hockey-loving 11-year-old Midwestern girl, but her world turns upside-down when she and her parents move to San Francisco. Rileys emotions -- led by Joy (Amy Poehler) -- try to guide her through this difficult, life-changing event. However, the stress of the move brings Sadness (Phyllis Smith) to the forefront. When Joy and Sadness are inadvertently swept into the far reaches of Rileys mind, the only emotions left in Headquarters are Anger, Fear and Disgust.',
+        synopsis: 'Riley (Kaitlyn Dias) is a happy, hockey-loving 11-year-old Midwestern girl, but her world turns upside-down when she and her parents move to San Francisco. Rileys emotions -- led by Joy (Amy Poehler) -- try to guide her through this difficult, life-changing event. However, the stress of the move brings Sadness (Phyllis Smith) to the forefront. When Joy and Sadness are inadvertently swept into the far reaches of Riley`s mind, the only emotions left in Headquarters are Anger, Fear and Disgust.',
         imagePath: 'image.png',
         year: '2015',
         director: 
@@ -53,7 +53,7 @@ let topMovies = [
                 directorId: '002',
                 name: 'Peter Docter',
                 bio: 'Peter Hans Docter is an American film director, producer, screenwriter, and animator. He has served as the chief creative officer of Pixar Animation Studios since 2018, and is best known for directing the animated feature films Monsters, Inc., Up, Inside Out, and Soul.',
-                birthyear: '1968',
+                birthyear: '1968-10-09',
                 deathyear: 'N/A',
             },
         genre: 
@@ -74,7 +74,7 @@ let topMovies = [
                 directorId: '003',
                 name: 'Doug Liman',
                 bio: 'Douglas Eric Liman is an American film director and producer. He is known for directing the films Swingers, Go, The Bourne Identity, Mr. & Mrs. Smith, Jumper, Edge of Tomorrow, and American Made. Most of his career has been associated with the production company Hypnotic.',
-                birthyear: '1965',
+                birthyear: '1965-07-24',
                 deathyear: 'N/A',
             },
         genre: 
@@ -95,7 +95,7 @@ let topMovies = [
                 directorId: '004',
                 name: 'Richard Curtis',
                 bio: 'Richard Whalley Anthony Curtis CBE (born 8 November 1956) is a British screenwriter, producer and film director. One of Britains most successful comedy screenwriters, he is known primarily for romantic comedy films.',
-                birthyear: '1956',
+                birthyear: '1956-11-08',
                 deathyear: 'N/A',
             },
         genre: 
@@ -116,7 +116,7 @@ let topMovies = [
                 directorId: '005',
                 name: 'Dennie Gordon',
                 bio: 'Dennie Gordon is an American film and television director. Her directorial television credits include Party of Five, Sports Night, Ally McBeal, The Practice, Grounded for Life, The Loop, White Collar, Burn Notice, Hell on Wheels, Waco, The Office and other series.',
-                birthyear: '1953',
+                birthyear: '1953-05-09',
                 deathyear: 'N/A',
             },
         genre: 
@@ -135,10 +135,10 @@ let topMovies = [
         director: 
             {
                 directorId: '006',
-                name: 'Gary Marhsall',
+                name: 'Garry Marhsall',
                 bio: 'Garry Kent Marshall was an American screenwriter, film director, producer and actor. Marshall began his career in the 1960s as a writer for The Lucy Show and Dick Van Dyke Show until he developed the television adaptation of Neil Simons play The Odd Couple.',
-                birthyear: '1934',
-                deathyear: '2016',
+                birthyear: '1934-11-13',
+                deathyear: '2016-07-19',
             },
         genre: 
             { 
@@ -158,7 +158,7 @@ let topMovies = [
                 directorId: '007',
                 name: 'John Pasquin',
                 bio: 'John Pasquin is an American director of film, television and theatre.',
-                birthyear: '1944',
+                birthyear: '1944-11-30',
                 deathyear: 'N/A',
             },
         genre: 
@@ -179,7 +179,7 @@ let topMovies = [
                 directorId: '008',
                 name: 'Peter Jackson',
                 bio: 'Sir Peter Robert Jackson ONZ KNZM is a New Zealand film director, screenwriter and producer. He is best known as the director, writer and producer of the Lord of the Rings trilogy and the Hobbit trilogy, both of which are adapted from the novels of the same name by J. R. R. Tolkien.',
-                birthyear: '1961',
+                birthyear: '1961-10-31',
                 deathyear: 'N/A',
             },
         genre: 
@@ -200,14 +200,14 @@ let topMovies = [
                 directorId: '009',
                 name: 'Michael Curtiz',
                 bio: 'Michael Curtiz was a Hungarian-American film director, recognized as one of the most prolific directors in history. He directed classic films from the silent era and numerous others during the Golden Age of Hollywood, when the studio system was prevalent.',
-                birthyear: '1886',
-                deathyear: '1962',
+                birthyear: '1886-12-24',
+                deathyear: '1962-04-10',
             },
         genre: 
             { 
                 genreId: '0006',
                 name: 'Romance',
-                description: 'This genre focuses on the relationship and romantic love between two people, typically with an emotionally satisfying and optimistic ending,',
+                description: 'This genre focuses on the relationship and romantic love between two people, typically with an emotionally satisfying and optimistic ending.',
             },
     },
     {
@@ -221,7 +221,7 @@ let topMovies = [
                 directorId: '010',
                 name: 'Ridley Scott',
                 bio: 'Sir Ridley Scott GBE is an English filmmaker. He is best known for directing films in the science fiction, crime and historical drama genres. His work is known for its atmospheric and highly concentrated visual style.',
-                birthyear: '1937',
+                birthyear: '1937-11-30',
                 deathyear: 'N/A',
             },
         genre: 
@@ -231,20 +231,81 @@ let topMovies = [
                 description: 'Science fiction is a genre of speculative fiction dealing with imaginative concepts such as futuristic science and technology, space travel, time travel, faster than light travel, parallel universes and extraterrestrial life.',
             },
     },
+    {
+        movieId: '11',
+        title: 'Rent',
+        synopsis: 'In this musical, set at the dawn of the 1990s, a group of New Yorkers struggle with their careers, love lives and the effects of the AIDS epidemic on their community. Mark (Anthony Rapp), an aspiring filmmaker, and Roger (Adam Pascal), an HIV-positive musician, scramble for money to pay rent to their landlord and former roommate, Benny (Taye Diggs). Meanwhile, their friend Tom (Jesse L. Martin), a professor, has fallen for Angel (Wilson Jermaine Heredia), who is slowly dying of AIDS.',
+        imagePath: 'image.png',
+        year: '2005',
+        director:
+            {
+                directorId: '001',
+                name: 'Chris Columbus',
+                bio: 'Chris Joseph Columbus is an American filmmaker. Born in Spangler, Pennsylvania, Columbus studied film at Tisch School of the Arts where he developed an interest in filmmaking.',
+                birthyear: '1958-09-10',
+                deathyear: 'N/A',
+            },
+        genre: 
+            { 
+                genreId: '0008',
+                name: 'Musical',
+                description: 'Musical film is a film genre in which songs by the characters are interwoven into the narrative, sometimes accompanied by dancing. The songs usually advance the plot or develop the film`s characters, but in some cases, they serve merely as breaks in the storyline, often as elaborate "production numbers".',
+            },
+    },
 ];
 
 // define Users
 let users = [
     {
-        userId: '00aaa0000a0000a0',
-        userName: 'TestUser',
-        password: '0000',
-        email: 'test@email.com',
-        birthday: '00/00/0000',
-        favoriteMovies: [
-          '1', '2'
+        userId: '1',
+        userName: 'TestUser1',
+        password: '1234',
+        email: 'testuser1@email.com',
+        birthdate: '2001-01-01',
+        favorite_movies: [
+          '1', '2', '3'
         ]
-}
+    },
+    {
+        userId: '2',
+        userName: 'TestUser2',
+        password: '5678',
+        email: 'testuser2@email.com',
+        birthdate: '2002-02-02',
+        favorite_movies: [
+          '4', '5', '6'
+        ]
+    },
+    {
+        userId: '3',
+        userName: 'TestUser3',
+        password: '9101',
+        email: 'testuser3@email.com',
+        birthdate: '2003-03-03',
+        favorite_movies: [
+          '7', '8', '9'
+        ]
+    },
+    {
+        userId: '4',
+        userName: 'TestUser4',
+        password: '1213',
+        email: 'testuser4@email.com',
+        birthdate: '2004-04-04',
+        favorite_movies: [
+          '1', '10', '11'
+        ]
+    },
+    {
+        userId: '5',
+        userName: 'TestUser5',
+        password: '1111',
+        email: 'testuser5@email.com',
+        birthdate: '2005-05-05',
+        favorite_movies: [
+          '2', '3', '4'
+        ]
+    }
 ];
 
 app.get('/', (req, res) => {
