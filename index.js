@@ -510,7 +510,7 @@ function isValidDateFormat(dateString) {
 }
 
 // Allows users to add a movie to their list of favorites
-app.post('/users/:userName/movies/:movieID', (req, res) => {
+app.post('/users/:userName/movies/:movieId', (req, res) => {
     let user = users.find((user) => user.userName === req.params.userName);
 
     if (!user) {
@@ -527,7 +527,7 @@ app.post('/users/:userName/movies/:movieID', (req, res) => {
 });
 
 // Allows users to remove a movie from their list of favorites
-app.delete('/users/:userName/movies/:movieID', (req, res) => {
+app.delete('/users/:userName/movies/:movieId', (req, res) => {
     let user = users.find((user) => user.userName === req.params.userName );
 
     if (!user) {
