@@ -325,7 +325,7 @@ let users = [
         password: '1234',
         email: 'testuser1@email.com',
         birthdate: '2001-01-01',
-        favorite_movies: [
+        favoriteMovies: [
           '1', '2', '3'
         ]
     },
@@ -335,7 +335,7 @@ let users = [
         password: '5678',
         email: 'testuser2@email.com',
         birthdate: '2002-02-02',
-        favorite_movies: [
+        favoriteMovies: [
           '4', '5', '6'
         ]
     },
@@ -345,7 +345,7 @@ let users = [
         password: '9101',
         email: 'testuser3@email.com',
         birthdate: '2003-03-03',
-        favorite_movies: [
+        favoriteMovies: [
           '7', '8', '9'
         ]
     },
@@ -355,7 +355,7 @@ let users = [
         password: '1213',
         email: 'testuser4@email.com',
         birthdate: '2004-04-04',
-        favorite_movies: [
+        favoriteMovies: [
           '1', '10', '11'
         ]
     },
@@ -365,7 +365,7 @@ let users = [
         password: '1111',
         email: 'testuser5@email.com',
         birthdate: '2005-05-05',
-        favorite_movies: [
+        favoriteMovies: [
           '2', '3', '4'
         ]
     }
@@ -521,7 +521,7 @@ app.post('/users/:userName/movies/:movieId', (req, res) => {
             user.favoriteMovies.push(movieId);
             res.status(201).send('Movie ' + movieId + ' was added to favorites for user ' + req.params.userName);
         } else {
-            res.status(400).send('Movie ' + movieId + ' is already in favorties for user ' + req.params.userName);
+            res.status(400).send('Movie ' + movieId + ' is already in favorites for user ' + req.params.userName);
         }
     }
 });
@@ -558,7 +558,7 @@ app.delete('/users/:userName', (req, res) => {
 //Error Handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).send('Something broke! ' + err.message);
 });
 
 app.listen(8080, () => {
