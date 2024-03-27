@@ -60,7 +60,7 @@ let topMovies = [
             { 
                 genreId: '2',
                 name: 'Fantasy Comedy',
-                description: 'Fantasy comedy films are types of films that uses magic, supernatural and or mythological figures for comic purposes. Most fantasy comedy includes an element of parody, or satire, turning many of the fantasy conventions on their head such as the hero becoming a cowardly fool, the princess being a klutz.',
+                description: 'Fantasy comedy films are types of films that use magic, supernatural and or mythological figures for comic purposes. Most fantasy comedy includes an element of parody, or satire, turning many of the fantasy conventions on their head such as the hero becoming a cowardly fool, or   Lovethe princess being a klutz.',
             },
     },
     {
@@ -90,11 +90,11 @@ let topMovies = [
         synopsis: 'Nine intertwined stories examine the complexities of the one emotion that connects us all: love. Among the characters explored are David (Hugh Grant), the handsome newly elected British prime minister who falls for a young junior staffer (Martine McCutcheon), Sarah (Laura Linney), a graphic designer whose devotion to her mentally ill brother complicates her love life, and Harry (Alan Rickman), a married man tempted by his attractive new secretary.',
         imagePath: 'image.png',
         year: '2003',
-        director: 
+        director:
             {
                 directorId: '4',
                 name: 'Richard Curtis',
-                bio: 'Richard Whalley Anthony Curtis CBE (born 8 November 1956) is a British screenwriter, producer and film director. One of Britains most successful comedy screenwriters, he is known primarily for romantic comedy films.',
+                bio: 'Richard Whalley Anthony Curtis CBE is a British screenwriter, producer and film director. One of Britains most successful comedy screenwriters, he is known primarily for romantic comedy films.',
                 birthyear: '1956-11-08',
                 deathyear: 'Null',
             },
@@ -144,13 +144,13 @@ let topMovies = [
             { 
                 genreId: '5',
                 name: 'Comedy',
-                description: 'Comedy is a genre of fiction that consists of discourses or works intended to be humourous or amusing by inducing laughter.',
+                description: 'Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter.',
             },
     },
     {
         movieId: '7',
         title: 'The Santa Clause',
-        synopsis: 'Divorced dad Scott (Tim Allen) has custody of his son (Eric Lloyd) on Christmas Eve. After he accidentally kills a man in a Santa suit, they are magically transported to the North Pole, where an elf explains that Scott must take Santas place before the next Christmas arrives. Scott thinks hes dreaming, but over the next several months he gains weight and grows an inexplicably white beard. Maybe that night at the North Pole was not a dream after all -- and maybe Scott has a lot of work to do.',
+        synopsis: 'Divorced dad Scott (Tim Allen) has custody of his son (Eric Lloyd) on Christmas Eve. After he accidentally kills a man in a Santa suit, they are magically transported to the North Pole, where an elf explains that Scott must take Santas place before the next Christmas arrives. Scott thinks he is dreaming, but over the next several months he gains weight and grows an inexplicably white beard. Maybe that night at the North Pole was not a dream after all -- and maybe Scott has a lot of work to do.',
         imagePath: 'image.png',
         year: '1994',
         director: 
@@ -165,7 +165,7 @@ let topMovies = [
             { 
                 genreId: '5',
                 name: 'Comedy',
-                description: 'Comedy is a genre of fiction that consists of discourses or works intended to be humourous or amusing by inducing laughter.',
+                description: 'Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter.',
             },
     },
     {
@@ -275,7 +275,7 @@ let topMovies = [
     },
     {
         movieId: '13',
-        title: 'Monsters Inc.',
+        title: 'Monsters, Inc.',
         synopsis: 'Monsters Incorporated is the largest scare factory in the monster world, and James P. Sullivan (John Goodman) is one of its top scarers. Sullivan is a huge, intimidating monster with blue fur, large purple spots and horns. His scare assistant, best friend and roommate is Mike Wazowski (Billy Crystal), a green, opinionated, feisty little one-eyed monster. Visiting from the human world is Boo (Mary Gibbs), a tiny girl who goes where no human has ever gone before.',
         imagePath: 'image.png',
         year: '2001',
