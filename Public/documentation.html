@@ -44,24 +44,21 @@
             {
               "movieId": "00000",
               "Title": "Movie Title Here",
-              "Overview": "Movie Description Here",
+              "Synopsis": "Movie Description Here",
               "ImagePath": "image.png",
               "Year": "0000",
-  
               "Director": {
-                "directorId": "00000",
+                "DirectorId": "0000",
                 "Name": "Director Name",
                 "Bio": "Biography of director here.",
                 "BirthYear": "0000",
                 "DeathYear": "0000",
               },
-  
               "Genre": {
-                "genreId": "00000",
+                "GenreId": "0000"
                 "Name": "Genre here",
                 "Description": "Description of genre here."
               }
-            }
           </code>
         </td>
       </tr>
@@ -73,7 +70,7 @@
         <td>Json object holding data about a single genre and it's description, using the following structure:
           <code>
             {
-              "genreId": "00000",
+              "GenreId": "0000",
               "Name": "Genre Name",
               "Description": "Description of genre here."
             }
@@ -85,7 +82,7 @@
           structure:
           <code>
             {
-              "directorId": "00000",
+              "DirectorId": "00000",
               "Name": "Director Name",
               "Bio": "Direcotry biography here.",
               "Birth Year": "0000",
@@ -107,23 +104,23 @@
           <code>
             {
               ID: Integer,
-              Username: String,
+              userName: String,
               Password: String, 
-              Email: String,
-              Birthday: Date,
+              email: String,
+              birthday: Date,
+              favoriteMovies: String,
             }
           </code>
         </td>
         <td>Json object holding data about user that was added (including ID), using the following structure:
           <code>
             {
-              "Username": "TestUser",
-              "Password": "0000",
-              "Email": "test@email.com",
-              "Birthday": "00/00/0000"
-              "FavoriteMovies": [],
               "__id": "00aaa0000a0000a0",
-              "__v": 0
+              "userName": "TestUser",
+              "Password": "0000",
+              "email": "test@email.com",
+              "birthdate": "0000-00-00"
+              "favoriteMovies": [],
             }
           </code>
         </td>
@@ -152,13 +149,12 @@
           <code>
             {
               "__id": "00aaa0000a0000a0",
-              "Username": "TestUser"
+              "userName": "TestUser"
               "Password": "0000",
-              "Email": "test@email.com",
-              "Birthday": "00/00/0000"
-              "FavoriteMovies": [
-                "767687c78fsd6f78"
-                "sd8f7s9da07f67df"
+              "email": "test@email.com",
+              "birthdate": "0000-00-00"
+              "favoriteMovies": [
+                "1", "2", "3"
               ]
             }
           </code>
@@ -173,12 +169,12 @@
           <code>
             {
               "__id": "00aaa0000a0000a0",
-              "Username": "TestUser"
+              "userName": "TestUser"
               "Password": "0000",
-              "Email": "test@email.com",
-              "Birthday": "00/00/0000"
-              "FavoriteMovies": [
-                "767687c78fsd6f78"
+              "email": "test@email.com",
+              "birthdate": "0000-00-00"
+              "favoriteMovies": [
+                "1", "2"
               ]
             }
           </code>
