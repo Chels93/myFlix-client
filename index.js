@@ -63,10 +63,10 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 // Returns data about a genre by name/title
-app.get('/movies/genre/:GenreName', (req, res) => {
-    Movies.find({ Genre: req.params.GenreName })
-        .then((movies) => {
-            res.status(200).json(movies);
+app.get('/movies/genre/:genreName', (req, res) => {
+    Genres.findOne({ name: req.params.genreName })
+        .then((genre) => {
+            res.status(200).json(genre);
         })
         .catch((err) => {
             console.error(err);
@@ -75,8 +75,8 @@ app.get('/movies/genre/:GenreName', (req, res) => {
 });
 
 // Returns data about a director (bio, birth year, death year) by name
-app.get('/movies/Director/:DirectorName', (req, res) => {
-    Movies.findOne({ Director: req.params.DirectorName })
+app.get('/movies/director/:directorName', (req, res) => {
+    Directors.findOne({ name: req.params.directorName })
         .then((director) => {
             res.json(director);
         })
@@ -114,7 +114,7 @@ app.post('/users', (req, res) => {
                     birthdate: req.body.birthdate,
                 })
                     .then(user => {
-                        res.status(201).json(user);
+                        res.status(200).json(user);
                     })
                     .catch(error => {
                         console.error(error);
@@ -167,21 +167,22 @@ app.post('/users/:userName/movies/:_id', (req, res) => {
 
 // Allows users to remove a movie from their list of favorites
 app.delete('/users/:userName/movies/:ObjectId', (req, res) => {
-    Users.findOneAndDelete({ userName: req.params.userName }, 
+    Users.findOneAndUpdate({ userName: req.params.userName }, 
+        { userName: req.params.userName },
         { $pull: { favoriteMovies: req.params.ObjectId } }, 
-        { new: true })
-        .then((updatedUser) => {
-            res.status(200).json(updatedUser);
+    )
+    .then((updatedUser) => {
+        res.status(200).json(updatedUser);
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
         });
 });
 
 // Allows existing users to deregister 
 app.delete('/users/:userName', (req, res) => {
-    Users.findOneAndRemove({ userName: req.params.userName })
+    Users.findOneAndDelete({ userName: req.params.userName })
         .then((user) => {
             if (!user) {
                 res.status(400).send(req.params.userName + ' was not found.');
