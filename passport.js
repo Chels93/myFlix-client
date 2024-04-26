@@ -1,50 +1,76 @@
-const passport = require('passport');
-    LocalStrategy = require('passport-local').Strategy,
-    Models = require('./models.js'),
-    passportJWT = require('passport-jwt');
+const passport = require("passport");
+const Models = require("./models.js");
 
-let Users = Models.User,
-    JWTStrategy = passportJWT.Strategy,
-    ExtractJWT = passportJWT.ExtractJwt;
+const Movies = Models.Movie;
 
-passport.use(
-    new LocalStrategy(
-        {
-            usernameField: 'userName',
-            passwordField: 'password',
-        },
-        async (username, password, callback) => {
-            console.log(`${username} ${password}`);
-            await Users.findOne({ Username: username })
-            .then ((user) => {
-                if(!user) {
-                    console.log('incorrect username');
-                    return callback(null, false, {
-                        message: 'Incorrect username or password.',
-                    });
-                }
-                console.log('finished');
-                return callback(null, user);
-            })
-            .catch((error) => {
-                if (error) {
-                    console.log(error);
-                    return callback(error);
-                }
-            })
-        }
-    )
-);
-
-passport.use(new JWTStrategy({
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'your_jwt_secret'
-}, async (jwtPayload, callback) => {
-    return await Users.findById(jwtPayload._id)
-        .then((user) => {
-            return callback(null, user);
+module.exports = (app) => {
+  // Returns a JSON object of all movies to the user
+  app.get(
+    "/movies",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      await Movies.find()
+        .then((movies) => {
+          res.status(201).json(movies);
         })
-        .catch((error) => {
-            return callback(error)
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error: " + err);
         });
-}));
+    }
+  );
+
+  // Returns data (description, genre, director, image URL) about a single movie by title
+  app.get(
+    "/movies/:Title",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      await Movies.findOne({ Title: req.params.Title })
+        .then((movie) => {
+          res.json(movie);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        });
+    }
+  );
+
+  // Returns data about a genre by name/title
+  app.get(
+    "/movies/genre/:genreName",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      await Movies.findOne({ "Genre.Name": req.params.genreName })
+        .then((genre) => {
+          if (!genre) {
+            return res.status(404).send("Genre not found.");
+          }
+          res.status(200).json(genre);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        });
+    }
+  );
+
+  // Returns data about a director (bio, birth year, death year) by name
+  app.get(
+    "/movies/director/:directorName",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      await Movies.findOne({ "Director.Name": req.params.directorName })
+        .then((director) => {
+          if (!director) {
+            return res.status(404).send("Director not found.");
+          }
+          res.status(200).json(director);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        });
+    }
+  );
+};
