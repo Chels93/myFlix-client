@@ -1,18 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const passport = require("passport");
 const mongoose = require("mongoose");
-const Models = require("./models.js");
 const cors = require("cors");
-const auth = require("./auth")
-const routerUser = require("./router-users.js")
+const auth = require("./auth");
+const routerUser = require("./router-users.js");
+const routerMovies = require("./router-movies");
 
 const app = express();
 app.use(cors());
-
-// Express routers
-auth(app);
-routerUser(app)
 
 mongoose.connect("mongodb://localhost:27017/moviesdb", {
   useNewUrlParser: true,
@@ -36,6 +31,11 @@ let requestTime = (req, res, next) => {
 app.use(myLogger);
 app.use(requestTime);
 
+// Express routers
+auth(app);
+routerUser(app);
+routerMovies(app);
+
 // Default text response
 app.get("/", (req, res) => {
   res.send("Welcome to MoviesDB!");
@@ -49,3 +49,4 @@ app.use((err, req, res, next) => {
 
 // Listen on port
 app.listen(8080, () => console.log("Your app is listening on Port 8080."));
+
