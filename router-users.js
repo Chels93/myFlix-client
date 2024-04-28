@@ -1,5 +1,6 @@
 const passport = require("passport");
 const Models = require("./models.js");
+const { check, validationResult } = require("express-validator");
 
 const Users = Models.User;
 
@@ -21,43 +22,74 @@ module.exports = (app) => {
   );
 
   // Allows new users to register
-  app.post("/users", async (req, res) => {
-    console.log(req);
+  app.post(
+    "/users",
+    [
+      check("username", "Username is required").isLength({ min: 5 }),
+      check(
+        "username",
+        "Username contains non alpanumeric characters - not allowed."
+      ).isAlphanumeric(),
+      check("password", "Password is required").not().isEmpty(),
+      check("email", "Email does not appear to be valid").isEmail(),
+    ],
 
-    if (!req.body.password || !req.body.username) {
-      return res.status(400).json({ error: "username or password missing" });
-    }
-    let hashedPassword = Users.hashPassword(req.body.password);
-    await Users.findOne({ username: req.body.username })
-      .then((user) => {
-        if (user) {
-          return res.status(400).send(req.body.username + "already exists.");
-        } else {
-          Users.create({
-            username: req.body.username,
-            password: hashedPassword,
-            email: req.body.email,
-            birthdate: req.body.birthdate,
-          })
-            .then((user) => {
-              res.status(201).json(user);
+    async (req, res) => {
+      let errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+      }
+      if (!req.body.password || !req.body.username) {
+        return res.status(400).json({ error: "username or password missing" });
+      }
+      let hashedPassword = Users.hashPassword(req.body.password);
+      await Users.findOne({ username: req.body.username })
+        .then((user) => {
+          if (user) {
+            return res.status(400).send(req.body.username + "already exists.");
+          } else {
+            Users.create({
+              username: req.body.username,
+              password: hashedPassword,
+              email: req.body.email,
+              birthdate: req.body.birthdate,
             })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send("Error: " + error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      });
-  });
+              .then((user) => {
+                res.status(201).json(user);
+              })
+              .catch((error) => {
+                console.error(error);
+                res.status(500).send("Error: " + error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send("Error: " + error);
+        });
+    }
+  );
 
   // Allows users to update their user info
   app.put(
     "/users/:username",
-    passport.authenticate("jwt", { session: false }),
+    [
+      check("username", "Username is required").isLength({ min: 5 }),
+      check(
+        "username",
+        "Username contains non alpanumeric characters - not allowed."
+      ).isAlphanumeric(),
+      check("password", "Password is required").not().isEmpty(),
+      check("email", "Email does not appear to be valid").isEmail(),
+      (req, res, next) => {
+        let errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(422).json({ errors: errors.array() });
+        }
+        next();
+      },
+      passport.authenticate("jwt", { session: false }),
+    ],
     async (req, res) => {
       await Users.findOneAndUpdate(
         { username: req.params.username },
