@@ -14,8 +14,8 @@ app.use(cors());
 // useUnifiedTopology: true,
 // });
 mongoose.connect(
-  process.env.CONNECTION_URI,
-  { useNewURLParser: true, useUnifiedTopology: true }
+  "mongodb+srv://cacguff:BirchyBoy2020@moviesdb.wfjolfq.mongodb.net/mymoviesdb?retryWrites=true&w=majority&appName=mymoviesdb",
+  { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 // Middleware to parse JSON bodies
