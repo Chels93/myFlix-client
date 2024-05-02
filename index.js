@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const auth = require("./auth");
 const routerUser = require("./router-users.js");
-const routerMovies = require("./router-movies.js");
+const routerMovies = require("./router-movies");
 
 const app = express();
 app.use(cors());
@@ -13,11 +13,10 @@ app.use(cors());
 // useNewUrlParser: true,
 // useUnifiedTopology: true,
 // });
-
-const uri = process.env.CONNECTION_URI || "mongodb+srv://cacguff:BirchyBoy2020@moviesdb.wfjolfq.mongodb.net/mymoviesdb?retryWrites=true&w=majority&appName=mymoviesdb";
-mongoose.connect( uri, {useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.error("Error connecting to MongoDB", err));
+mongoose.connect(
+  "mongodb+srv://cacguff:BirchyBoy2020@moviesdb.wfjolfq.mongodb.net/mymoviesdb?retryWrites=true&w=majority&appName=mymoviesdb",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -57,3 +56,4 @@ const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
   console.log("Listening on Port " + port);
 });
+
