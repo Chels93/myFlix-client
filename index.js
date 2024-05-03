@@ -14,7 +14,8 @@ app.use(cors());
 // useUnifiedTopology: true,
 // });
 mongoose.connect(
-  "mongodb+srv://cacguff:BirchyBoy2020@moviesdb.wfjolfq.mongodb.net/mymoviesdb?retryWrites=true&w=majority&appName=mymoviesdb",
+  //"mongodb+srv://cacguff:BirchyBoy2020@moviesdb.wfjolfq.mongodb.net/mymoviesdb?retryWrites=true&w=majority&appName=mymoviesdb",
+  process.env.CONNECTION_URI,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
@@ -45,6 +46,13 @@ app.get("/", (req, res) => {
   res.send("Welcome to MoviesDB!");
 });
 
+// Default text response
+app.get("/docs", (req, res) => {
+  res.redirect("/documentation.html");
+});
+
+app.use(express.static("public"));
+
 // Error Handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -56,4 +64,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
   console.log("Listening on Port " + port);
 });
-
