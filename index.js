@@ -13,9 +13,10 @@ app.use(cors());
 // useNewUrlParser: true,
 // useUnifiedTopology: true,
 // });
+
 mongoose.connect(
-  "mongodb+srv://cacguff:BirchyBoy2020@moviesdb.wfjolfq.mongodb.net/mymoviesdb?retryWrites=true&w=majority&appName=mymoviesdb",
-  // process.env.CONNECTION_URI,
+  // "mongodb+srv://cacguff:BirchyBoy2020@mymoviesdb.wfjolfq.mongodb.net/moviesdb?retryWrites=true&w=majority&appName=mymoviesdb",
+  process.env.CONNECTION_URI,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
