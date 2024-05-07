@@ -1,7 +1,6 @@
 {
   "name": "package.json",
   "license": "ISC",
-  "main": "src/index.jsx",
   "version": "1.0.0",
   "keywords": [],
   "description": "",
