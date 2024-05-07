@@ -13,10 +13,6 @@ export const MovieView = ({ movie }) => {
         <span>(movie.synopsis)</span>
       </div>
       <div>
-        <span>Poster Image: </span>
-        <span>(movie.image)</span>
-      </div>
-      <div>
         <span>Release Year: </span>
         <span>(movie.year)</span>
       </div>
