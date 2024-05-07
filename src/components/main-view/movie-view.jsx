@@ -17,7 +17,7 @@ export const MovieView = ({ movie }) => {
         <span>(movie.image)</span>
       </div>
       <div>
-        <span>Release Year</span>
+        <span>Release Year: </span>
         <span>(movie.year)</span>
       </div>
       <div>
