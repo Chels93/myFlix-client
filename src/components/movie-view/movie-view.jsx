@@ -24,8 +24,7 @@ export const MovieView = ({ movie }) => {
         <span>Genre: </span>
         <span>(movie.genre)</span>
       </div>
-
-      <button>Back</button>
+      <button onClick={onBackClick}>Back</button>
     </div>
   );
 };

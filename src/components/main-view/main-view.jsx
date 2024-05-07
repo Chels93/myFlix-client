@@ -46,7 +46,7 @@ export const MovieView = () => {
       id: 3,
       title: "Bourne Identity",
       synopsis:
-        "The story of a man (Matt Damon), salvaged, near deat, from the ocean by an Italian fishing boat. When he recuperates, the man suffers from total amnesia, without identity or background... except for a range of extraordinary talents in fighting, linguistic skills and self-defense that speak of a dangerous past. He sets out on a desperate search-assisted by the initially rebellious Marie (franka Potente) - to discover who he really is, and why he is being lethally pursued by assassins.",
+        "The story of a man (Matt Damon), salvaged, near death, from the ocean by an Italian fishing boat. When he recuperates, the man suffers from total amnesia, without identity or background... except for a range of extraordinary talents in fighting, linguistic skills and self-defense that speak of a dangerous past. He sets out on a desperate search-assisted by the initially rebellious Marie (franka Potente) - to discover who he really is, and why he is being lethally pursued by assassins.",
       image: "image.png",
       year: "2002",
       director: {
@@ -104,16 +104,14 @@ export const MovieView = () => {
 
   if (selectedMovie) {
     return (
-      <MovieView
-        movie={selectedMovie}
-        onBackClick={() => setSelectedMovie(null)}
-      />
+      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
     );
   }
 
   if (movies.length === 0) {
     return <div>The list is empty!</div>;
-  } else {
+  }
+
     return (
       <div>
         {movies.map((movie) => (
@@ -127,5 +125,4 @@ export const MovieView = () => {
         ))}
       </div>
     );
-  }
 };
