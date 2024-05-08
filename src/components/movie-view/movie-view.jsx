@@ -5,23 +5,23 @@ export const MovieView = ({ movie }) => {
         <img src={movie.image} />
       </div>
       <div>
-        <span>Title: </span>
+        <span>title: </span>
         <span>{movie.title}</span>
       </div>
       <div>
-        <span>Synopsis: </span>
+        <span>synopsis: </span>
         <span>(movie.synopsis)</span>
       </div>
       <div>
-        <span>Release Year: </span>
+        <span>release year: </span>
         <span>(movie.year)</span>
       </div>
       <div>
-        <span>Director: </span>
+        <span>director: </span>
         <span>{movie.director}</span>
       </div>
       <div>
-        <span>Genre: </span>
+        <span>genre: </span>
         <span>(movie.genre)</span>
       </div>
       <button onClick={onBackClick}>Back</button>
