@@ -1,3 +1,5 @@
+import React from "react";
+
 export const MovieView = ({ movie, onBackClick }) => {
   return (
     <div>
@@ -5,23 +7,23 @@ export const MovieView = ({ movie, onBackClick }) => {
         <img src={movie.image} alt={movie.title} />
       </div>
       <div>
-        <span>title: </span>
+        <span>Title: </span>
         <span>{movie.title}</span>
       </div>
       <div>
-        <span>synopsis: </span>
+        <span>Synopsis: </span>
         <span>{movie.synopsis}</span>
       </div>
       <div>
-        <span>release year: </span>
+        <span>Release year: </span>
         <span>{movie.year}</span>
       </div>
       <div>
-        <span>director: </span>
+        <span>Director: </span>
         <span>{movie.director}</span>
       </div>
       <div>
-        <span>genre: </span>
+        <span>Genre: </span>
         <span>{movie.genre}</span>
       </div>
       <button onClick={onBackClick}>Back</button>
