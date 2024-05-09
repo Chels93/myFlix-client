@@ -7,7 +7,6 @@ module.exports = (app) => {
   // Returns a JSON object of all movies to the user
   app.get(
     "/movies",
-    passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       await Movies.find()
         .then((movies) => {
