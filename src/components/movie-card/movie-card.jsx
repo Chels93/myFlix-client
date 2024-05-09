@@ -1,11 +1,12 @@
-export const MovieCard = ({props, onMovieClick }) => {
+export const MovieCard = ({ movie, onMovieClick }) => {
     return (
-        <div
-            onClick={() => {
-                onMovieClick(movie);
-            }}
-            >
-            {props.movie.title}
-            </div>
+      <div
+        onClick={() => {
+          onMovieClick(movie);
+        }}
+      >
+        {movie.title}
+      </div>
     );
-};
+  };
+  
