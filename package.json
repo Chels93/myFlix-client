@@ -1,6 +1,5 @@
 {
     "name": "33-exercise-myflix-client-final",
-    "main": "src/index.jsx",
     "dependencies": {
       "react": "18.0.0",
       "react-dom": "18.0.0",
