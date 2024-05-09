@@ -1,16 +1,11 @@
 {
-  "name": "package.json",
-  "license": "ISC",
-  "version": "1.0.0",
-  "keywords": [],
-  "description": "",
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "^4.0.0"
-  },
-  "devDependencies": {
-    "parcel": "^2.12.0",
-    "process": "^0.11.10"
+    "name": "33-exercise-myflix-client-final",
+    "main": "src/index.jsx",
+    "dependencies": {
+      "react": "18.0.0",
+      "react-dom": "18.0.0",
+      "react-scripts": "4.0.0"
+    },
+    "keywords": [],
+    "description": ""
   }
-}
