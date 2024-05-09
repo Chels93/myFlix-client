@@ -27839,7 +27839,6 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MainView", ()=>MainView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 var _s = $RefreshSig$();
@@ -27848,118 +27847,69 @@ const MainView = ()=>{
     const [movies, setMovies] = (0, _react.useState)([
         {
             id: 1,
-            title: "Harry Potter and the Sorceror's Stone",
-            synopsis: "Harry Potter, a boy who learns on his eleventh birthday that he is the orphanced son of two powerful wizards and possesses unique magical powers of his own. He is summoned from his life as an unwanted child to become a student at Hogwarts, an English boarding school for wizards. There, he meets several friends who become his closest allies and help him discover the truth about his parents and their mysterious deaths.",
-            image: "image.png",
-            year: "2001",
-            director: {
-                name: "Chris Columbus",
-                bio: "Chris Joseph Columbus is an American filmmaker. Born in Spangler, Pennsylvania, Columbus studied film at Tisch School of the Arts where he developed an interest in filmmkaing.",
-                birthyear: "1958",
-                deathyear: "N/A"
-            },
-            genre: {
-                name: "Adventure Fantasy",
-                description: "A type of adventure film where the action takes place in imaginary lands with strange beasts, wizards and witches. These films contain many of the elements of the sword-and-sorcery film, but are not necessarily bound to the conventions of the sword and magic."
-            }
+            title: "Harry Potter and the Sorceror`s Stone",
+            image: "https://i.ebayimg.com/images/g/nHQAAOSwQ8hhoMr~/s-l1600.jpg",
+            director: "Chris Columbus"
         },
         {
             id: 2,
             title: "Inside Out",
-            synopsis: "Riley (Kaitlyn Dias) is a happy, hockey-loving 11-year-old Midwestern girl, but her world turns upside-down when she and her parents move to San Francisco. Riley's emotions -- let by Joy (Amy Poehler) -- try to guide her through this difficult, life-changing event. However, the stress of the move brings Sadness (phyllis Smith) to the forefront. WWhen Joy and Sadness are inadvertently swept into the far reaches of Riley's mind, the only emotions left in Headquarters are Anger, Fear and Disgust.",
-            image: "image.png",
-            year: "2015",
-            director: {
-                name: "Peter Docter",
-                bio: "Peter Hans Docter is an American film director, producer, screenwriter, and animator. He has served as the chief executive officer of Pixar Animation Studios since 2018, and is best known for directing the animated feature films Monsers, Inc., Up, Inside Out, and Soul.",
-                birthyear: "1968",
-                deathyear: "N/A"
-            },
-            genre: {
-                name: "Fantasy Comedy",
-                description: "Fantasy Comedy films are types of films that use magic, supernatural and or mythological figures for comic purposes. Most fantasy comedy includes an element of parody, or satire, turning many of the fantasy conventions on their head such as the hero becoming a cowardly fool, or the princess being a klutz."
-            }
+            image: "https://cdn.printerval.com/unsafe/960x960/asset.prtvstatic.com/2024/04/08/66138aa6e14a11.34079191.png",
+            director: "Peter Docter"
         },
         {
             id: 3,
             title: "Bourne Identity",
-            synopsis: "The story of a man (Matt Damon), salvaged, near death, from the ocean by an Italian fishing boat. When he recuperates, the man suffers from total amnesia, without identity or background... except for a range of extraordinary talents in fighting, linguistic skills and self-defense that speak of a dangerous past. He sets out on a desperate search-assisted by the initially rebellious Marie (franka Potente) - to discover who he really is, and why he is being lethally pursued by assassins.",
-            image: "image.png",
-            year: "2002",
-            director: {
-                name: "Doug Liman",
-                bio: "Douglas Eric Liman is an American film director and producer. He is known for directing the films Swingers, Go, The Bourne Identity, Mr. & Mrs. Smith, Jumper, Edge of Tomorrow, and American Made. Most of his career has been associated with the production company Hypnotic.",
-                birthyear: "1965",
-                deathyear: "N/A"
-            },
-            genre: {
-                name: "Action Thriller",
-                description: "Action thriller is a blend of both action and thriller film in which the protagonist confronts dangerous adversaries, obstacles, or situations which he/she must conquer, normally in an action setting."
-            }
+            image: "https://i.ebayimg.com/images/g/A9UAAOSwiDFYNI7u/s-l1600.jpg",
+            director: "Doug Liman"
         },
         {
             id: 4,
             title: "Love Actually",
-            synopsis: "Nine intertwined stories examine the complexitites of the one emotion that connects us all: love. Among the characters explored are Dvaid (Hugh Grant), the handsome newly elected British prime minister who falls for a young junior staffer (Martine McCutcheon), Sarah (Laura Linney), a graphic designer whose devotion to her mentally ill brother complicates her love life, and Harry (Alan Rickman), a married man tempted by his attractive new secretary.",
-            image: "image.png",
-            year: "2003",
-            director: {
-                name: "Richard Curtis",
-                bio: "Richard Whalley Anthony Curtis CBE is a British screenwriter, producer and film director. One of Britain's most successful comedy screenwriters, he is known primarily for romantic comedy films.",
-                birthyear: "1956",
-                deathyear: "N/A"
-            },
-            genre: {
-                name: "Romantic Comedy",
-                description: "Romantic comedy is a subgenre of comedy and romance fiction, focusing on lighthearted, humorous plot lines centered on romantic ideas, such as how true love is able to surmount most obstacles."
-            }
+            image: "https://m.media-amazon.com/images/I/5199VZVD6KL._SX300_SY300_QL70_FMwebp_.jpg",
+            director: "Richard Curtis"
         },
         {
             id: 5,
             title: "What A Girl Wants",
-            synopsis: "On a whim, American teenager Daphne (Amanda Bynes) boards a plane to England to find the father she never met. Upon arriving there, though, she makes a startling discover: the man she is looking for is Lord Henry Dashwood (Colin Firth), a member of the British upper class, who is running for political office. Lord Henry did not know Daphne existed, but he welcomes her into his life. However, she is not so sure -- and his family and his current betrothed look on her disapprovingly.",
-            image: "image.png",
-            director: {
-                name: "Dennie Gordon",
-                bio: "Dennie Gordon is an American film and television director. Her directorial television credits include Party of Five, Sports Night, Ally McBeal, The Practice, Grounded for Life, The Loop, White Collar, Burn Notice, Hell On Wheels, Waco, The Office and other series.",
-                birthyear: "1953",
-                deathyear: "N/A"
-            },
-            genre: {
-                name: "Comedy",
-                description: "Comedy is a genre of fiction that consists of discourses or works intended to be humourus or amusing by inducing laughter."
-            }
+            image: "https://m.media-amazon.com/images/I/51e0MZf+32L._AC_UF894,1000_QL80_.jpg",
+            director: "Dennie Gordon"
         }
     ]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
-    const handleMovieClick = (movie)=>{
-        setSelectedMovie(movie);
-    };
+    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+        movie: selectedMovie,
+        onBackClick: ()=>setSelectedMovie(null)
+    }, void 0, false, {
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 46,
+        columnNumber: 7
+    }, undefined);
+    if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "The list is empty!"
+    }, void 0, false, {
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 54,
+        columnNumber: 12
+    }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: selectedMovie ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-            movie: selectedMovie,
-            onBackClick: ()=>setSelectedMovie(null)
-        }, void 0, false, {
-            fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 102,
-            columnNumber: 17
-        }, undefined) : movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                 movie: movie,
-                onMovieClick: ()=>{
-                    handleMovieClick(movie);
+                onMovieClick: (newSelectedMovie)=>{
+                    setSelectedMovie(newSelectedMovie);
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 105,
-                columnNumber: 11
+                lineNumber: 60,
+                columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 100,
-        columnNumber: 9
+        lineNumber: 58,
+        columnNumber: 5
     }, undefined);
 };
-_s(MainView, "9iWIL830xdpoYDelBT9/QDHIl3s=");
+_s(MainView, "O/EGtqM5SdYXC8XzNzf2wBUwa90=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27978,98 +27928,30 @@ $parcel$ReactRefreshHelpers$67b2.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MainView", ()=>MainView);
 parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _mainView = require("../main-view/main-view");
-var _movieCard = require("../movie-card/movie-card");
-var _s = $RefreshSig$();
-const MainView = ()=>{
-    _s();
-    const [movies, setMovies] = useState([]);
-};
-_s((0, _mainView.MainView), "m6SRVq9N0POigGpMlnh/6woD7xI=");
-_c = (0, _mainView.MainView);
 const MovieCard = ({ movie, onMovieClick })=>{
-    const { title, synopsis, year, director, genre } = movie;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        onClick: ()=>onMovieClick(movie),
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                children: title
-            }, void 0, false, {
-                fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 13,
-                columnNumber: 9
-            }, undefined),
-            synopsis && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                children: [
-                    "Synopsis: ",
-                    synopsis
-                ]
-            }, void 0, true, {
-                fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 15,
-                columnNumber: 13
-            }, undefined),
-            year && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                children: [
-                    "Release Year: ",
-                    year
-                ]
-            }, void 0, true, {
-                fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 20,
-                columnNumber: 13
-            }, undefined),
-            director && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                children: [
-                    "Director: ",
-                    director.name,
-                    " ",
-                    director.bio,
-                    " ",
-                    director.birthyear,
-                    " ",
-                    director.deathyear
-                ]
-            }, void 0, true, {
-                fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 25,
-                columnNumber: 13
-            }, undefined),
-            genre && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                children: [
-                    "Genre: ",
-                    genre.name,
-                    " ",
-                    genre.description
-                ]
-            }, void 0, true, {
-                fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 30,
-                columnNumber: 13
-            }, undefined)
-        ]
-    }, void 0, true, {
+        onClick: ()=>{
+            onMovieClick(movie);
+        },
+        children: movie.title
+    }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 12,
-        columnNumber: 5
+        lineNumber: 3,
+        columnNumber: 7
     }, undefined);
 };
-_c1 = (0, _movieCard.MovieCard);
-var _c, _c1;
-$RefreshReg$(_c, "MainView");
-$RefreshReg$(_c1, "MovieCard");
+_c = MovieCard;
+var _c;
+$RefreshReg$(_c, "MovieCard");
 
   $parcel$ReactRefreshHelpers$67b2.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../movie-card/movie-card":"bwuIu","../main-view/main-view":"4gflv"}],"gkKU3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
