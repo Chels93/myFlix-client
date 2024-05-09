@@ -2954,24 +2954,20 @@ try {
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _client = require("react-dom/client");
 var _mainView = require("./components/main-view/main-view");
-// Import statement to indicate need to bundle `./index.scss`
 var _indexScss = require("./index.scss");
-// Main component
 const App = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {}, void 0, false, {
         fileName: "src/index.jsx",
-        lineNumber: 9,
+        lineNumber: 7,
         columnNumber: 10
     }, undefined);
 };
 _c = App;
-// Finds root of app
 const container = document.querySelector("#root");
 const root = (0, _client.createRoot)(container);
-// Tells React to render app in root DOM element
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
     fileName: "src/index.jsx",
-    lineNumber: 17,
+    lineNumber: 12,
     columnNumber: 13
 }, undefined));
 var _c;
