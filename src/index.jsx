@@ -1,13 +1,12 @@
 import { createRoot } from "react-dom/client";
 import { MainView } from "./components/main-view/main-view";
-import React from "react";
 
 // Import statement to indicate need to bundle `./index.scss`
 import "./index.scss";
 
 // Main component
 const App = () => {
-  return <MainView />
+  return <MainView />;
 };
 
 // Finds root of app
