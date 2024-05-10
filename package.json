@@ -1,10 +1,11 @@
 {
     "name": "33-exercise-myflix-client-final",
     "dependencies": {
-      "react": "18.0.0",
-      "react-dom": "18.0.0",
-      "react-scripts": "4.0.0"
+        "mongodb": "^6.6.1",
+        "react": "18.0.0",
+        "react-dom": "18.0.0",
+        "react-scripts": "4.0.0"
     },
     "keywords": [],
     "description": ""
-  }
+}
