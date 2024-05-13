@@ -27132,7 +27132,10 @@ const MainView = ()=>{
     (0, _react.useEffect)(()=>{
         async function fetchMovies() {
             try {
-                const response = await fetch(undefined);
+                const response = await fetch(undefined, {
+                    useNewUrlParser: true,
+                    useUnifiedTopology: true
+                });
                 if (!response.ok) throw new Error("Failed to fetch data");
                 const data = await response.json();
                 const moviesFromApi = data.movies.map((movie)=>({
@@ -27153,14 +27156,14 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 36,
+        lineNumber: 37,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 44,
+        lineNumber: 45,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27171,12 +27174,12 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 50,
+                lineNumber: 51,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 48,
+        lineNumber: 49,
         columnNumber: 5
     }, undefined);
 };
