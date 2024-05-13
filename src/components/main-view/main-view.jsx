@@ -7,19 +7,27 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    fetch("mongodb+srv://cacguff:BirchyBoy2020@mymoviesdb.wfjolfq.mongodb.net/test?retryWrites=true&w=majority&appName=mymoviesdb")
-        .then((response) => response.json())
-        .then((data) => {
-            const moviesFromApi = data.docs.map((doc) => {
-                return {
-                    id: doc.key, 
-                    title: doc.title,
-                    image: doc.imagePath || "default-image.jpg", 
-                    director: doc.director_name?.[0]
-                };
-            });
-            setMovies(moviesFromApi);
+    fetch(process.env.CONNECTION_URI)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const moviesFromApi = data.movie.map((movie) => {
+          return {
+            id: movie.key,
+            title: movie.title,
+            image: movie.imagePath,
+            director: movie.director_name?.[0],
+          };
         });
+        setMovies(moviesFromApi);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   if (selectedMovie) {
