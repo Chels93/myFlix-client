@@ -7,27 +7,28 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    fetch(process.env.CONNECTION_URI)
-      .then((response) => {
+    async function fetchMovies() {
+      try {
+        const response = await fetch(
+          process.env.CONNECTION_URI
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-        return response.json();
-      })
-      .then((data) => {
-        const moviesFromApi = data.movie.map((movie) => {
-          return {
-            id: movie.key,
-            title: movie.title,
-            image: movie.imagePath,
-            director: movie.director_name?.[0],
-          };
-        });
+        const data = await response.json();
+        const moviesFromApi = data.movies.map((movie) => ({
+          id: movie.key,
+          title: movie.title,
+          image: movie.imagePath,
+          director: movie.director_name?.[0],
+        }));
         setMovies(moviesFromApi);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching data:", error);
-      });
+      }
+    }
+
+    fetchMovies();
   }, []);
 
   if (selectedMovie) {
