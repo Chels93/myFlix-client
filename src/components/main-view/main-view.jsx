@@ -4,32 +4,26 @@ import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
+
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     fetch(process.env.CONNECTION_URI)
       .then((response) => response.json())
       .then((data) => {
-        const moviesFromApi = data.docs.map((doc) => {
+        const moviesFromApi = data.movies.map((movie) => {
           return {
-            id: doc.key,
-            title: doc.title,
-            image: doc.imagePath || "default-image.jpg",
-            director: doc.director_name?.[0],
+            id: movie.key,
+            title: movie.title,
+            image: `image.jpg`,
+            author: movie.director.name?.[0],
           };
         });
+
         setMovies(moviesFromApi);
       });
   }, []);
 
-  if (selectedMovie) {
-    return (
-      <MovieView
-        movie={selectedMovie}
-        onBackClick={() => setSelectedMovie(null)}
-      />
-    );
-  }
   if (selectedMovie) {
     return (
       <MovieView
