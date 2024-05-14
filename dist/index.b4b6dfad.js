@@ -27130,40 +27130,31 @@ const MainView = ()=>{
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
-        async function fetchMovies() {
-            try {
-                const response = await fetch(undefined, {
-                    useNewUrlParser: true,
-                    useUnifiedTopology: true
-                });
-                if (!response.ok) throw new Error("Failed to fetch data");
-                const data = await response.json();
-                const moviesFromApi = data.movies.map((movie)=>({
-                        id: movie.key,
-                        title: movie.title,
-                        image: movie.imagePath,
-                        director: movie.director_name?.[0]
-                    }));
-                setMovies(moviesFromApi);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        }
-        fetchMovies();
+        fetch(undefined).then((response)=>response.json()).then((data)=>{
+            const moviesFromApi = data.movies.map((movie)=>{
+                return {
+                    id: movie.key,
+                    title: movie.title,
+                    image: `image.jpg`,
+                    author: movie.director?.[0]
+                };
+            });
+            setMovies(moviesFromApi);
+        });
     }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 37,
+        lineNumber: 29,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 45,
+        lineNumber: 37,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27174,12 +27165,12 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 51,
+                lineNumber: 43,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 49,
+        lineNumber: 41,
         columnNumber: 5
     }, undefined);
 };
