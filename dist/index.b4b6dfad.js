@@ -27090,8 +27090,16 @@ MovieCard.propTypes = {
         title: (0, _propTypesDefault.default).string.isRequired,
         synopsis: (0, _propTypesDefault.default).string.isRequired,
         year: (0, _propTypesDefault.default).string.isRequired,
-        genre: (0, _propTypesDefault.default).string.isRequired,
-        director: (0, _propTypesDefault.default).string
+        genre: (0, _propTypesDefault.default).shape({
+            name: (0, _propTypesDefault.default).string.isRequired,
+            description: (0, _propTypesDefault.default).string.isRewquired
+        }).isRequired,
+        director: (0, _propTypesDefault.default).shape({
+            name: (0, _propTypesDefault.default).string.isRequired,
+            bio: (0, _propTypesDefault.default).string.isRequired,
+            birthyear: (0, _propTypesDefault.default).string.isRequired,
+            deathyear: (0, _propTypesDefault.default).string
+        }).isRequired
     }).isRequired,
     onMovieClick: (0, _propTypesDefault.default).func.isRequired
 };
