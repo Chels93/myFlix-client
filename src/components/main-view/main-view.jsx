@@ -16,7 +16,7 @@ export const MainView = () => {
           return {
             _id: movie._id,
             title: movie.title,
-            imagePath: movie.imagePath,
+            imagePath: movie.imageUrl,
             director: movie.director.name,
           };
         });
