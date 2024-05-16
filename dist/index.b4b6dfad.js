@@ -26997,9 +26997,9 @@ const MainView = ()=>{
             const moviesFromApi = data.map((movie)=>{
                 return {
                     _id: movie._id,
-                    Title: movie.Title,
+                    title: movie.title,
                     imagePath: `image.jpg`,
-                    Director: movie.Director?.[0]
+                    director: movie.director?.[0]
                 };
             });
             setMovies(moviesFromApi);
