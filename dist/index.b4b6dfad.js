@@ -26997,9 +26997,20 @@ const MainView = ()=>{
             const moviesFromApi = data.map((movie)=>{
                 return {
                     _id: movie._id,
-                    title: movie.title,
                     imagePath: movie.imagePath,
-                    director: movie.director.name
+                    title: movie.title,
+                    synopsis: movie.synopsis,
+                    year: movie.year,
+                    genre: {
+                        name: movie.genre.name,
+                        description: movie.genre.description
+                    },
+                    director: {
+                        name: movie.director.name,
+                        bio: movie.director.bio,
+                        birthyear: movie.director.birthyear,
+                        deathyear: movie.director.deathyear
+                    }
                 };
             });
             setMovies(moviesFromApi);
@@ -27010,14 +27021,14 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 30,
+        lineNumber: 41,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 38,
+        lineNumber: 49,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27028,12 +27039,12 @@ const MainView = ()=>{
                 }
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 44,
+                lineNumber: 55,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 42,
+        lineNumber: 53,
         columnNumber: 5
     }, undefined);
 };
