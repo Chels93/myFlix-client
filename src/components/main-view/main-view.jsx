@@ -20,14 +20,14 @@ export const MainView = () => {
             synopsis: movie.synopsis,
             year: movie.year,
             genre: {
-              name: movie.genre.name,
-              description: movie.genre.description,
+              name: movie.genre?.name,
+              description: movie.genre?.description,
             },
             director: {
-              name: movie.director.name,
-              bio: movie.director.bio,
-              birthyear: movie.director.birthyear,
-              deathyear: movie.director.deathyear,
+              name: movie.director?.name,
+              bio: movie.director?.bio,
+              birthyear: movie.director?.birthyear,
+              deathyear: movie.director?.deathyear,
             },
           };
         });
