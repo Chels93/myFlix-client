@@ -8,15 +8,16 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    fetch(process.env.CONNECTION_URI)
+    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
-        const moviesFromApi = data.movies.map((movie) => {
+        console.log(data)
+        const moviesFromApi = data.map((movie) => {
           return {
-            id: movie.key,
-            title: movie.title,
-            image: `image.jpg`,
-            author: movie.director?.[0],
+            _id: movie._id,
+            Title: movie.Title,
+            imagePath: `image.jpg`,
+            Director: movie.Director?.[0],
           };
         });
 
