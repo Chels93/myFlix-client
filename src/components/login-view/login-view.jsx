@@ -14,15 +14,22 @@ export const LoginView = ({ onLoggedIn }) => {
 
     fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/login", {
       method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
       body: JSON.stringify(data),
-    }).then((response) => {
-      if (response.ok) {
-        onLoggedIn(username);
-      } else {
-        alert("Login failed");
-      }
+    }).then((response) => response.json())
+    .then((data) => {
+        console.log("Login response: ", data);
+        if (data.user) {
+            onLoggedIn(data.user, data.token);
+        } else {
+            alert("No such user");
+        }
+    })
+    .catch((e) => {
+        alert("Something went wrong");
     });
-  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -37,11 +44,11 @@ export const LoginView = ({ onLoggedIn }) => {
       </label>
       <label>
         Password:
-        <input 
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required 
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </label>
       <button type="submit">Submit</button>
