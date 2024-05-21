@@ -26,8 +26,8 @@ export const MainView = () => {
             director: {
               name: movie.director?.name,
               bio: movie.director?.bio,
-              birthyear: movie.director?.birthyear,
-              deathyear: movie.director?.deathyear,
+              birthYear: movie.director?.birthYear,
+              deathYear: movie.director?.deathYear,
             },
           };
         });
