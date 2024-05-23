@@ -62,6 +62,15 @@ export const SignupView = () => {
           required
         />
       </label>
+      <label>
+        Email: 
+        <input 
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        />
+      </label>
       <button type="submit">Submit</button>
     </form>
   );
