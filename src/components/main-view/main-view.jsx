@@ -4,48 +4,48 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 
 export const MainView = () => {
-  const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     if (!token) {
       return;
+
+      fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((movies) => {
+          setMovies(movies);
+
+          //console.log(data);
+          //const moviesFromApi = data.map(
+          //(movie) => {
+          //return {
+          // _id: movie._id,
+          //imagePath: movie.imagePath,
+          //title: movie.title,
+          //synopsis: movie.synopsis,
+          //year: movie.year,
+          //genre: {
+          //name: movie.genre?.name,
+          //description: movie.genre?.description,
+          //},
+          //director: {
+          //name: movie.director?.name,
+          //bio: movie.director?.bio,
+          //birthyear: movie.director?.birthyear,
+          //deathyear: movie.director?.deathyear,
+          //},
+        });
     }
+  }, [token]);
 
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        const moviesFromApi = data.map(
-          (movie) => {
-            return {
-              _id: movie._id,
-              imagePath: movie.imagePath,
-              title: movie.title,
-              synopsis: movie.synopsis,
-              year: movie.year,
-              genre: {
-                name: movie.genre?.name,
-                description: movie.genre?.description,
-              },
-              director: {
-                name: movie.director?.name,
-                bio: movie.director?.bio,
-                birthyear: movie.director?.birthyear,
-                deathyear: movie.director?.deathyear,
-              },
-            };
-          },
-          [token]
-        );
-
-        setMovies(moviesFromApi);
-      });
-  }, []);
+  setMovies(moviesFromApi);
 
   if (!user) {
     return (
@@ -74,6 +74,7 @@ export const MainView = () => {
           onClick={() => {
             setUser(null);
             setToken(null);
+            localStorage.clear();
           }}
         >
           Logout
