@@ -19,19 +19,21 @@ export const LoginView = ({ onLoggedIn }) => {
       },
       body: JSON.stringify(data),
     })
-    .then((response) => {
-        if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(data.user)); 
-        localStorage.setItem("token", data.token);   
-        onLoggedIn(data.user, data.token);
-        } else {
-            alert("No such user");
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("No such user");
         }
-  })
-    .catch((e) => {
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        onLoggedIn(data.user, data.token);
+      })
+      .catch((e) => {
         alert("Something went wrong");
-    });
-};
+      });
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -55,4 +57,5 @@ export const LoginView = ({ onLoggedIn }) => {
       </label>
       <button type="submit">Submit</button>
     </form>
-)};
+  );
+};
