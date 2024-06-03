@@ -12,7 +12,7 @@ export const LoginView = ({ onLoggedIn }) => {
       secret: password,
     };
 
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/login", {
+    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const LoginView = ({ onLoggedIn }) => {
       body: JSON.stringify(data),
     })
       .then((response) => {
-        if (!response.ok) {
+        if (response.ok) {
           throw new Error("No such user");
         }
         return response.json();
