@@ -28397,7 +28397,7 @@ const SignupView = ()=>{
                 "Content-Type": "application/json"
             }
         }).then((response)=>{
-            if (response.ok) {
+            if (!response.ok) {
                 alert("Signup successful");
                 window.location.reload();
             } else alert("Signup failed");
