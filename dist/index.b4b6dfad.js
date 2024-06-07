@@ -27122,10 +27122,14 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 const MovieCard = ({ movie, onMovieClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        onClick: ()=>{
-            onMovieClick(movie);
-        },
-        children: movie.title
+        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MovieCard, {
+                movie: movie,
+                onMovieClick: onMovieClick
+            }, movie.id, false, {
+                fileName: "src/components/movie-card/movie-card.jsx",
+                lineNumber: 7,
+                columnNumber: 9
+            }, undefined))
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
         lineNumber: 5,
@@ -28238,12 +28242,12 @@ MovieView.propTypes = {
         year: (0, _propTypesDefault.default).string.isRequired,
         genre: (0, _propTypesDefault.default).shape({
             name: (0, _propTypesDefault.default).string.isRequired,
-            description: (0, _propTypesDefault.default).string.isRewquired
+            description: (0, _propTypesDefault.default).string.isRequired
         }).isRequired,
         director: (0, _propTypesDefault.default).shape({
             name: (0, _propTypesDefault.default).string.isRequired,
             bio: (0, _propTypesDefault.default).string.isRequired,
-            birthyear: (0, _propTypesDefault.default).string.isRequired,
+            birthyear: (0, _propTypesDefault.default).string,
             deathyear: (0, _propTypesDefault.default).string
         }).isRequired
     }).isRequired,
