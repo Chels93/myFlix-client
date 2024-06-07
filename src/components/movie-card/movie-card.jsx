@@ -12,6 +12,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   return (
     <div key={movie.id}>
       <h3>{movie.title}</h3>
+      <div>
+        <img src={movie.imagePath} alt={`$movie.title} poster`} />
+      </div>
           {detailsDisplayed ? (
             <>
             <p>Synopsis: {movie.synopsis}</p>
