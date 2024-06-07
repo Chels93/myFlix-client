@@ -59,6 +59,7 @@ export const MainView = () => {
       <MovieView
         movie={selectedMovie}
         onBackClick={() => setSelectedMovie(null)}
+        onMovieClick={(newSelectedMovie) => setSelectedMvoie(newSelectedMovie)}
       />
     );
   }
@@ -75,15 +76,17 @@ export const MainView = () => {
   return (
     <div>
       <button onClick={handleLogout}>Logout</button>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
+      {movies.map((movie, index) => {
+        console.log(movie.id);
+        return (
+          <MovieCard
+            key={movie.id + '-' + index}
+            movie={movie}
+            onMovieClick={(newSelectedMovie) => {
+              setSelectedMovie(newSelectedMovie);
+            }}
+          />
+        );
+      })}
     </div>
-  );
-};
+  )};
