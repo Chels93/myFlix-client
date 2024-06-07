@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ export const LoginView = ({ onLoggedIn }) => {
       secret: password,
     };
 
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/movies", {
+    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -10,25 +10,25 @@ export const SignupView = () => {
     event.preventDefault();
 
     const data = {
-        Username: username, 
-        Password: password, 
-        Email: email,
-        Birthday: birthday
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday,
     };
 
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json"
-        }
+    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then((response) => {
-        if (!response.ok) {
-            alert("Signup successful");
-            window.location.reload();
-        } else {
-            alert("Signup failed");
-        }
+      if (!response.ok) {
+        alert("Signup successful");
+        window.location.reload();
+      } else {
+        alert("Signup failed");
+      }
     });
   };
 
@@ -63,12 +63,12 @@ export const SignupView = () => {
         />
       </label>
       <label>
-        Email: 
-        <input 
-        type="text"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
+        Email:
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
       </label>
       <button type="submit">Submit</button>
