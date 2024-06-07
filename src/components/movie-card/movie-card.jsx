@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import "./movie-card.scss";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
     const [detailsDisplayed, setDetailsDisplayed] = useState(false);
