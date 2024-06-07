@@ -2,12 +2,10 @@ import PropTypes from "prop-types";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
-    <div
-      onClick={() => {
-        onMovieClick(movie);
-      }}
-    >
-      {movie.title}
+    <div key={movie.id}>
+      <h3>{movie.title}</h3>
+      <p>Synopsis: {movie.synopsis}</p>
+      <button onClick={() => onMovieClick(movie)}>View Details</button>
     </div>
   );
 };

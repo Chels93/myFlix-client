@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");

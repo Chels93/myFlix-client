@@ -30,6 +30,11 @@ export const MainView = () => {
       });
   }, [token]);
 
+  const handleLogout = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+  };
   //setMovies(moviesFromApi);
 
   if (!user) {
@@ -61,15 +66,7 @@ export const MainView = () => {
   if (movies.length === 0) {
     return (
       <>
-        <button
-          onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-          }}
-        >
-          Logout
-        </button>
+        <button onClick={handleLogout}>Logout</button>
         <div>The list is empty!</div>
       </>
     );
@@ -77,18 +74,10 @@ export const MainView = () => {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          setUser(null);
-          setToken(null);
-          localStorage.clear();
-        }}
-    >
-        Logout
-    </button>
+      <button onClick={handleLogout}>Logout</button>
       {movies.map((movie) => (
         <MovieCard
-          key={movie._id}
+          key={movie.id}
           movie={movie}
           onMovieClick={(newSelectedMovie) => {
             setSelectedMovie(newSelectedMovie);
