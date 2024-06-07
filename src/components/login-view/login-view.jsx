@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -8,8 +8,8 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: username,
-      secret: password,
+      username,
+      password,
     };
 
     fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/login", {
@@ -20,7 +20,7 @@ export const LoginView = ({ onLoggedIn }) => {
       body: JSON.stringify(data),
     })
       .then((response) => {
-        if (response.ok) {
+        if (!response.ok) {
           throw new Error("No such user");
         }
         return response.json();

@@ -27141,7 +27141,7 @@ MovieCard.propTypes = {
         year: (0, _propTypesDefault.default).string.isRequired,
         genre: (0, _propTypesDefault.default).shape({
             name: (0, _propTypesDefault.default).string.isRequired,
-            description: (0, _propTypesDefault.default).string.isRewquired
+            description: (0, _propTypesDefault.default).string.isRequired
         }).isRequired,
         director: (0, _propTypesDefault.default).shape({
             name: (0, _propTypesDefault.default).string.isRequired,
@@ -28272,22 +28272,22 @@ var _react = require("react");
 var _s = $RefreshSig$();
 const LoginView = ({ onLoggedIn })=>{
     _s();
-    const [username, setUsername] = (0, _react.useState)("");
-    const [password, setPassword] = (0, _react.useState)("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            username,
+            password
         };
-        fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/movies", {
+        fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         }).then((response)=>{
-            if (response.ok) throw new Error("No such user");
+            if (!response.ok) throw new Error("No such user");
             return response.json();
         }).then((data)=>{
             localStorage.setItem("user", JSON.stringify(data.user));
@@ -28385,22 +28385,20 @@ const SignupView = ()=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
+            username: username,
+            password: password,
+            email: email,
+            birthday: birthday
         };
-        fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com", {
+        fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json"
             }
         }).then((response)=>{
-            if (!response.ok) {
-                alert("Signup successful");
-                window.location.reload();
-            } else alert("Signup failed");
+            if (response.ok) alert("Signup successful");
+            else alert("Signup failed");
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
