@@ -8,29 +8,32 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: username,
-      secret: password,
+      username,
+      password,
     };
 
     fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/login", {
       method: "POST",
       headers: {
-        "content-Type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-    .then((response) => response.json())
-    .then((data) => {
-        localStorage.setItem("user", JSON.stringify(data.user)); 
-        localStorage.setItem("token", data.token);    \
-        onLoggedIn(data.user, data.token);
-        } else {
-            alert("No such user");
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("No such user");
         }
-    })
-    .catch((e) => {
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        onLoggedIn(data.user, data.token);
+      })
+      .catch((e) => {
         alert("Something went wrong");
-    });
+      });
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -55,4 +58,4 @@ export const LoginView = ({ onLoggedIn }) => {
       <button type="submit">Submit</button>
     </form>
   );
-}};
+};

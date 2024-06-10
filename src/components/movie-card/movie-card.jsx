@@ -1,12 +1,36 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
+import "./movie-card.scss";
+
 export const MovieCard = ({ movie, onMovieClick }) => {
-  return (
-    <div
-      onClick={() => {
+    const [detailsDisplayed, setDetailsDisplayed] = useState(false);
+
+    const handleViewDetails = () => {
+        setDetailsDisplayed(!detailsDisplayed);
         onMovieClick(movie);
-      }}
-    >
-      {movie.title}
+    };
+
+  return (
+    <div key={movie.id}>
+      <h3>{movie.title}</h3>
+      <div>
+        <img src={movie.imagePath} alt={`$movie.title} poster`} />
+      </div>
+          {detailsDisplayed ? (
+            <>
+            <p>Synopsis: {movie.synopsis}</p>
+            <p>Release Year: {movie.year}</p>
+            <p>Genre: {movie.genre.name}</p>
+            <p>Genre Description: {movie.genre.description}</p>
+            <p>Director: {movie.director.name}</p>
+            <p>Director Bio: {movie.director.bio}</p>
+            <p>Director Birthyear: {movie.director.birthYear}</p>
+            <p>Director Deathyear: {movie.director.deathYear}</p>
+          <button onClick={handleViewDetails}>Hide Details</button>
+          </>
+      ) : (
+        <button onClick={handleViewDetails}>View Details</button>
+      )}
     </div>
   );
 };
@@ -19,14 +43,16 @@ MovieCard.propTypes = {
     year: PropTypes.string.isRequired,
     genre: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRewquired,
+      description: PropTypes.string.isRequired,
     }).isRequired,
     director: PropTypes.shape({
       name: PropTypes.string.isRequired,
       bio: PropTypes.string.isRequired,
-      birthyear: PropTypes.string.isRequired,
-      deathyear: PropTypes.string,
+      birthYear: PropTypes.string,
+      deathYear: PropTypes.string,
     }).isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
 };
+
+

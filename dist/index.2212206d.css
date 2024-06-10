@@ -1,3 +1,54 @@
+.movie-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 8px #0000001a;
+}
+
+.movie-card h3 {
+  margin: .5em 0;
+  font-size: 1.5em;
+}
+
+.movie-card .movie-image-container {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 300px;
+  margin-bottom: 16px;
+  display: flex;
+  overflow: hidden;
+}
+
+.movie-card img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.movie-card p {
+  margin: .5em 0;
+}
+
+.movie-card button {
+  cursor: pointer;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  margin-top: 1em;
+  padding: .5em 1em;
+  font-size: 1em;
+}
+
+.movie-card button:hover {
+  background-color: #0056b3;
+}
+
 .my-flix {
   color: #4682b4;
 }
