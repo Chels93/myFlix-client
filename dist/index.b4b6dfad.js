@@ -28436,7 +28436,7 @@ const MovieView = ({ movie, onBackClick })=>{
                 onClick: onBackClick,
                 className: "back-button",
                 style: {
-                    cursor: pointer
+                    cursor: "pointer"
                 },
                 children: "Back"
             }, void 0, false, {
