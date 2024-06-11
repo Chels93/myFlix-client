@@ -27092,12 +27092,12 @@ const MainView = ()=>{
                         onMovieClick: (newSelectedMovie)=>{
                             setSelectedMovie(newSelectedMovie);
                         }
-                    }, movie._id, false, {
+                    }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
                         lineNumber: 65,
                         columnNumber: 17
                     }, undefined)
-                }, void 0, false, {
+                }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 64,
                     columnNumber: 15
