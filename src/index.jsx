@@ -6,7 +6,7 @@ import "./index.scss";
 
 const App = () => {
   return (
-    <Container>
+    <Container style={{border: "1px solid red"}}>
       <MainView />
     </Container>
   );
