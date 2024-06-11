@@ -19,7 +19,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         alt={`${movie.title} poster`}
       />
       <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
+        <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
         <Button onClick={handleViewDetails} variant="link">
           {detailsDisplayed ? "Hide Details" : "View Details"}
         </Button>

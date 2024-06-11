@@ -27170,6 +27170,11 @@ const MovieCard = ({ movie, onMovieClick })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Title, {
+                        style: {
+                            fontFamily: "Montserrat, sans-serif",
+                            fontSize: "1.5rem",
+                            fontWeight: "bold"
+                        },
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
