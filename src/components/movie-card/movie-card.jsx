@@ -12,7 +12,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   };
 
   return (
-    <Card className="h-100" style={{ width: '18rem' }}>
+    <Card className="h-100" style={{ width: '18rem', border: "3px solid black" }}>
       <Card.Img
         variant="top"
         src={movie.imagePath}
