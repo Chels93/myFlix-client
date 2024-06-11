@@ -27155,7 +27155,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
         className: "h-100",
         style: {
             width: "18rem",
-            border: "3px solid black"
+            border: "3px solid gray"
         },
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
