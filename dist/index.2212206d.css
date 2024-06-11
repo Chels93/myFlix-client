@@ -57,6 +57,10 @@
   padding: 4px 12px;
 }
 
+img {
+  width: 100%;
+}
+
 .my-flix {
   color: #4682b4;
 }
