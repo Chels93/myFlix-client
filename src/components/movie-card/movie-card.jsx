@@ -12,7 +12,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   };
 
   return (
-    <Card>
+    <Card style={{ width: '18rem' }}>
       <Card.Img
         variant="top"
         src={movie.imagePath}
@@ -20,7 +20,6 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       />
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>Director: {movie.director.name}</Card.Text>
         <Button onClick={handleViewDetails} variant="link">
           {detailsDisplayed ? "Hide Details" : "View Details"}
         </Button>
