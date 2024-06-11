@@ -40,7 +40,7 @@ export const MainView = () => {
 
   if (!user) {
     return (
-      <Row>
+      <Row className="justify-content-md-center">
         {!user ? (
           <>
             <LoginView onLoggedIn={(user) => setUser(user)} />
