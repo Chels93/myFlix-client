@@ -27051,9 +27051,22 @@ const MainView = ()=>{
                     columnNumber: 13
                 }, undefined)
             ]
-        }, void 0, true) : selectedMovie ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-            movie: selectedMovie,
-            onBackClick: ()=>setSelectedMovie(null)
+        }, void 0, true) : selectedMovie ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Col, {
+            md: 8,
+            style: {
+                border: "1px solid black"
+            },
+            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                style: {
+                    border: "1px solid green"
+                },
+                movie: selectedMovie,
+                onBackClick: ()=>setSelectedMovie(null)
+            }, void 0, false, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 52,
+                columnNumber: 13
+            }, undefined)
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 51,
@@ -27062,7 +27075,7 @@ const MainView = ()=>{
             children: "The list is empty!"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 56,
+            lineNumber: 59,
             columnNumber: 11
         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
             children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Col, {
@@ -27074,12 +27087,12 @@ const MainView = ()=>{
                         }
                     }, movie._id, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 61,
+                        lineNumber: 64,
                         columnNumber: 17
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 60,
+                    lineNumber: 63,
                     columnNumber: 15
                 }, undefined))
         }, void 0, false)
