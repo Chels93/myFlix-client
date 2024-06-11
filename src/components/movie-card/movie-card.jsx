@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import "./movie-card.scss";
 import { Button, Card } from "react-bootstrap";
+import "./movie-card.scss";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   const [detailsDisplayed, setDetailsDisplayed] = useState(false);
@@ -12,7 +12,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card className="h-100" style={{ width: '18rem' }}>
       <Card.Img
         variant="top"
         src={movie.imagePath}
