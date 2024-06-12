@@ -2,37 +2,47 @@ import React from "react";
 
 function UpdateUser({ handleSubmit, handleUpdate }) {
   return (
-    <Form className="profile-form" onSubmit={(e) => handleSubmit(e)}>
-      <h2>Want to change some info?</h2>
+    <>
+      <h4>Update</h4>
+      <Form>
+        <Form.Group>
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type="text"
+            defaultValue={user.username}
+            onChange={(e) => handleUpdate(e)}
+            required
+            placeholder="Enter a username"
+          />
+        </Form.Group>
 
-      <label>Username:</label>
-      <input
-        type="text"
-        name="username"
-        defaultValue={user.username}
-        onChange={(e) => handleUpdate(e)}
-      />
+        <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type="password"
+            defaultValue=""
+            onChange={(e) => handleUpdate(e)}
+            required
+            minLength="8"
+            placeholder="Your password must be 8 or more characters"
+          />
+        </Form.Group>
 
-      <label>Password</label>
-      <input
-        type="password"
-        name="password"
-        defaultValue={user.password}
-        onChange={(e) => handleUpdate(e)}
-      />
-
-      <label>Email Address</label>
-      <input
-        type="email"
-        name="email"
-        defaultValue={user.email}
-        onChange={(e) => handleUpdate(e.target.value)}
-      />
-
-      <Button variant="primary" type="submit">
-        Update
-      </Button>
-    </Form>
+        <Form.Group>
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
+            type="email"
+            defaultValue={user.email}
+            onChange={(e) => handleUpdate(e)}
+            required
+            placeholder="Enter your email address"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={handleSubmit}>
+          Update
+        </Button>
+      </Form>
+    </>
   );
 }
 
