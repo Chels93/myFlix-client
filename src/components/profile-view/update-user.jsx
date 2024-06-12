@@ -6,12 +6,6 @@ const UpdateUser = ({ handleSubmit, handleUpdate }) => {
     const [username, setUsername] = useState(user.username);
     const [email, setEmail] = useState(user.email);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setUsername({ ...user, username, email });
-        onSubmit (e);
-    };
-
   return (
     <>
       <h4>Update</h4>
