@@ -1,10 +1,15 @@
 import PropTypes from "prop-types";
+import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
     <div>
       <div>
-        <img src={movie.imagePath} />
+        <img src={movie.imagePath}
+        alt={`${movie.title} poster`} 
+        style={{ width: "auto", height: "auto", display: "block", margin: "0 auto" }}
+
+        />
       </div>
       <div>
         <span>Title: </span>
@@ -42,7 +47,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         <span>Director Deathyear: </span>
         <span>{movie.director.deathYear}</span>
       </div>
-      <button onClick={onBackClick}>Back</button>
+      <button onClick={onBackClick} className="back-button" style={{ cursor: "pointer" }}>Back</button>
     </div>
   );
 };

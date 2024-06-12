@@ -1,23 +1,30 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { Button, Card } from "react-bootstrap";
 import "./movie-card.scss";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
-    const [detailsDisplayed, setDetailsDisplayed] = useState(false);
+  const [detailsDisplayed, setDetailsDisplayed] = useState(false);
 
-    const handleViewDetails = () => {
-        setDetailsDisplayed(!detailsDisplayed);
-        onMovieClick(movie);
-    };
+  const handleViewDetails = () => {
+    setDetailsDisplayed(!detailsDisplayed);
+    onMovieClick(movie);
+  };
 
   return (
-    <div key={movie.id}>
-      <h3>{movie.title}</h3>
-      <div>
-        <img src={movie.imagePath} alt={`$movie.title} poster`} />
-      </div>
-          {detailsDisplayed ? (
-            <>
+    <Card className="h-100" style={{ width: '18rem', border: "3px solid gray" }}>
+      <Card.Img
+        variant="top"
+        src={movie.imagePath}
+        alt={`${movie.title} poster`}
+      />
+      <Card.Body>
+        <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
+        <Button onClick={handleViewDetails} variant="link">
+          {detailsDisplayed ? "Hide Details" : "View Details"}
+        </Button>
+        {detailsDisplayed && (
+          <div>
             <p>Synopsis: {movie.synopsis}</p>
             <p>Release Year: {movie.year}</p>
             <p>Genre: {movie.genre.name}</p>
@@ -26,12 +33,10 @@ export const MovieCard = ({ movie, onMovieClick }) => {
             <p>Director Bio: {movie.director.bio}</p>
             <p>Director Birthyear: {movie.director.birthYear}</p>
             <p>Director Deathyear: {movie.director.deathYear}</p>
-          <button onClick={handleViewDetails}>Hide Details</button>
-          </>
-      ) : (
-        <button onClick={handleViewDetails}>View Details</button>
-      )}
-    </div>
+          </div>
+        )}
+      </Card.Body>
+    </Card>
   );
 };
 
@@ -54,5 +59,3 @@ MovieCard.propTypes = {
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
 };
-
-
