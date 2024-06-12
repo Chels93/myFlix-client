@@ -5,10 +5,9 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
-
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -40,7 +39,12 @@ export const MainView = () => {
     setToken(null);
     localStorage.clear();
   };
-  //setMovies(moviesFromApi);
+
+  const MovieViewWrapper = () => {
+    const { movie_id } = useParams();
+    const movie = movies.find((m) => m._id === movie_id);
+    return <MovieView movie={movie} />;
+  };
 
   return (
     <BrowserRouter>
@@ -78,7 +82,6 @@ export const MainView = () => {
               )
             }
           />
-
           <Route
             path="/movies/:movie_id"
             element={
@@ -88,12 +91,23 @@ export const MainView = () => {
                 <Col>The list is empty!</Col>
               ) : (
                 <Col md={8}>
-                  <MovieView movies={movies} />
+                  <MovieViewWrapper />
                 </Col>
               )
             }
           />
-
+          <Route
+            path="/profile"
+            element={
+              !user ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <Col>
+                  <ProfileView movies={movies} />
+                </Col>
+              )
+            }
+          />
           <Route
             path="/"
             element={
