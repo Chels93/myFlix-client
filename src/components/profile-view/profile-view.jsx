@@ -71,8 +71,8 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
         <Col xs={12} sm={8}>
           <Card>
             <Card.Body>
-              {/* Pass handleUpdate prop to UpdateUser */}
-              <UpdateUser user={user} setUser={setUser} handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
+              {/* Pass user and handleUpdate props to UpdateUser */}
+              <UpdateUser user={user} handleUpdate={handleUpdate} handleSubmit={handleSubmit} />
             </Card.Body>
           </Card>
         </Col>

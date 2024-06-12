@@ -42034,9 +42034,8 @@ function ProfileView({ movies, onUpdatedUserInfo }) {
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _updateUserDefault.default), {
                                     user: user,
-                                    setUser: setUser,
-                                    handleSubmit: handleSubmit,
-                                    handleUpdate: handleUpdate
+                                    handleUpdate: handleUpdate,
+                                    handleSubmit: handleSubmit
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
                                     lineNumber: 75,
