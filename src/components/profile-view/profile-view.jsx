@@ -7,6 +7,7 @@ import "./profile-view.scss";
 import axios from "axios";
 import UserInfo from "./user-info";
 import FavoriteMovies from "./favorite-movies";
+import UpdateUser from "./update-user";
 
 export function ProfileView({ movies, onUpdatedUserInfo }) {
   const [user, setUser] = useState({});
@@ -23,8 +24,8 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
   return (
     <div>
       <UserInfo name={user.username} email={user.email} />
-     <FavoriteMovies favoriteMovieList={favoriteMovieList} />
-      
+      <FavoriteMovies favoriteMovieList={favoriteMovieList} />
+      <UpdateUser handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
     </div>
   );
 }
