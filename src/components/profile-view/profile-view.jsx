@@ -24,10 +24,10 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
   return (
     <Container>
       <Row>
-        <Col>
+        <Col xs={12} sm={4}>
           <UserInfo name={user.username} email={user.email} />
         </Col>
-        <Col>
+        <Col xs={12} sm={8}>
           <UpdateUser user={user} setUser={setUser} />
         </Col>
       </Row>
