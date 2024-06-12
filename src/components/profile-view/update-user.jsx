@@ -2,9 +2,19 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Form } from "react-bootstrap";
 
-const UpdateUser = ({ handleSubmit, handleUpdate }) => {
-    const [username, setUsername] = useState(user.username);
-    const [email, setEmail] = useState(user.email);
+const UpdateUser = ({ user, handleSubmit, handleUpdate }) => {
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+    handleUpdate({ ...user, username: e.target.value });
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    handleUpdate({ ...user, email: e.target.value });
+  };
 
   return (
     <>
@@ -14,22 +24,10 @@ const UpdateUser = ({ handleSubmit, handleUpdate }) => {
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
-            defaultValue={user.username}
-            onChange={(e) => handleUpdate(e)}
+            value={username}
+            onChange={handleUsernameChange}
             required
             placeholder="Enter a username"
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type="password"
-            defaultValue=""
-            onChange={(e) => handleUpdate(e)}
-            required
-            minLength="8"
-            placeholder="Your password must be 8 or more characters"
           />
         </Form.Group>
 
@@ -37,18 +35,25 @@ const UpdateUser = ({ handleSubmit, handleUpdate }) => {
           <Form.Label>Email:</Form.Label>
           <Form.Control
             type="email"
-            defaultValue={user.email}
-            onChange={(e) => handleUpdate(e)}
+            value={email}
+            onChange={handleEmailChange}
             required
             placeholder="Enter your email address"
           />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
+
+        <Button variant="primary" type="submit">
           Update
         </Button>
       </Form>
     </>
   );
-}
+};
+
+UpdateUser.propTypes = {
+  user: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
+};
 
 export default UpdateUser;

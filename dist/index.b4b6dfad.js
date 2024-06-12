@@ -42269,17 +42269,31 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _s = $RefreshSig$();
-const UpdateUser = ({ handleSubmit, handleUpdate })=>{
+const UpdateUser = ({ user, handleSubmit, handleUpdate })=>{
     _s();
     const [username, setUsername] = (0, _react.useState)(user.username);
     const [email, setEmail] = (0, _react.useState)(user.email);
+    const handleUsernameChange = (e)=>{
+        setUsername(e.target.value);
+        handleUpdate({
+            ...user,
+            username: e.target.value
+        });
+    };
+    const handleEmailChange = (e)=>{
+        setEmail(e.target.value);
+        handleUpdate({
+            ...user,
+            email: e.target.value
+        });
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
                 children: "Update"
             }, void 0, false, {
                 fileName: "src/components/profile-view/update-user.jsx",
-                lineNumber: 11,
+                lineNumber: 21,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
@@ -42291,51 +42305,24 @@ const UpdateUser = ({ handleSubmit, handleUpdate })=>{
                                 children: "Username:"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 14,
+                                lineNumber: 24,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                 type: "text",
-                                defaultValue: user.username,
-                                onChange: (e)=>handleUpdate(e),
+                                value: username,
+                                onChange: handleUsernameChange,
                                 required: true,
                                 placeholder: "Enter a username"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 15,
-                                columnNumber: 11
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 13,
-                        columnNumber: 9
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                children: "Password:"
-                            }, void 0, false, {
-                                fileName: "src/components/profile-view/update-user.jsx",
                                 lineNumber: 25,
                                 columnNumber: 11
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                                type: "password",
-                                defaultValue: "",
-                                onChange: (e)=>handleUpdate(e),
-                                required: true,
-                                minLength: "8",
-                                placeholder: "Your password must be 8 or more characters"
-                            }, void 0, false, {
-                                fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 26,
-                                columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 24,
+                        lineNumber: 23,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -42344,40 +42331,39 @@ const UpdateUser = ({ handleSubmit, handleUpdate })=>{
                                 children: "Email:"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 37,
+                                lineNumber: 35,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                 type: "email",
-                                defaultValue: user.email,
-                                onChange: (e)=>handleUpdate(e),
+                                value: email,
+                                onChange: handleEmailChange,
                                 required: true,
                                 placeholder: "Enter your email address"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 38,
+                                lineNumber: 36,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 36,
+                        lineNumber: 34,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                         variant: "primary",
                         type: "submit",
-                        onClick: handleSubmit,
                         children: "Update"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 46,
+                        lineNumber: 45,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/update-user.jsx",
-                lineNumber: 12,
+                lineNumber: 22,
                 columnNumber: 7
             }, undefined)
         ]
@@ -42385,6 +42371,11 @@ const UpdateUser = ({ handleSubmit, handleUpdate })=>{
 };
 _s(UpdateUser, "d9amxXVD2KsqtZlh2hzhwPmEmO4=");
 _c = UpdateUser;
+UpdateUser.propTypes = {
+    user: (0, _propTypesDefault.default).object.isRequired,
+    handleSubmit: (0, _propTypesDefault.default).func.isRequired,
+    handleUpdate: (0, _propTypesDefault.default).func.isRequired
+};
 exports.default = UpdateUser;
 var _c;
 $RefreshReg$(_c, "UpdateUser");
