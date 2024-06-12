@@ -46,6 +46,10 @@ export const MainView = () => {
     return <MovieView movie={movie} />;
   };
 
+  const handleMovieClick = (movie) => {
+    console.log("Movie clicked: ", movie);
+  };
+
   return (
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={handleLogout} />
@@ -117,7 +121,7 @@ export const MainView = () => {
                 <>
                   {movies.map((movie) => (
                     <Col className="mb-5" key={movie._id} md={3}>
-                      <MovieCard movie={movie} />
+                      <MovieCard movie={movie} onMovieClick={handleMovieClick} />
                     </Col>
                   ))}
                 </>
