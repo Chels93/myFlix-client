@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap"; // Import Row and Col
 import { Link } from "react-router-dom";
 
 const FavoriteMovies = ({ favoriteMovieList, removeFav }) => {
@@ -12,16 +12,20 @@ const FavoriteMovies = ({ favoriteMovieList, removeFav }) => {
         </Col>
       </Row>
       <Row>
-        {favoriteMovieList.map((movies) => {
+        {favoriteMovieList.map((movie) => { // Renamed 'movies' to 'movie' for clarity
           return (
-            <Col xs={12} md={6} lg={3} key={movies._id}>
-              <img src={movies.imagePath} />
-              <Link to={`/movies${movies._id}`}>
-                <h4>{movies.title}</h4>
-              </Link>
-              <Button variant="secondary" onClick={() => removeFav(movies._id)}>
-                Remove From List
-              </Button>
+            <Col xs={12} md={6} lg={3} key={movie._id}>
+              <Card>
+                <Card.Img variant="top" src={movie.imagePath} />
+                <Card.Body>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Card.Title>{movie.title}</Card.Title>
+                  </Link>
+                  <Button variant="secondary" onClick={() => removeFav(movie._id)}>
+                    Remove From List
+                  </Button>
+                </Card.Body>
+              </Card>
             </Col>
           );
         })}
