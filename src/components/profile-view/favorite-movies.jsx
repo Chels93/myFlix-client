@@ -1,7 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function FavoriteMovies({ favoriteMovieList }) {
+const FavoriteMovies = ({ favoriteMovieList, removeFav }) => {
   return (
     <>
       <Row>
@@ -26,5 +28,11 @@ function FavoriteMovies({ favoriteMovieList }) {
       </Row>
     </>
   );
-}
+};
+
+FavoriteMovies.propTypes = {
+  favoriteMovieList: PropTypes.array.isRequired,
+  removeFav: PropTypes.func.isRequired,
+};
+
 export default FavoriteMovies;

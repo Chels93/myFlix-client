@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function UserInfo({ email, name }) {
+const UserInfo = ({ name, email }) => {
   return (
     <>
       <h4>Your Info</h4>
@@ -8,6 +9,11 @@ function UserInfo({ email, name }) {
       <p>Email: {email}</p>
     </>
   );
-}
+};
 
-export default User - info;
+UserInfo.propTypes = {
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};
+
+export default UserInfo;

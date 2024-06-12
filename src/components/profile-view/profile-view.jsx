@@ -7,15 +7,54 @@ import "./profile-view.scss";
 
 export function ProfileView({ movies, onUpdatedUserInfo }) {
   const [user, setUser] = useState({});
+  const token = localStorage.getItem("token");
 
-  const favoriteMovieList = movies.filter((movies) => {});
+  const favoriteMovieList = movies.filter(movie => user.favoriteMovies?.includes(movie._id));
 
-  const getUser = () => {};
-  const handleSubmit = (e) => {};
-  const removeFav = (id) => {};
-  const handleUpdate = (e) => {};
+  const getUser = () => {
+    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/current", {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(response => response.json())
+    .then(data => setUser(data))
+    .catch(error => console.error("Error fetching user data: ", error));
+  };
 
-  useEffect(() => {}, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(user)
+    })
+    .then(response => response.json())
+    .then(data => {
+      setUser(data);
+      onUpdatedUserInfo(data);
+    })
+    .catch(error => console.error("Error updating user data: ", error));
+  };
+
+  const removeFav = (id) => {
+    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/favorites/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(response => response.json())
+    .then(data => setUser(data))
+    .catch(error => console.error("Error removing favorite movie: ", error));
+  };
+
+  const handleUpdate = (updatedUser) => {
+    setUser(updatedUser);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <Container>
@@ -30,13 +69,12 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
         <Col xs={12} sm={8}>
           <Card>
             <Card.Body>
-              <UpdateUser user={user} setUser={setUser} />
+              <UpdateUser user={user} setUser={setUser} onSubmit={handleSubmit} />
             </Card.Body>
           </Card>
         </Col>
       </Row>
-
-      <FavoriteMovies favoriteMovieList={favoriteMovieList} />
+      <FavoriteMovies favoriteMovieList={favoriteMovieList} removeFav={removeFav} />
     </Container>
   );
 }

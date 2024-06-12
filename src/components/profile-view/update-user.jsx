@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { Button, Form } from "react-bootstrap";
 
-function UpdateUser({ handleSubmit, handleUpdate }) {
+const UpdateUser = ({ handleSubmit, handleUpdate }) => {
+    const [username, setUsername] = useState(user.username);
+    const [email, setEmail] = useState(user.email);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setUsername({ ...user, username, email });
+        onSubmit (e);
+    };
+
   return (
     <>
       <h4>Update</h4>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Username:</Form.Label>
           <Form.Control
