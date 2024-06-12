@@ -43,6 +43,9 @@ export const MainView = () => {
   const MovieViewWrapper = () => {
     const { movie_id } = useParams();
     const movie = movies.find((m) => m._id === movie_id);
+    if (!movie) {
+      return <Col>The movie could not be found.</Col>;
+    }
     return <MovieView movie={movie} />;
   };
 
