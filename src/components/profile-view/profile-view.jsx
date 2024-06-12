@@ -12,7 +12,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
   const favoriteMovieList = movies.filter(movie => user.favoriteMovies?.includes(movie._id));
 
   const getUser = () => {
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/", {
+    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/current", {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => response.json())
@@ -69,7 +69,8 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
         <Col xs={12} sm={8}>
           <Card>
             <Card.Body>
-              <UpdateUser user={user} setUser={setUser} onSubmit={handleSubmit} />
+              {/* Pass handleSubmit as a prop to UpdateUser */}
+              <UpdateUser user={user} setUser={setUser} handleSubmit={handleSubmit} />
             </Card.Body>
           </Card>
         </Col>

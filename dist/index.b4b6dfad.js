@@ -41961,7 +41961,7 @@ function ProfileView({ movies, onUpdatedUserInfo }) {
     const token = localStorage.getItem("token");
     const favoriteMovieList = movies.filter((movie)=>user.favoriteMovies?.includes(movie._id));
     const getUser = ()=>{
-        fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/", {
+        fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/current", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -42035,10 +42035,10 @@ function ProfileView({ movies, onUpdatedUserInfo }) {
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _updateUserDefault.default), {
                                     user: user,
                                     setUser: setUser,
-                                    onSubmit: handleSubmit
+                                    handleSubmit: handleSubmit
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 72,
+                                    lineNumber: 73,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
@@ -42067,7 +42067,7 @@ function ProfileView({ movies, onUpdatedUserInfo }) {
                 removeFav: removeFav
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 77,
+                lineNumber: 78,
                 columnNumber: 7
             }, this)
         ]
