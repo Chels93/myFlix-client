@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import "./profile-view.scss";
 import axios from "axios";
+import UserInfo from "./user-info";
 
 export function ProfileView({ movies, onUpdatedUserInfo }) {
   const [user, setUser] = useState({});
