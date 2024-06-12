@@ -22,10 +22,17 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
   useEffect(() => {}, []);
 
   return (
-    <div>
-      <UserInfo name={user.username} email={user.email} />
+    <Container>
+      <Row>
+        <Col>
+          <UserInfo name={user.username} email={user.email} />
+        </Col>
+        <Col>
+          <UpdateUser user={user} setUser={setUser} />
+        </Col>
+      </Row>
+
       <FavoriteMovies favoriteMovieList={favoriteMovieList} />
-      <UpdateUser handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
-    </div>
+    </Container>
   );
 }
