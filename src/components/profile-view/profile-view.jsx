@@ -56,20 +56,22 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
     getUser();
   }, []);
 
+  // Render UserInfo only if user.username and user.email are defined
   return (
     <Container>
       <Row>
         <Col xs={12} sm={4}>
           <Card>
             <Card.Body>
-              <UserInfo name={user.username} email={user.email} />
+              {user.username && user.email && (
+                <UserInfo name={user.username} email={user.email} />
+              )}
             </Card.Body>
           </Card>
         </Col>
         <Col xs={12} sm={8}>
           <Card>
             <Card.Body>
-              {/* Pass handleSubmit as a prop to UpdateUser */}
               <UpdateUser user={user} setUser={setUser} handleSubmit={handleSubmit} />
             </Card.Body>
           </Card>
