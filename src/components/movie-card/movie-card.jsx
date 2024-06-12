@@ -13,17 +13,30 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   };
 
   return (
-    <Card className="h-100" style={{ width: '18rem', border: "3px solid gray" }}>
+    <Card
+      className="h-100"
+      style={{ width: "18rem", border: "3px solid gray" }}
+    >
       <Card.Img
         variant="top"
         src={movie.imagePath}
         alt={`${movie.title} poster`}
       />
       <Card.Body>
-        <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
-        <Button onClick={handleViewDetails} variant="link">
-          {detailsDisplayed ? "Hide Details" : "View Details"}
-        </Button>
+        <Card.Title
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+          }}
+        >
+          {movie.title}
+        </Card.Title>
+        <Link to={`/movies/${encodeURIComponent(movie._Id)}`}>
+          <Button onClick={handleViewDetails} variant="link">
+            {detailsDisplayed ? "Hide Details" : "View Details"}
+          </Button>
+        </Link>
         {detailsDisplayed && (
           <div>
             <p>Synopsis: {movie.synopsis}</p>
