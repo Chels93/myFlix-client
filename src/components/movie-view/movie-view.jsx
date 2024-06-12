@@ -3,10 +3,15 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie, onBackClick }) => {
-  const { movieId } = useParams();
+export const MovieView = ({ movies, onBackClick }) => {
+  const { movie_id } = useParams();
 
-  const movie = movies.find(b === movieId);
+  const movie = movies.find((m) => m._id === movie_id);
+
+  // Check if movies array is empty or null
+  if (!movie || movie.length === 0) {
+    return <div>No movie found!</div>;
+  }
 
   return (
     <div>
@@ -72,21 +77,24 @@ export const MovieView = ({ movie, onBackClick }) => {
 };
 
 MovieView.propTypes = {
-  movie: PropTypes.shape({
-    imagePath: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    synopsis: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    genre: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-    }).isRequired,
-    director: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      bio: PropTypes.string.isRequired,
-      birthYear: PropTypes.string,
-      deathYear: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  movie: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      imagePath: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      synopsis: PropTypes.string.isRequired,
+      year: PropTypes.string.isRequired,
+      genre: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      }).isRequired,
+      director: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        bio: PropTypes.string.isRequired,
+        birthYear: PropTypes.string,
+        deathYear: PropTypes.string,
+      }).isRequired,
+    })
+  ).isRequired,
+  onBackClick: PropTypes.func.isRequired,
 };

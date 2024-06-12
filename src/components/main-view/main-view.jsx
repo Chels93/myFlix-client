@@ -76,7 +76,7 @@ export const MainView = () => {
           />
 
           <Route
-            path="/movies/:movie_Id"
+            path="/movies/:movie_id"
             element={
               !user ? (
                 <Navigate to="/login" replace />
