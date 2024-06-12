@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "./profile-view.scss";
 import axios from "axios";
 import UserInfo from "./user-info";
+import FavoriteMovies from "./favorite-movies";
 
 export function ProfileView({ movies, onUpdatedUserInfo }) {
   const [user, setUser] = useState({});
