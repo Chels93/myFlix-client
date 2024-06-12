@@ -21,7 +21,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
 
   return (
     <div>
-      
+      <UserInfo name={user.username} email={user.email} />
       <div>
         <h2>Favorite Movies</h2>
         {favoriteMovieList.map((movies) => {
