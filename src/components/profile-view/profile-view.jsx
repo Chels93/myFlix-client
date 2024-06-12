@@ -23,7 +23,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
   return (
     <div>
       <UserInfo name={user.username} email={user.email} />
-     
+     <FavoriteMovies favoriteMovieList={favoriteMovieList} />
       <Form className="profile-form" onSubmit={(e) => handleSubmit(e)}>
         <h2>Want to change some info?</h2>
 
