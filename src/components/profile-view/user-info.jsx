@@ -4,7 +4,7 @@ function UserInfo({ email, name }) {
   return (
     <>
       <h4>Your Info</h4>
-      <p>User: {name}</p>
+      <p>Name: {name}</p>
       <p>Email: {email}</p>
     </>
   );
