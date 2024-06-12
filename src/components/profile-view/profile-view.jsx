@@ -12,7 +12,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
   const favoriteMovieList = movies.filter(movie => user.favoriteMovies?.includes(movie._id));
 
   const getUser = () => {
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/current", {
+    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => response.json())
