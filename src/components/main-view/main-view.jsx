@@ -39,9 +39,9 @@ export const MainView = () => {
   };
   //setMovies(moviesFromApi);
 
-  if (!user) {
-    return (
-      <Row className="justify-content-md-center">
+  return (
+    <Row className="justify-content-md-center">
+      {!user ? (
         <Col md={5}>
           <LoginView
             onLoggedIn={(user, token) => {
@@ -54,13 +54,7 @@ export const MainView = () => {
           or
           <SignupView />
         </Col>
-      </Row>
-    );
-  }
-
-  return (
-    <Row className="justify-content-md-center">
-      {selectedMovie ? (
+      ) : selectedMovie ? (
         <Col md={8} style={{ border: "1px solid black" }}>
           <MovieView
             style={{ border: "1px solid green" }}
@@ -69,7 +63,7 @@ export const MainView = () => {
           />
         </Col>
       ) : movies.length === 0 ? (
-        <div>The list is empty!</div>
+        <Col>The list is empty!</Col>
       ) : (
         movies.map((movie) => (
           <Col className="mb-5" key={movie._id} md={3}>
