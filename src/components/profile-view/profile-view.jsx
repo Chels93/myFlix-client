@@ -3,10 +3,11 @@ import { Container, Col, Row, Card, Form, Button } from "react-bootstrap";
 import UserInfo from "./user-info";
 import FavoriteMovies from "./favorite-movies";
 import UpdateUser from "./update-user";
+import MovieView from "../movie-view/movie-view"; 
 import "./profile-view.scss";
-import MovieView from "../movie-view/movie-view";
 
-export function ProfileView({ movies, onUpdatedUserInfo }) {
+
+export function ProfileView({ movies, onUpdatedUserInfo, selectedMovie }) {
   const [user, setUser] = useState({});
   const [newFavoriteMovieId, setNewFavoriteMovieId] = useState("");
   const token = localStorage.getItem("token");
@@ -17,7 +18,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
 
   const getUser = () => {
     fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
-      method: "POST",
+      method: "GET", 
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -33,7 +34,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/:username", {
+    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/:username`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -53,24 +54,21 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
       .catch((error) => console.error("Error updating user data: ", error));
   };
 
-  const addFavoriteMovie = (e) => {
-    e.preventDefault();
+  const addFavoriteMovie = (movieId) => {
     fetch(
-      "https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/:username/movies/:_id",
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/:username/movies/:ObjectId`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ movieId: newFavoriteMovieId }),
       }
     )
       .then((response) => response.json())
       .then((data) => {
         if (typeof data === "object") {
           setUser(data);
-          setNewFavoriteMovieId("");
         } else {
           throw new Error("Invalid user data format");
         }
@@ -80,7 +78,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
 
   const removeFav = (id) => {
     fetch(
-      "https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/:username/movies/:ObjectId",
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com//users/:username/movies/:ObjectId`,
       {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
@@ -111,7 +109,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
     getUser();
   }, []);
 
-  console.log("User type:", typeof user, user); // Log user to inspect its type
+  console.log("User type:", typeof user, user); 
 
   return (
     <Container>
@@ -127,7 +125,10 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
           <Card className="mt-3">
             <Card.Body>
               <h5>Add Favorite Movie</h5>
-              <Form onSubmit={addFavoriteMovie}>
+              <Form onSubmit={(e) => {
+                e.preventDefault();
+                addFavoriteMovie(newFavoriteMovieId);
+              }}>
                 <Form.Group>
                   <Form.Control
                     type="text"
@@ -159,6 +160,11 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
       <FavoriteMovies
         favoriteMovieList={favoriteMovieList}
         removeFav={removeFav}
+      />
+      <MovieView
+        movie={selectedMovie}
+        onBackClick={() => console.log("Back clicked")}
+        onAddToFavorites={addFavoriteMovie}
       />
     </Container>
   );
