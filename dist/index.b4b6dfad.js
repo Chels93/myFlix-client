@@ -41388,14 +41388,14 @@ const MovieView = ({ movie, onBackClick })=>{
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
                                 lineNumber: 26,
-                                columnNumber: 13
+                                columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                 children: movie._id
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
                                 lineNumber: 27,
-                                columnNumber: 13
+                                columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
@@ -41587,12 +41587,21 @@ const MovieView = ({ movie, onBackClick })=>{
                         lineNumber: 60,
                         columnNumber: 11
                     }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MovieView, {
+                        movie: selectedMovie,
+                        onBackClick: handleBackClick,
+                        onAddToFavorites: addFavoriteMovie
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 66,
+                        columnNumber: 9
+                    }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                         onClick: ()=>onAddToFavorites(movie._id),
                         children: "Add to Favorites"
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 65,
+                        lineNumber: 72,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -41603,12 +41612,12 @@ const MovieView = ({ movie, onBackClick })=>{
                             children: "Back"
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 67,
+                            lineNumber: 76,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 66,
+                        lineNumber: 75,
                         columnNumber: 9
                     }, undefined)
                 ]
