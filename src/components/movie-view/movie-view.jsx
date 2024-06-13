@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
-const MovieView = ({ movie, onBackClick }) => {
+const MovieView = ({ movie, onBackClick, onAddToFavorites }) => {
   // Check if movie is null or undefined
   if (!movie) {
     return <div>No movie found!</div>;
@@ -62,12 +62,6 @@ const MovieView = ({ movie, onBackClick }) => {
             <span>{movie.director.deathYear}</span>
           </div>
         )}
-
-        <MovieView
-          movie={selectedMovie}
-          onBackClick={handleBackClick}
-          onAddToFavorites={addFavoriteMovie}
-        />
 
         <button onClick={() => onAddToFavorites(movie._id)}>
           Add to Favorites
