@@ -22,6 +22,10 @@ const MovieView = ({ movie, onBackClick }) => {
           <span>Title: </span>
           <span>{movie.title}</span>
         </div>
+        <div className="_id">
+            <span>ID Number: </span>
+            <span>{movie._id}</span>
+        </div>
         <div className="synopsis">
           <span>Synopsis: </span>
           <span>{movie.synopsis}</span>
@@ -58,6 +62,7 @@ const MovieView = ({ movie, onBackClick }) => {
             <span>{movie.director.deathYear}</span>
           </div>
         )}
+        <button onClick={() => onAddToFavorites(movie._id)}>Add to Favorites</button>
         <Link to={`/`}>
           <button className="back-button" onClick={onBackClick}>
             Back
