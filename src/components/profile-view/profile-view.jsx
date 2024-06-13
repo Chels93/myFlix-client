@@ -4,6 +4,7 @@ import UserInfo from "./user-info";
 import FavoriteMovies from "./favorite-movies";
 import UpdateUser from "./update-user";
 import "./profile-view.scss";
+import MovieView from "../movie-view/movie-view";
 
 export function ProfileView({ movies, onUpdatedUserInfo }) {
   const [user, setUser] = useState({});
