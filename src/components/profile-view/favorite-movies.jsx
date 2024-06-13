@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card, Button, Row, Col, Figure } from "react-bootstrap";
+import { Button, Row, Col, Figure } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const FavoriteMovies = ({ favoriteMovieList, removeFav }) => {
