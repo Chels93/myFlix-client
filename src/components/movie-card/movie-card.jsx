@@ -4,13 +4,21 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie, onMovieClick, onAddToFavorites }) => {
   const [detailsDisplayed, setDetailsDisplayed] = useState(false);
 
   const handleViewDetails = () => {
     setDetailsDisplayed(!detailsDisplayed);
     if (typeof onMovieClick === "function") {
-        onMovieClick(movie);
+      onMovieClick(movie);
+    }
+  };
+
+  const handleAddToFavorites = () => {
+    if (typeof onAddToFavorites === "function") {
+      onAddToFavorites(movie._id);
+    } else {
+      console.warn("onAddToFavorites function is not provided);");
     }
   };
 
@@ -39,6 +47,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
             {detailsDisplayed ? "Hide Details" : "View Details"}
           </Button>
         </Link>
+        <Button onclick={handleAddToFavorites} variant="primary" className="m-2">
+            Add to Favorites
+        </Button>
         {detailsDisplayed && (
           <div>
             <p>Synopsis: {movie.synopsis}</p>
@@ -57,25 +68,25 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 };
 
 MovieCard.propTypes = {
-    movie: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      imagePath: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      synopsis: PropTypes.string.isRequired,
-      year: PropTypes.string.isRequired,
-      genre: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-      }).isRequired,
-      director: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        bio: PropTypes.string.isRequired,
-        birthYear: PropTypes.string,
-        deathYear: PropTypes.string,
-      }).isRequired,
+  movie: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    imagePath: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    synopsis: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+    genre: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
     }).isRequired,
-    onMovieClick: PropTypes.func.isRequired,
-  };
-  
+    director: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      bio: PropTypes.string.isRequired,
+      birthYear: PropTypes.string,
+      deathYear: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  onMovieClick: PropTypes.func.isRequired,
+  onAddToFavorites: PropTypes.func.isRequired
+};
 
-  
+export default MovieCard;

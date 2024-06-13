@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Container, Col, Row, Card, Form, Button } from "react-bootstrap";
 import UserInfo from "./user-info";
-import FavoriteMovies from "./favorite-movies";
+import MovieCard from "../movie-card/movie-card";
 import UpdateUser from "./update-user";
-import MovieView from "../movie-view/movie-view"; 
+import MovieView from "../movie-view/movie-view";
 import "./profile-view.scss";
 
-
-export function ProfileView({ movies, onUpdatedUserInfo, selectedMovie }) {
+const ProfileView = ({ movies, onUpdatedUserInfo, selectedMovie, movieId, movieCards }) => {
   const [user, setUser] = useState({});
   const [newFavoriteMovieId, setNewFavoriteMovieId] = useState("");
   const token = localStorage.getItem("token");
 
-  const favoriteMovieList = movies.filter((movie) =>
-    user.favoriteMovies?.includes(movie._id)
+  const favoriteMovies = movies.filter(
+    (movie) => user.favoriteMovies && user.favoriteMovies.includes(movie._id)
   );
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const getUser = () => {
     fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
-      method: "GET", 
+      method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -56,7 +59,7 @@ export function ProfileView({ movies, onUpdatedUserInfo, selectedMovie }) {
 
   const addFavoriteMovie = (movieId) => {
     fetch(
-      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/:username/movies/:ObjectId`,
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
       {
         method: "POST",
         headers: {
@@ -76,9 +79,9 @@ export function ProfileView({ movies, onUpdatedUserInfo, selectedMovie }) {
       .catch((error) => console.error("Error adding favorite movie: ", error));
   };
 
-  const removeFav = (id) => {
+  const removeFav = (movieId) => {
     fetch(
-      `https://mymoviesdb-6c5720b5bef1.herokuapp.com//users/:username/movies/:ObjectId`,
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
       {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
@@ -105,12 +108,6 @@ export function ProfileView({ movies, onUpdatedUserInfo, selectedMovie }) {
     }
   };
 
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  console.log("User type:", typeof user, user); 
-
   return (
     <Container>
       <Row>
@@ -125,10 +122,12 @@ export function ProfileView({ movies, onUpdatedUserInfo, selectedMovie }) {
           <Card className="mt-3">
             <Card.Body>
               <h5>Add Favorite Movie</h5>
-              <Form onSubmit={(e) => {
-                e.preventDefault();
-                addFavoriteMovie(newFavoriteMovieId);
-              }}>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  addFavoriteMovie(newFavoriteMovieId);
+                }}
+              >
                 <Form.Group>
                   <Form.Control
                     type="text"
@@ -157,15 +156,34 @@ export function ProfileView({ movies, onUpdatedUserInfo, selectedMovie }) {
           </Card>
         </Col>
       </Row>
-      <FavoriteMovies
-        favoriteMovieList={favoriteMovieList}
-        removeFav={removeFav}
-      />
-      <MovieView
-        movie={selectedMovie}
-        onBackClick={() => console.log("Back clicked")}
-        onAddToFavorites={addFavoriteMovie}
-      />
+
+      <Row className="mt-3">
+        <Col>
+          <h3>Favorite Movies</h3>
+          <Row>
+            {/* Render MovieCard components */}
+            {favoriteMovies.map((movie) => (
+              <Col key={movie._id} xs={12} sm={6} md={4} lg={3}>
+                <MovieCard
+                  movie={movie}
+                  onAddToFavorites={addFavoriteMovie}
+                  onMovieClick={(selectedMovie) => console.log(selectedMovie)}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Col>
+      </Row>
+
+      {selectedMovie && (
+        <MovieView
+          movie={selectedMovie}
+          onBackClick={() => console.log("Back clicked")}
+          onAddToFavorites={addFavoriteMovie}
+        />
+      )}
     </Container>
   );
-}
+};
+
+export default ProfileView;

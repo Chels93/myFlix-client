@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
-import { MovieCard } from "../movie-card/movie-card";
-import MovieView  from "../movie-view/movie-view";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import MovieCard from "../movie-card/movie-card";
+import MovieView from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { ProfileView } from "../profile-view/profile-view";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import ProfileView from "../profile-view/profile-view";
 import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 
 export const MainView = () => {
@@ -16,6 +15,7 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser || null);
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
+  const [userFavorites, setUserFavorites] = useState({});
 
   useEffect(() => {
     if (!token) {
@@ -40,22 +40,25 @@ export const MainView = () => {
     localStorage.clear();
   };
 
-  const MovieViewWrapper = () => {
-    const { movie_id } = useParams();
-    const movie = movies.find((m) => m._id === movie_id);
-    if (!movie) {
-      return <Col>The movie could not be found.</Col>;
+  const handleAddToFavorites = (movieId) => {
+    if (userFavorites.includes(movieId)) {
+      console.log("Movie is already in favorites!");
+      return;
     }
-    return <MovieView movie={movie} />;
-  };
 
-  const handleMovieClick = (movie) => {
-    console.log("Movie clicked: ", movie);
-  };
+    const movieToAdd = movies.find((m) => m._id === movieId);
+  
+    if (!movieToAdd) {
+      console.error(`Movie with id ${movieId} not found in movies list.`);
+      return;
+    }
+  
+    setUserFavorites([...userFavorites, movieId]);
 
   return (
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={handleLogout} />
+      <Container>
       <Row className="justify-content-md-center">
         <Routes>
           <Route
@@ -98,7 +101,7 @@ export const MainView = () => {
                 <Col>The list is empty!</Col>
               ) : (
                 <Col md={8}>
-                  <MovieViewWrapper />
+                  <MovieView />
                 </Col>
               )
             }
@@ -110,7 +113,7 @@ export const MainView = () => {
                 <Navigate to="/login" replace />
               ) : (
                 <Col>
-                  <ProfileView movies={movies} />
+                  <ProfileView movies={movies} userFavorites={userFavorites} onAddToFavorites={handleAddToFavorites} />
                 </Col>
               )
             }
@@ -124,7 +127,7 @@ export const MainView = () => {
                 <>
                   {movies.map((movie) => (
                     <Col className="mb-5" key={movie._id} md={3}>
-                      <MovieCard movie={movie} onMovieClick={handleMovieClick} />
+                      <MovieCard movie={movie} onMovieClick={handleMovieClick}  onAddToFavorites={handleAddToFavorites} />
                     </Col>
                   ))}
                 </>
@@ -133,6 +136,9 @@ export const MainView = () => {
           />
         </Routes>
       </Row>
+      </Container>
     </BrowserRouter>
   );
-};
+}};
+
+export default MainView;

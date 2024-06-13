@@ -1,9 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
+import { Button } from "react-bootstrap";
 
 const MovieView = ({ movie, onBackClick, onAddToFavorites }) => {
-  // Check if movie is null or undefined
+  const handleFavoriteClick = () => {
+    if (typeof onAddToFavorites === "function") {
+      onAddToFavorites(movie._id);
+    } else {
+      console.warn("onAddToFavorites function is not provided");
+    }
+  };
+
   if (!movie) {
     return <div>No movie found!</div>;
   }
@@ -63,13 +71,12 @@ const MovieView = ({ movie, onBackClick, onAddToFavorites }) => {
           </div>
         )}
 
-        <button onClick={() => onAddToFavorites(movie._id)}>
-          Add to Favorites
-        </button>
-        <Link to={`/`}>
-          <button className="back-button" onClick={onBackClick}>
+        <Button onClick={handleFavoriteClick}>Add to Favorites</Button>
+
+        <Link to={`/home`}>
+          <Button className="back-button" onClick={onBackClick}>
             Back
-          </button>
+          </Button>
         </Link>
       </div>
     </div>
