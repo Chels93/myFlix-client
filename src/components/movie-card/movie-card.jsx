@@ -18,7 +18,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       />
       <Card.Body>
         <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
-        <Link to={`/movies/${movie._id}`} className="btn btn-link">
+        <Link to={`/movies/${movie._id}`} className="btn btn-link" onClick={handleSeeMore}>
             See More
         </Link>
       </Card.Body>

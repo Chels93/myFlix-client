@@ -20,7 +20,6 @@ export const MainContent = ({ user, movies, setSelectedMovie }) => {
             <MovieCard
               movie={movie}
               onMovieClick={setSelectedMovie}
-              selectedMovie={setSelectedMovie}
             />
           </Col>
         ))
