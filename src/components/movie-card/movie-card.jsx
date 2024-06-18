@@ -1,11 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
-  const [detailsDisplayed, setDetailsDisplayed] = useState(false);
-
   const handleSeeMore = () => {
     onMovieClick(movie);
   };
@@ -19,9 +18,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       />
       <Card.Body>
         <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
-        <Button onClick={handleSeeMore} variant="link">
-          See More
-        </Button>
+        <Link to={`/movies/${movie._id}`} className="btn btn-link">
+            See More
+        </Link>
       </Card.Body>
     </Card>
   );

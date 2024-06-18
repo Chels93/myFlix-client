@@ -20,7 +20,7 @@ export const MainContent = ({ user, movies, setSelectedMovie }) => {
               <MovieCard
                 movie={movie}
                 onMovieClick={setSelectedMovie}
-                selectedMovie={selectedMovie}
+                selectedMovie={setSelectedMovie}
               />
             </Col>
           ))
@@ -60,7 +60,10 @@ export const MainView = () => {
     setToken(null);
     localStorage.clear();
   };
-  //setMovies(moviesFromApi);
+
+  const handleMovieClick = () => {
+    setSelectedMovie(movies);
+  };
 
   if (!user) {
     return (
@@ -153,8 +156,7 @@ export const MainView = () => {
                       <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
-                          onMovieClick={setSelectedMovie}
-                          selectedMovie={selectedMovie}
+                          onMovieClick={handleMovieClick}
                         />
                       </Col>
                     ))}
