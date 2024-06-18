@@ -16,7 +16,7 @@ export const ProfileView = ({ movies, onUpdatedUserInfo }) => {
 
   const getUser = () => {
     // Fetch user data based on logged-in user's username
-    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
+    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ export const ProfileView = ({ movies, onUpdatedUserInfo }) => {
       .then((data) => {
         setUser(data); // Update user state with fetched data
         // Filter movies array to get favorite movies of the user
-        const userFavoriteMovies = movies.filter((movie) => data.favoriteMovies.includes(movie._id));
+        const FavoriteMovies = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
         setFavoriteMovies(userFavoriteMovies); // Update favorite movies state
       })
       .catch((error) => console.error('Error fetching user data: ', error));
