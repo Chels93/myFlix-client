@@ -1,33 +1,51 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "./movie-card.scss";
 
 export const MovieCard = ({ movie, onMovieClick, username }) => {
+  const navigate = useNavigate();
+
   const handleSeeMore = () => {
-    onMovieClick(movie);
-  };
-  
-  const handleAddToFavorites = () => {
+    navigate(`/movies/${movie._id}`);
     onMovieClick(movie);
   };
 
+  const handleAddToFavorites = () => {
+    console.log("Add to favorites clicked for: ", movie.title);
+  };
+
   return (
-    <Card className="h-100" style={{ width: '18rem', border: "3px solid gray" }}>
+    <Card
+      className="h-100"
+      style={{ width: "18rem", border: "3px solid gray" }}
+    >
       <Card.Img
         variant="top"
         src={movie.imagePath}
         alt={`${movie.title} poster`}
       />
       <Card.Body>
-        <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
-        <Link to={`/movies/${movie._id}`} className="btn btn-link" onClick={handleSeeMore}>
-            See More
-        </Link>
-        <Link to={`/users/${username}/movies/${movie._id}`} className="btn btn-link" onClick={handleAddToFavorites}>
-            Add to Favorites
-        </Link>
+        <Card.Title
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+          }}
+        >
+          {movie.title}
+        </Card.Title>
+        <Button variant="link" className="btn-link" onClick={handleSeeMore}>
+          See More
+        </Button>
+        <Button
+          variant="link"
+          className="btn-link ml-2"
+          onClick={handleAddToFavorites}
+        >
+          Add to Favorites
+        </Button>
       </Card.Body>
     </Card>
   );
@@ -51,4 +69,5 @@ MovieCard.propTypes = {
     }).isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
 };
