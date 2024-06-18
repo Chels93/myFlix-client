@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./movie-card.scss";
 
-export const MovieCard = ({ movie, onMovieClick, username }) => {
+export const MovieCard = ({ movie, onMovieClick, username, onAddToFavorites }) => {
   const navigate = useNavigate();
 
   const handleSeeMore = () => {
@@ -13,7 +13,22 @@ export const MovieCard = ({ movie, onMovieClick, username }) => {
   };
 
   const handleAddToFavorites = () => {
-    console.log("Add to favorites clicked for: ", movie.title);
+    const token = localStorage.getItem("token");
+    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${username}/movies/${movie._id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ movieID: movie._id }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Add to favorites clicked for: ", data);
+    })
+    .catch((error) => {
+        console.error("Error adding movie to favorites: ", error);
+    });
   };
 
   return (
@@ -70,4 +85,6 @@ MovieCard.propTypes = {
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
+  onAddToFavorites: PropTypes.func,
+  onRemoveFromFavorites: PropTypes.func,
 };

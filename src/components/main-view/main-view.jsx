@@ -1,32 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Row, Col } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
-export const MainContent = ({ user, movies, setSelectedMovie }) => {
-  return (
-    <Row className="justify-content-md-center">
-      {movies.length === 0 ? (
-        <Col>The list is empty!</Col>
-      ) : (
-        movies.map((movie) => (
-          <Col className="mb-5" key={movie._id} md={3}>
-            <MovieCard
-              movie={movie}
-              onMovieClick={setSelectedMovie}
-            />
-          </Col>
-        ))
-      )}
-    </Row>
-  );
-};
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -62,6 +42,35 @@ export const MainView = () => {
     setSelectedMovie(null);
   };
 
+  const handleToggleFavorite = (movieId, isFavorite) => {
+    const updatedMovies = movies.map((movie) =>
+      movie._id === movieId ? { ...movie, isFavorite: !isFavorite } : movie
+    );
+
+    setMovies(updatedMovies);
+
+    const method = isFavorite ? "DELETE" : "POST";
+
+    fetch(
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
+      {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ movieId }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Toggle favorite success: ", data);
+      })
+      .catch((error) => {
+        console.error("Error toggling favorite: ", error);
+      });
+  };
+
   if (!user) {
     return (
       <Row className="justify-content-md-center">
@@ -80,6 +89,12 @@ export const MainView = () => {
       </Row>
     );
   }
+
+  const favoriteMovies = movies.filter((movie) =>
+    Array.isArray(user.FavoriteMovies)
+      ? user.FavoriteMovies.includes(movie._id)
+      : false
+  );
 
   return (
     <BrowserRouter>
@@ -134,7 +149,7 @@ export const MainView = () => {
                       onBackClick={handleBackClick}
                     />
                   ) : (
-                    <MainContent user={user} movies={movies} />
+                    <Navigate to="/" replace />
                   )}
                 </Col>
               )
@@ -156,6 +171,8 @@ export const MainView = () => {
                         <MovieCard
                           movie={movie}
                           onMovieClick={handleMovieClick}
+                          onToggleFavorite={handleToggleFavorite}
+                          username={user.username}
                         />
                       </Col>
                     ))}
@@ -171,18 +188,12 @@ export const MainView = () => {
               !user ? (
                 <Navigate to="/login" replace />
               ) : (
-                <ProfileView user={user} movies={movies} />
+                <ProfileView
+                  user={user}
+                  movies={movies}
+                  favoriteMovies={favoriteMovies}
+                />
               )
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <MainContent
-                user={user}
-                movies={movies}
-                onMovieClick={handleMovieClick}
-              />
             }
           />
         </Routes>

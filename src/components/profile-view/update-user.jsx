@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button, Alert } from 'react-bootstrap';
 
 export const UpdateUser = ({ user, onUpdateUser }) => {
   const [formData, setFormData] = useState({
-    username: user.username || '',
-    password: '',
-    email: user.email || '',
-    birthdate: user.birthdate || '',
+    username: user.username,
+    password: user.password,
+    email: user.email,
+    birthdate: user.birthdate
   });
+
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,20 +22,29 @@ export const UpdateUser = ({ user, onUpdateUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateUser(formData);
+    setError(null);
+    try {
+      UpdateUser(formData);
+      setSuccess(true);
+    } catch (error) {
+      setError('Failed to update user information. Please try again later.');
+      console.error('Error updating user data: ', error);
+    }
   };
 
   return (
     <Card className="update-user">
       <Card.Body>
         <Card.Title>Update User Information</Card.Title>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {success && <Alert variant="success">User information updated successfully!</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control
               type="text"
               name="username"
-              value={formData.username}
+              defaultValue={formData.username}
               onChange={handleChange}
               placeholder="Enter new username"
               required
@@ -44,7 +56,7 @@ export const UpdateUser = ({ user, onUpdateUser }) => {
             <Form.Control
               type="password"
               name="password"
-              value={formData.password}
+              defaultValue={formData.password}
               onChange={handleChange}
               placeholder="Enter new password"
               required
@@ -56,7 +68,7 @@ export const UpdateUser = ({ user, onUpdateUser }) => {
             <Form.Control
               type="email"
               name="email"
-              value={formData.email}
+              defaultValue={formData.email}
               onChange={handleChange}
               placeholder="Enter new email"
               required
@@ -68,7 +80,7 @@ export const UpdateUser = ({ user, onUpdateUser }) => {
             <Form.Control
               type="date"
               name="birthdate"
-              value={formData.birthdate}
+              defaultValue={formData.birthdate}
               onChange={handleChange}
               placeholder="Enter date of birth"
             />
