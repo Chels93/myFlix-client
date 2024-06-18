@@ -72,10 +72,10 @@ export const ProfileView = ({ movies, onUpdatedUserInfo }) => {
   return (
     <Container className="profile-view">
       <Row>
-        <Col>
+        <Col xs={12} sm={4}>
           <Card>
             <Card.Body>
-              <UserInfo name={user.username} email={user.email} /> {/* Display user info */}
+              <UserInfo name={user.username} email={user.email} birthday={user.birthday}/>
               <Button variant="danger" onClick={handleDeregister} className="mt-3">
                 Deregister
               </Button>
@@ -85,7 +85,7 @@ export const ProfileView = ({ movies, onUpdatedUserInfo }) => {
         <Col>
           <Card>
             <Card.Body>
-              <UpdateUser user={user} onUpdateUser={handleUpdateUser} /> {/* Update user details */}
+              <UpdateUser user={user} setUser={setUser} onUpdateUser={handleUpdateUser} /> 
             </Card.Body>
           </Card>
         </Col>
