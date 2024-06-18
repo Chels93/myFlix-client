@@ -1,18 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
-    if (!movie) {
-        return null;
-      }
+  const navigate = useNavigate();
+  if (!movie) {
+    return null;
+  }
+
+  const handleBackClick = () => {
+    navigate("/");
+  };
+
   return (
     <div>
       <div>
-        <img src={movie.imagePath}
-        alt={`${movie.title} poster`} 
-        style={{ width: "auto", height: "auto", display: "block", margin: "0 auto" }}
+        <img
+          src={movie.imagePath}
+          alt={`${movie.title} poster`}
+          style={{
+            width: "auto",
+            height: "auto",
+            display: "block",
+            margin: "0 auto",
+          }}
         />
       </div>
       <div>
@@ -51,7 +64,13 @@ export const MovieView = ({ movie, onBackClick }) => {
         <span>Director Deathyear: </span>
         <span>{movie.director.deathYear}</span>
       </div>
-      <Button onClick={onBackClick} className="back-button" style={{ cursor: "pointer" }}>Back</Button>
+      <Button
+        onClick={handleBackClick}
+        className="back-button"
+        style={{ cursor: "pointer" }}
+      >
+        Back
+      </Button>
     </div>
   );
 };
