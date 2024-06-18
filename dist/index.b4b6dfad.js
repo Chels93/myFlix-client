@@ -26995,6 +26995,7 @@ parcelHelpers.export(exports, "MainContent", ()=>MainContent);
 parcelHelpers.export(exports, "MainView", ()=>MainView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
@@ -27016,18 +27017,18 @@ const MainContent = ({ user, movies, setSelectedMovie })=>{
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 16,
             columnNumber: 9
-        }, undefined) : movies.map((movie1)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+        }, undefined) : movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                 className: "mb-5",
                 md: 3,
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                    movie: movie1,
+                    movie: movie,
                     onMovieClick: setSelectedMovie
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 20,
                     columnNumber: 13
                 }, undefined)
-            }, movie1._id, false, {
+            }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 19,
                 columnNumber: 11
@@ -27062,7 +27063,7 @@ const MainView = ()=>{
     }, [
         token
     ]);
-    const handleMovieClick = ()=>{
+    const handleMovieClick = (movie)=>{
         setSelectedMovie(movie);
     };
     const handleBackClick = ()=>{
@@ -27236,18 +27237,18 @@ const MainView = ()=>{
                                     lineNumber: 151,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-                                    children: movies.map((movie1)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                                    children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                             className: "mb-5",
                                             md: 3,
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                                movie: movie1,
+                                                movie: movie,
                                                 onMovieClick: handleMovieClick
                                             }, void 0, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
                                                 lineNumber: 156,
                                                 columnNumber: 25
                                             }, void 0)
-                                        }, movie1._id, false, {
+                                        }, movie._id, false, {
                                             fileName: "src/components/main-view/main-view.jsx",
                                             lineNumber: 155,
                                             columnNumber: 23
