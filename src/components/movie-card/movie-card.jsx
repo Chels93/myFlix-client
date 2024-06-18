@@ -6,8 +6,7 @@ import "./movie-card.scss";
 export const MovieCard = ({ movie, onMovieClick }) => {
   const [detailsDisplayed, setDetailsDisplayed] = useState(false);
 
-  const handleViewDetails = () => {
-    setDetailsDisplayed(!detailsDisplayed);
+  const handleSeeMore = () => {
     onMovieClick(movie);
   };
 
@@ -20,21 +19,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       />
       <Card.Body>
         <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
-        <Button onClick={handleViewDetails} variant="link">
-          {detailsDisplayed ? "Hide Details" : "View Details"}
+        <Button onClick={handleSeeMore} variant="link">
+          See More
         </Button>
-        {detailsDisplayed && (
-          <div>
-            <p>Synopsis: {movie.synopsis}</p>
-            <p>Release Year: {movie.year}</p>
-            <p>Genre: {movie.genre.name}</p>
-            <p>Genre Description: {movie.genre.description}</p>
-            <p>Director: {movie.director.name}</p>
-            <p>Director Bio: {movie.director.bio}</p>
-            <p>Director Birthyear: {movie.director.birthYear}</p>
-            <p>Director Deathyear: {movie.director.deathYear}</p>
-          </div>
-        )}
       </Card.Body>
     </Card>
   );
