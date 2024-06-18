@@ -9,6 +9,26 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+export const MainContent = ({ user, movies, setSelectedMovie }) => {
+    return (
+      <Row className="justify-content-md-center">
+        {movies.length === 0 ? (
+          <Col>The list is empty!</Col>
+        ) : (
+          movies.map((movie) => (
+            <Col className="mb-5" key={movie._id} md={3}>
+              <MovieCard
+                movie={movie}
+                onMovieClick={setSelectedMovie}
+                selectedMovie={selectedMovie}
+              />
+            </Col>
+          ))
+        )}
+      </Row>
+    );
+  };
+
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -120,7 +140,7 @@ export const MainView = () => {
           />
 
           <Route
-            path="/"
+            path="/home"
             element={
               <>
                 {!user ? (
@@ -153,6 +173,10 @@ export const MainView = () => {
                 <ProfileView user={user} movies={movies} />
               )
             }
+        />
+          <Route
+          path="/"
+                element={<MainContent user={user} movies={movies} setSelectedMovie={setSelectedMovie} />}
           />
         </Routes>
       </Row>
