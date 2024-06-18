@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
-import { MovieCard } from '../movie-card/movie-card';
-import { UpdateUser } from './update-user';
-import { UserInfo } from './user-info';
-import { FavoriteMovies } from './favorite-movies';
-import './profile-view.scss';
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import { MovieCard } from "../movie-card/movie-card";
+import { UpdateUser } from "./update-user";
+import { UserInfo } from "./user-info";
+import "./profile-view.scss";
 
-export const ProfileView = ({ movies }) => {
+export const ProfileView = ({ movies, onUpdatedUserInfo }) => {
   const [user, setUser] = useState({});
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
