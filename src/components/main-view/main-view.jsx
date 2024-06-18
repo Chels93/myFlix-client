@@ -10,24 +10,24 @@ import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainContent = ({ user, movies, setSelectedMovie }) => {
-    return (
-      <Row className="justify-content-md-center">
-        {movies.length === 0 ? (
-          <Col>The list is empty!</Col>
-        ) : (
-          movies.map((movie) => (
-            <Col className="mb-5" key={movie._id} md={3}>
-              <MovieCard
-                movie={movie}
-                onMovieClick={setSelectedMovie}
-                selectedMovie={setSelectedMovie}
-              />
-            </Col>
-          ))
-        )}
-      </Row>
-    );
-  };
+  return (
+    <Row className="justify-content-md-center">
+      {movies.length === 0 ? (
+        <Col>The list is empty!</Col>
+      ) : (
+        movies.map((movie) => (
+          <Col className="mb-5" key={movie._id} md={3}>
+            <MovieCard
+              movie={movie}
+              onMovieClick={setSelectedMovie}
+              selectedMovie={setSelectedMovie}
+            />
+          </Col>
+        ))
+      )}
+    </Row>
+  );
+};
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -55,14 +55,12 @@ export const MainView = () => {
       });
   }, [token]);
 
-  const handleLogout = () => {
-    setUser(null);
-    setToken(null);
-    localStorage.clear();
-  };
-
   const handleMovieClick = () => {
     setSelectedMovie(movies);
+  };
+
+  const handleBackClick = () => {
+    setSelectedMovie(null); 
   };
 
   if (!user) {
@@ -132,10 +130,20 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col md={8} style={{ border: "1px solid black" }}>
-                    <MovieView
-                      movies={movies}
-                      style={{ border: "1px solid green" }}
-                    />
+                    <>
+                      {selectedMovie ? (
+                        <MovieView
+                          movie={selectedMovie}
+                          onBackClick={handleBackClick}
+                        />
+                      ) : (
+                        <MainContent
+                          user={user}
+                          movies={movies}
+                        />
+                      )}
+                    </>
+                    );
                   </Col>
                 )}
               </>
@@ -143,7 +151,7 @@ export const MainView = () => {
           />
 
           <Route
-            path="/home"
+            path="/"
             element={
               <>
                 {!user ? (
@@ -175,10 +183,16 @@ export const MainView = () => {
                 <ProfileView user={user} movies={movies} />
               )
             }
-        />
+          />
           <Route
-          path="/"
-                element={<MainContent user={user} movies={movies} setSelectedMovie={setSelectedMovie} />}
+            path="/"
+            element={
+              <MainContent
+                user={user}
+                movies={movies}
+                onMovieClick={handleMovieClick}
+              />
+            }
           />
         </Routes>
       </Row>
