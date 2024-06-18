@@ -4,8 +4,12 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie, onMovieClick, username }) => {
   const handleSeeMore = () => {
+    onMovieClick(movie);
+  };
+  
+  const handleAddToFavorites = () => {
     onMovieClick(movie);
   };
 
@@ -20,6 +24,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
         <Link to={`/movies/${movie._id}`} className="btn btn-link" onClick={handleSeeMore}>
             See More
+        </Link>
+        <Link to={`/users/${username}/movies/${movie._id}`} className="btn btn-link" onClick={handleAddToFavorites}>
+            Add to Favorites
         </Link>
       </Card.Body>
     </Card>
