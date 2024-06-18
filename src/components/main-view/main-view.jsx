@@ -56,11 +56,11 @@ export const MainView = () => {
   }, [token]);
 
   const handleMovieClick = () => {
-    setSelectedMovie(movies);
+    setSelectedMovie(movie);
   };
 
   const handleBackClick = () => {
-    setSelectedMovie(null); 
+    setSelectedMovie(null);
   };
 
   if (!user) {
@@ -123,30 +123,22 @@ export const MainView = () => {
           <Route
             path="/movies/:movieId"
             element={
-              <>
-                {!user ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
-                ) : (
-                  <Col md={8} style={{ border: "1px solid black" }}>
-                    <>
-                      {selectedMovie ? (
-                        <MovieView
-                          movie={selectedMovie}
-                          onBackClick={handleBackClick}
-                        />
-                      ) : (
-                        <MainContent
-                          user={user}
-                          movies={movies}
-                        />
-                      )}
-                    </>
-                    );
-                  </Col>
-                )}
-              </>
+              !user ? (
+                <Navigate to="/login" replace />
+              ) : movies.length === 0 ? (
+                <Col>The list is empty!</Col>
+              ) : (
+                <Col md={8} style={{ border: "1px solid black" }}>
+                  {selectedMovie ? (
+                    <MovieView
+                      movie={selectedMovie}
+                      onBackClick={handleBackClick}
+                    />
+                  ) : (
+                    <MainContent user={user} movies={movies} />
+                  )}
+                </Col>
+              )
             }
           />
 

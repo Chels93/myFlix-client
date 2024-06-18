@@ -24,10 +24,11 @@ export const ProfileView = ({ movies, onUpdatedUserInfo }) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setUser(data); // Update user state with fetched data
         // Filter movies array to get favorite movies of the user
         const FavoriteMovies = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
-        setFavoriteMovies(userFavoriteMovies); // Update favorite movies state
+        setFavoriteMovies(FavoriteMovies); // Update favorite movies state
       })
       .catch((error) => console.error('Error fetching user data: ', error));
   };
