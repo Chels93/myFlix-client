@@ -42577,6 +42577,10 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 const DeregisterUser = (user, token)=>{
     const handleDeregisterClick = ()=>{
+        if (!user || !user.username) {
+            console.error("User object or username is missing");
+            return;
+        }
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "DELETE",
             headers: {
@@ -42594,26 +42598,17 @@ const DeregisterUser = (user, token)=>{
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                children: "User Settings"
-            }, void 0, false, {
-                fileName: "src/components/profile-view/deregister-user.jsx",
-                lineNumber: 32,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                onClick: handleDeregisterClick,
-                children: "Deregister User"
-            }, void 0, false, {
-                fileName: "src/components/profile-view/deregister-user.jsx",
-                lineNumber: 33,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+            onClick: handleDeregisterClick,
+            children: "Deregister User"
+        }, void 0, false, {
+            fileName: "src/components/profile-view/deregister-user.jsx",
+            lineNumber: 36,
+            columnNumber: 7
+        }, undefined)
+    }, void 0, false, {
         fileName: "src/components/profile-view/deregister-user.jsx",
-        lineNumber: 31,
+        lineNumber: 35,
         columnNumber: 5
     }, undefined);
 };

@@ -1,7 +1,11 @@
-import React from 'react';
+import React from "react";
 
 export const DeregisterUser = (user, token) => {
   const handleDeregisterClick = () => {
+    if (!user || !user.username) {
+      console.error("User object or username is missing");
+      return;
+    }
     fetch(
       `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`,
       {
@@ -29,7 +33,6 @@ export const DeregisterUser = (user, token) => {
 
   return (
     <div>
-      <h2>User Settings</h2>
       <button onClick={handleDeregisterClick}>Deregister User</button>
     </div>
   );
