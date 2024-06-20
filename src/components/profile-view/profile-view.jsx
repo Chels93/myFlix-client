@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { UpdateUser } from "./update-user";
+import UpdateUser from "./update-user";
 import UserInfo from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
@@ -37,7 +37,7 @@ export const ProfileView = ({ user, movies }) => {
             <Row>
               {user.FavoriteMovies && user.FavoriteMovies.length > 0 ? (
                 user.FavoriteMovies.map((movieId) => {
-                  const movie = movies.find((m) => m._id === movieId);
+                  const movie = movies.find((movie) => movie._id === movieId);
                   return (
                     <Col key={movie._id} xs={12} sm={6} md={4} lg={3}>
                       <FavoriteMovies movie={movie} user={user} />
