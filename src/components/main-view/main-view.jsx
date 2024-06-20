@@ -15,6 +15,7 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser || null);
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     if (!token) {
@@ -25,13 +26,14 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((movies) => {
+        console.log("Movies fetched successfully: ", movies); // Log movies here
         setMovies(movies);
-        console.log(movies);
       })
       .catch((error) => {
-        console.error("Error fetching movies: ", error);
+        console.error("Error fetching movies: ", error); // Log error here
       });
   }, [token]);
+  
 
   const handleMovieClick = (movie) => {
     setSelectedMovie(movie);
