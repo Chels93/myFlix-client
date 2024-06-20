@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { UpdateUser } from "./update-user";
 import { UserInfo } from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
+import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
 export const ProfileView = ({ user, movies }) => {
