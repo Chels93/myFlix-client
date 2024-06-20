@@ -27,6 +27,9 @@ export const ProfileView = ({ user, movies }) => {
           <div className="user-update">
             <UpdateUser user={user} />
           </div>
+          <div>
+            <DeregisterUser user={user} token={token} />
+          </div>
         </Col>
         <Col xs={12} sm={6}>
           <div className="favorite-movies">
