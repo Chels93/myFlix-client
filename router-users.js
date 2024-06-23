@@ -113,6 +113,31 @@ module.exports = (app) => {
     }
   );
 
+  // get user info
+  app.get(
+    "/users/:username",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      await Users.findOne({ username: req.params.username })
+        .then((user) => {
+          if (!user) {
+            console.log("incorrect username");
+            return callback(null, false, {
+              message: "User doesnt exist",
+            });
+          }
+          console.log("finished");
+          return callback(null, user);
+        })
+        .catch((error) => {
+          if (error) {
+            console.log(error);
+            return callback(error);
+          }
+        });
+    }
+  );
+
   // Allows users to add a movie to their list of favorites
   app.post(
     "/users/:username/movies/:_id",
