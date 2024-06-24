@@ -145,7 +145,8 @@ module.exports = (app) => {
     async (req, res) => {
       await Users.findOneAndUpdate(
         { username: req.params.username },
-        { $push: { favoriteMovies: req.params._id } }
+        { $addToSet: { favoriteMovies: req.params._id } },
+        { new: true }
       )
         .then((updatedUser) => {
           res.status(200).json(updatedUser);
@@ -165,7 +166,8 @@ module.exports = (app) => {
       await Users.findOneAndUpdate(
         { username: req.params.username },
         { username: req.params.username },
-        { $pull: { favoriteMovies: req.params.ObjectId } }
+        { $pull: { favoriteMovies: req.params.ObjectId } }, 
+        { new: true }
       )
         .then((updatedUser) => {
           res.status(200).json(updatedUser);
