@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import { MovieCard } from "../movie-card/movie-card";
+import MovieCard from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
@@ -33,7 +33,6 @@ export const MainView = () => {
         console.error("Error fetching movies: ", error); // Log error here
       });
   }, [token]);
-  
 
   const handleMovieClick = (movie) => {
     setSelectedMovie(movie);
@@ -43,14 +42,15 @@ export const MainView = () => {
     setSelectedMovie(null);
   };
 
-  const handleToggleFavorite = (movieId, isFavorite) => {
+  const handleAddToFavorites = (movieId, isFavoriteAlready) => {
     const updatedMovies = movies.map((movie) =>
-      movie._id === movieId ? { ...movie, isFavorite: !isFavorite } : movie
+      movie._id === movieId ? { ...movie, isFavorite: !isFavoriteAlready } : movie
     );
+    console.log(`Adding movie ${movieId} to favorites`);
 
     setMovies(updatedMovies);
 
-    const method = isFavorite ? "DELETE" : "POST";
+    const method = isFavoriteAlready ? "DELETE" : "POST";
 
     fetch(
       `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
@@ -64,8 +64,14 @@ export const MainView = () => {
       }
     )
       .then((response) => response.json())
-      .then((data) => {
-        console.log("Toggle favorite success: ", data);
+      .then(() => {
+        alert(`Toggle favorite success: The movie was ${isFavoriteAlready ? 'deleted' : 'added'} from the favorite list`);
+        setUser((prevUser) => ({
+          ...prevUser,
+          favoriteMovies: isFavoriteAlready
+            ? prevUser.favoriteMovies.filter((id) => id !== movieId)
+            : [...prevUser.favoriteMovies, movieId],
+        }));
       })
       .catch((error) => {
         console.error("Error toggling favorite: ", error);
@@ -90,12 +96,6 @@ export const MainView = () => {
       </Row>
     );
   }
-
-  const favoriteMovies = movies.filter((movie) =>
-    Array.isArray(user.FavoriteMovies)
-      ? user.FavoriteMovies.includes(movie._id)
-      : false
-  );
 
   return (
     <BrowserRouter>
@@ -172,8 +172,9 @@ export const MainView = () => {
                         <MovieCard
                           movie={movie}
                           onMovieClick={handleMovieClick}
-                          onToggleFavorite={handleToggleFavorite}
-                          username={user.username}
+                          onAddToFavorites={handleAddToFavorites}
+                          user={user}
+                          token={token}
                         />
                       </Col>
                     ))}
@@ -192,7 +193,7 @@ export const MainView = () => {
                 <ProfileView
                   user={user}
                   movies={movies}
-                  favoriteMovies={favoriteMovies}
+                  onUserUpdate={(updatedUser) => setUser(updatedUser)}
                 />
               )
             }

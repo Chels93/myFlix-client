@@ -1,23 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 
-const UpdateUser = ({ user, handleSubmit, handleUpdate }) => {
-    if (!user) {
-        return <div>User data not available</div>;
-      }
-      const { username, email, password, birthday  } = user;
+const UpdateUser = ({ user }) => {
+    const [username, setUsername] = useState(user.username);
+    const [password, setPassword] = useState(user.password);
+    const [email, setEmail] = useState(user.email);
+    const [birthdate, setBirthdate] = useState(user.birthdate);
+    const token = localStorage.getItem("token");
+
+    const handleUpdate = (event) => {
+        event.preventDefault();
+        const updatedUser = {
+            Name: username, 
+            Password: password,
+            Email: email,
+            Birthday: birthdate,
+        };
+
+        fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(updatedUser),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to update user");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            alert("User updated successfully!");
+            onUserUpdate(data);
+        })
+        .catch((error) => {
+            console.error("Error updating user: ", error);
+            alert("Failed to update user. Please try again.");
+        });
+    };
+
   return (
     <Card className="update-user">
     <Card.Body>
     <Card.Title>Update User Information</Card.Title>
-        <Form className="profile-form" onSubmit={(e) => handleSubmit(e)}>
+        <Form className="profile-form" onSubmit={handleUpdate}>
           <Form.Group className="mb-3" controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control
               type="text"
-              name="username"
-              defaultValue={username}
-              onChange={handleUpdate}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </Form.Group>
 
@@ -25,9 +59,8 @@ const UpdateUser = ({ user, handleSubmit, handleUpdate }) => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              name="password"
-              defaultValue={password}
-              onChange={handleUpdate}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -35,18 +68,16 @@ const UpdateUser = ({ user, handleSubmit, handleUpdate }) => {
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
-              name="email"
-              defaultValue={email}
-              onChange={handleUpdate}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBirthday">
-            <Form.Label>Birthday</Form.Label>
+          <Form.Group className="mb-3" controlId="formBirthdate">
+            <Form.Label>Birthdate</Form.Label>
             <Form.Control
               type="date"
-              name="birthday"
-              defaultValue={birthday}
-              onChange={handleUpdate}
+              value={birthdate}
+              onChange={(e) => setBirthdate(e.target.value)}
             />
           </Form.Group>
           <Button variant="primary" type="submit" >

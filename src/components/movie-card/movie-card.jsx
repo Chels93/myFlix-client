@@ -4,31 +4,39 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./movie-card.scss";
 
-export const MovieCard = ({ movie, onMovieClick, username, onAddToFavorites }) => {
+const MovieCard = ({ movie, onMovieClick, onAddToFavorites, user, token }) => {
   const navigate = useNavigate();
+
+  console.log("Movie prop:", movie);
+  console.log("User prop:", user);
+  console.log("Token prop:", token);
+
+  // Need to check from the user if the movie id is in favorite list
+  // const isMovieFavorite = true
 
   const handleSeeMore = () => {
     navigate(`/movies/${movie._id}`);
     onMovieClick(movie);
   };
 
-  const handleAddToFavorites = () => {
-    const token = localStorage.getItem("token");
-    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${username}/movies/${movie._id}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ movieID: movie._id }),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log("Add to favorites clicked for: ", data);
-    })
-    .catch((error) => {
-        console.error("Error adding movie to favorites: ", error);
-    });
+  const addFav = async () => {
+    if (!user || !user.username) {
+      console.error("User or username is undefined.");
+      return;
+    }
+    if (onAddToFavorites) {
+      onAddToFavorites(movie._id, false);
+    }
+  };
+
+  const removeFav = async () => {
+    if (!user || !user.username) {
+      console.error("User or username is undefined.");
+      return;
+    }
+    if (onAddToFavorites) {
+      onAddToFavorites(movie._id, true);
+    }
   };
 
   return (
@@ -51,14 +59,10 @@ export const MovieCard = ({ movie, onMovieClick, username, onAddToFavorites }) =
         >
           {movie.title}
         </Card.Title>
-        <Button variant="link" className="btn-link" onClick={handleSeeMore}>
+        <Button className="btn-link" onClick={handleSeeMore}>
           See More
         </Button>
-        <Button
-          variant="link"
-          className="btn-link ml-2"
-          onClick={handleAddToFavorites}
-        >
+        <Button className="btn-link ml-2" onClick={addFav}>
           Add to Favorites
         </Button>
       </Card.Body>
@@ -84,7 +88,11 @@ MovieCard.propTypes = {
     }).isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired,
   onAddToFavorites: PropTypes.func,
-  onRemoveFromFavorites: PropTypes.func,
+  token: PropTypes.string.isRequired,
 };
+
+export default MovieCard;

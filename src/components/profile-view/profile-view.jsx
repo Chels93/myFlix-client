@@ -1,58 +1,84 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import UpdateUser from "./update-user";
-import UserInfo from "./user-info";
+import { UserInfo } from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
-export const ProfileView = ({ user, movies }) => {
-  const token = localStorage.getItem("token");
+export const ProfileView = ({ user, movies, onAddToFavorites }) => {
+    const token = localStorage.getItem("token");
 
-  if (!user) {
-    return <div>User data not available</div>;
-  }
+  const handleUserUpdate = (updatedUser) => {
+    setCurrentUser(updatedUser);
+    console.log("Updated User: ", updatedUser);
+  };
 
-  return (
-    <Container className="profile-view-container">
-      <Row>
-        <Col xs={12} sm={6}>
-          <div className="user-info">
-            <UserInfo
-              name={user.Username}
-              email={user.Email}
-              birthday={user.Birthday}
+  const handleDeregisterUser = () =>
+    fetch(
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to deregister user");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        alert("User deregistered successfully!");
+      })
+      .catch((error) => {
+        console.error("Error deregistering user: ", error);
+        alert("Failed to deregister user. Please try again.");
+      });
+      if (!user) {
+        return <div>User data not available</div>;
+      }
+
+return (
+  <Container className="profile-view-container">
+    <Row>
+      <Col xs={12} sm={6}>
+        <div className="user-info">
+          <UserInfo
+            username={user.username}
+            email={user.email}
+            birthdate={user.birthdate}
+          />
+        </div>
+        <div className="user-update">
+          <UpdateUser user={user} onUserUpdate={handleUserUpdate} />
+        </div>
+        <div>
+          <DeregisterUser
+            user={user}
+            token={token}
+            onDeregisterUser={handleDeregisterUser}
+          />
+        </div>
+      </Col>
+      <Col xs={12} sm={6}>
+        <div className="favorite-movies">
+          <h3>Favorite Movies</h3>
+          {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
+            <FavoriteMovies
+              movies={movies}
+              user={user}
+              onAddToFavorites={onAddToFavorites}
             />
-          </div>
-          <div className="user-update">
-            <UpdateUser user={user} />
-          </div>
-          <div>
-            <DeregisterUser user={user} token={token} />
-          </div>
-        </Col>
-        <Col xs={12} sm={6}>
-          <div className="favorite-movies">
-            <h3>Favorite Movies</h3>
-            <Row>
-              {user.FavoriteMovies && user.FavoriteMovies.length > 0 ? (
-                user.FavoriteMovies.map((movieId) => {
-                  const movie = movies.find((movie) => movie._id === movieId);
-                  return (
-                    <Col key={movie._id} xs={12} sm={6} md={4} lg={3}>
-                      <FavoriteMovies movie={movie} user={user} />
-                    </Col>
-                  );
-                })
-              ) : (
-                <Col>
-                  <div>No favorite movies yet!</div>
-                </Col>
-              )}
-            </Row>
-          </div>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+          ) : (
+            <Col>
+              <div>No favorite movies yet!</div>
+            </Col>
+          )}
+        </div>
+      </Col>
+    </Row>
+  </Container>
+)};

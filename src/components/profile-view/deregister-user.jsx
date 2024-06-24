@@ -23,7 +23,9 @@ export const DeregisterUser = (user, token) => {
       })
       .then((data) => {
         alert("User deregistered successfully!", data);
-        // Optionally perform additional actions after deregistration
+       localStorage.removeItem("token");
+       localStorage.removeItem("user");
+       window.location.reload();
       })
       .catch((error) => {
         console.error("Error deregistering user: ", error);

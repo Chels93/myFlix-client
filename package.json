@@ -11,5 +11,14 @@
         "react-scripts": "4.0.0"
     },
     "keywords": [],
-    "description": ""
+    "description": "",
+    "devDependencies": {
+        "assert": "^2.1.0",
+        "buffer": "^6.0.3",
+        "path-browserify": "^1.0.1",
+        "punycode": "^1.4.1",
+        "stream-browserify": "^3.0.0",
+        "stream-http": "^3.2.0",
+        "util": "^0.12.5"
+    }
 }
