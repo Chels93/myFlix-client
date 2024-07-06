@@ -1,40 +1,70 @@
-import { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Button, Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "./movie-card.scss";
 
-export const MovieCard = ({ movie, onMovieClick }) => {
-  const [detailsDisplayed, setDetailsDisplayed] = useState(false);
+const MovieCard = ({ movie, onMovieClick, onAddToFavorites, user, token }) => {
+  const navigate = useNavigate();
 
-  const handleViewDetails = () => {
-    setDetailsDisplayed(!detailsDisplayed);
+  console.log("Movie prop:", movie);
+  console.log("User prop:", user);
+  console.log("Token prop:", token);
+
+  // Need to check from the user if the movie id is in favorite list
+  // const isMovieFavorite = true
+
+  const handleSeeMore = () => {
+    navigate(`/movies/${movie._id}`);
     onMovieClick(movie);
   };
 
+  const addFav = async () => {
+    if (!user || !user.username) {
+      console.error("User or username is undefined.");
+      return;
+    }
+    if (onAddToFavorites) {
+      onAddToFavorites(movie._id, false);
+    }
+  };
+
+  const removeFav = async () => {
+    if (!user || !user.username) {
+      console.error("User or username is undefined.");
+      return;
+    }
+    if (onAddToFavorites) {
+      onAddToFavorites(movie._id, true);
+    }
+  };
+
   return (
-    <Card className="h-100" style={{ width: '18rem', border: "3px solid gray" }}>
+    <Card
+      className="h-100"
+      style={{ width: "18rem", border: "3px solid gray" }}
+    >
       <Card.Img
         variant="top"
         src={movie.imagePath}
         alt={`${movie.title} poster`}
       />
       <Card.Body>
-        <Card.Title style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.5rem", fontWeight: "bold" }}>{movie.title}</Card.Title>
-        <Button onClick={handleViewDetails} variant="link">
-          {detailsDisplayed ? "Hide Details" : "View Details"}
+        <Card.Title
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+          }}
+        >
+          {movie.title}
+        </Card.Title>
+        <Button className="btn-link" onClick={handleSeeMore}>
+          See More
         </Button>
-        {detailsDisplayed && (
-          <div>
-            <p>Synopsis: {movie.synopsis}</p>
-            <p>Release Year: {movie.year}</p>
-            <p>Genre: {movie.genre.name}</p>
-            <p>Genre Description: {movie.genre.description}</p>
-            <p>Director: {movie.director.name}</p>
-            <p>Director Bio: {movie.director.bio}</p>
-            <p>Director Birthyear: {movie.director.birthYear}</p>
-            <p>Director Deathyear: {movie.director.deathYear}</p>
-          </div>
-        )}
+        <Button className="btn-link ml-2" onClick={addFav}>
+          Add to Favorites
+        </Button>
       </Card.Body>
     </Card>
   );
@@ -58,4 +88,11 @@ MovieCard.propTypes = {
     }).isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired,
+  onAddToFavorites: PropTypes.func,
+  token: PropTypes.string.isRequired,
 };
+
+export default MovieCard;
