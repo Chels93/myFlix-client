@@ -15,6 +15,11 @@ export const FavoriteMovies = ({ movies, user, onAddToFavorites }) => {
         try {
           const response = await fetch(
             `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }
           );
           if (!response.ok) {
             throw new Error("Failed to fetch favorite movies");

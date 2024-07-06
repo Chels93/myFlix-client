@@ -42113,7 +42113,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","./update-user":"2SBwg","./user-info":"66eot","./favorite-movies":"dTTQH","./profile-view.scss":"eyKYH","@parcel/transformer-js/src/esmodule-helpers.js":"bzeKx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6ji81","./deregister-user":"lbirt"}],"2SBwg":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","./update-user":"2SBwg","./user-info":"66eot","./favorite-movies":"dTTQH","./deregister-user":"lbirt","./profile-view.scss":"eyKYH","@parcel/transformer-js/src/esmodule-helpers.js":"bzeKx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6ji81"}],"2SBwg":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$95d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42409,7 +42409,11 @@ const FavoriteMovies = ({ movies, user, onAddToFavorites })=>{
                 return;
             }
             try {
-                const response = await fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`);
+                const response = await fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) throw new Error("Failed to fetch favorite movies");
                 const userData = await response.json();
                 setFavoriteMovies(userData.favoriteMovies);
@@ -42425,7 +42429,7 @@ const FavoriteMovies = ({ movies, user, onAddToFavorites })=>{
         children: "No favorite movies available"
     }, void 0, false, {
         fileName: "src/components/profile-view/favorite-movies.jsx",
-        lineNumber: 33,
+        lineNumber: 38,
         columnNumber: 14
     }, undefined);
     const filteredMovies = movies.filter((movie)=>favoriteMovies.includes(movie._id));
@@ -42442,12 +42446,12 @@ const FavoriteMovies = ({ movies, user, onAddToFavorites })=>{
                         onAddToFavorites: ()=>onAddToFavorites(movie._id)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 44,
+                        lineNumber: 49,
                         columnNumber: 15
                     }, undefined)
                 }, movie._id, false, {
                     fileName: "src/components/profile-view/favorite-movies.jsx",
-                    lineNumber: 43,
+                    lineNumber: 48,
                     columnNumber: 13
                 }, undefined)) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
@@ -42455,27 +42459,27 @@ const FavoriteMovies = ({ movies, user, onAddToFavorites })=>{
                         children: "No favorite movies yet!"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 53,
+                        lineNumber: 58,
                         columnNumber: 15
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/favorite-movies.jsx",
-                    lineNumber: 52,
+                    lineNumber: 57,
                     columnNumber: 13
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                lineNumber: 51,
+                lineNumber: 56,
                 columnNumber: 11
             }, undefined)
         }, void 0, false, {
             fileName: "src/components/profile-view/favorite-movies.jsx",
-            lineNumber: 40,
+            lineNumber: 45,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/profile-view/favorite-movies.jsx",
-        lineNumber: 39,
+        lineNumber: 44,
         columnNumber: 5
     }, undefined);
 };
@@ -42489,7 +42493,7 @@ $RefreshReg$(_c, "FavoriteMovies");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"bzeKx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6ji81","../movie-card/movie-card":"bwuIu"}],"eyKYH":[function() {},{}],"lbirt":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","../movie-card/movie-card":"bwuIu","@parcel/transformer-js/src/esmodule-helpers.js":"bzeKx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6ji81"}],"lbirt":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$b0cd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42550,6 +42554,6 @@ $RefreshReg$(_c, "DeregisterUser");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bzeKx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6ji81"}],"lJZlQ":[function() {},{}],"i5LP7":[function() {},{}]},["8jOJo","iMYEe","d8Dch"], "d8Dch", "parcelRequire56c2")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bzeKx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6ji81"}],"eyKYH":[function() {},{}],"lJZlQ":[function() {},{}],"i5LP7":[function() {},{}]},["8jOJo","iMYEe","d8Dch"], "d8Dch", "parcelRequire56c2")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
