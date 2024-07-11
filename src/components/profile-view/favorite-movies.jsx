@@ -4,6 +4,7 @@ import MovieCard from "../movie-card/movie-card";
 
 export const FavoriteMovies = ({ movies, user, onAddToFavorites }) => {
     const [favoriteMovies, setFavoriteMovies] = useState([]);
+    const token = localStorage.getItem("token");
   
     useEffect(() => {
       const fetchFavoriteMovies = async () => {
@@ -18,14 +19,14 @@ export const FavoriteMovies = ({ movies, user, onAddToFavorites }) => {
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                }
+                },
             }
           );
           if (!response.ok) {
             throw new Error("Failed to fetch favorite movies");
           }
-          const userData = await response.json();
-          setFavoriteMovies(userData.favoriteMovies);
+          const userdata = await response.json();
+          setFavoriteMovies(userdata.favoriteMovies);
         } catch (error) {
           console.error("Error fetching favorite movies:", error);
         }
@@ -43,8 +44,8 @@ export const FavoriteMovies = ({ movies, user, onAddToFavorites }) => {
   return (
     <Container className="favorite-movies">
       <Row>
-        {favoriteMovies.length > 0 ? (
-          favoriteMovies.map((movie) => (
+        {filteredMovies.length > 0 ? (
+          filteredMovies.map((movie) => (
             <Col key={movie._id} xs={12} sm={6} md={4} lg={3}>
               <MovieCard
                 movie={movie}

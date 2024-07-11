@@ -2,13 +2,13 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export const SignupView = () => {
+export const SignupView = ({ onSignedUp }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthdate, setBirthdate] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
@@ -18,20 +18,26 @@ export const SignupView = () => {
       birthdate: birthdate,
     };
 
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
+    try { 
+        const response = await fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((response) => {
-      if (response.ok) {
-        alert("Signup successful");
-        // window.location.reload();
-      } else {
-        alert("Signup failed");
-      }
     });
+    if (response.ok) {
+        const userData = await response.json();
+        alert("Signup successful");
+        onSignedUp(userData.user, userData.token);
+      } else {
+        const errorData = await response.json();
+        alert(`Signup failed: ${errorData.message || response.statusText}`);
+      }
+    } catch (error) {
+        console.error("Error during fetch:", error);
+        alert("Signup failed: Network or server error");
+    }
   };
 
   return (

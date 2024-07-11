@@ -78,6 +78,13 @@ export const MainView = () => {
       });
   };
 
+  const handleSignedUp = (newUser, newToken) => {
+    setUser(newUser);
+    setToken(newToken);
+    localStorage.setItem("user", JSON.stringify(newUser));
+    localStorage.setItem("token", newToken);
+  };
+
   if (!user) {
     return (
       <Row className="justify-content-md-center">
@@ -91,7 +98,7 @@ export const MainView = () => {
             }}
           />
           or
-          <SignupView />
+          <SignupView onSignedUp={handleSignedUp} />
         </Col>
       </Row>
     );
@@ -115,7 +122,7 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <SignupView />
+                    <SignupView onSignedUp={handleSignedUp} />
                   </Col>
                 )}
               </>
@@ -129,7 +136,12 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                    <LoginView onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                        localStorage.setItem("user", JSON.stringify(user));
+                        localStorage.setItem("token", token);
+                        }} />
                   </Col>
                 )}
               </>
