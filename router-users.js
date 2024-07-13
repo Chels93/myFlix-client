@@ -1,3 +1,5 @@
+const express = require("express");
+const cors = require("cors");
 const passport = require("passport");
 const Models = require("./models.js");
 const { check, validationResult } = require("express-validator");
@@ -5,6 +7,12 @@ const { check, validationResult } = require("express-validator");
 const Users = Models.User;
 
 module.exports = (app) => {
+  // Enable CORS for all routes or specifies origins
+  app.use(
+    cors({
+      origin: "http://localhost:1234"
+    })
+  );
   // Returns a JSON object of all users
   app.get(
     "/users",
@@ -166,7 +174,7 @@ module.exports = (app) => {
       await Users.findOneAndUpdate(
         { username: req.params.username },
         { username: req.params.username },
-        { $pull: { favoriteMovies: req.params.ObjectId } }, 
+        { $pull: { favoriteMovies: req.params.ObjectId } },
         { new: true }
       )
         .then((updatedUser) => {
