@@ -72,12 +72,11 @@ export const MainView = () => {
     })    
     .then((data) => {
         console.log("Success: ", data);
-        let newUserData = JSON.stringify(data);
-        localStorage.setItem("user", newUserData);
+        localStorage.setItem("user", JSON.stringify(data));
         alert("Movie was successfully removed from list.");
         setUser((prevUser) => ({
             ...prevUser,
-            FavoriteMovies: prevUser.FavoriteMovies.filter((id) => !== movieId),
+            FavoriteMovies: prevUser.FavoriteMovies.filter((id) => id !== movieId),
         }));
     })
     .catch((error) => {
@@ -199,8 +198,8 @@ export const MainView = () => {
                         <MovieCard
                           movie={movie}
                           fav={user.FavoriteMovies.includes(movie._id)}
-                          onAddToFavorites={(movie) => handleAddToFavorites(movie)}
-                          onRemoveFromFavorites={(movie) => handleRemoveFromFavorites}
+                          onAddToFavorites={() => handleAddToFavorites(movie._id)}
+                          onRemoveFromFavorites={() => handleRemoveFromFavorites(movie._id)}
                           onMovieClick={() => setSelectedMovie(movie)}
                         />
                       </Col>
