@@ -10,7 +10,8 @@ module.exports = (app) => {
   // Enable CORS for all routes or specifies origins
   app.use(
     cors({
-      origin: "http://localhost:1234"
+      origin: "*",
+      credentials: true
     })
   );
   // Returns a JSON object of all users
@@ -79,47 +80,40 @@ module.exports = (app) => {
   );
 
   // Allows users to update their user info
-  app.put(
-    "/users/:username",
+  app.put("/users/:username",
+    passport.authenticate("jwt", { session: false }),
     [
       check("username", "Username is required").isLength({ min: 5 }),
-      check(
-        "username",
-        "Username contains non alpanumeric characters - not allowed."
-      ).isAlphanumeric(),
+      check("username", "Username contains non alpanumeric characters - not allowed.").isAlphanumeric(),
       check("password", "Password is required").not().isEmpty(),
-      check("email", "Email does not appear to be valid").isEmail(),
+      check("Password", "Password must be between 8 and 20 characters").isLength({ min: 5, max: 20 }),
+      check("email", "Email does not appear to be valid").isEmail()
+    ],
       (req, res, next) => {
         let errors = validationResult(req);
         if (!errors.isEmpty()) {
-          return res.status(422).json({ errors: errors.array() });
+          return res.status(422).json({ errors: errors.array() })
         }
-        next();
-      },
-      passport.authenticate("jwt", { session: false }),
-    ],
-    async (req, res) => {
-      await Users.findOneAndUpdate(
-        { username: req.params.username },
+
+        let hashedPassword = Users.hashPassword(req.body.Password)
+
+        Users.findOneAndUpdate({ username: req.params.username },
         {
-          $set: {
             username: req.body.username,
-            password: req.body.password,
+            passwrod: hashedPassword,
             email: req.body.email,
-            birthdate: req.body.birthdate,
-          },
+            birthdate: req.body.birthdate
         },
-        { new: true }
-      )
-        .then((updatedUser) => {
-          res.json(updatedUser);
+        { new: true })
+        .then(user => {
+            res.status(200).json(user)
         })
-        .catch((err) => {
-          console.error(err);
-          res.status(500).send("Error: " + err);
-        });
-    }
-  );
+        .catch(err => {
+            console.error(err) 
+            res.status(500).send("Error: " + err)
+        })
+      }
+    )
 
   // get user info
   app.get(
