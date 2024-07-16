@@ -42121,7 +42121,7 @@ const ProfileView = ({ user, movies, setUser, onRemoveFromFavorites })=>{
                             user.favoriteMovies && user.favoriteMovies.length > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMovies.FavoriteMovies), {
                                 movies: movies,
                                 user: user,
-                                onRemoveFromFavorites: onRemoveFromFavorites
+                                onRemoveFromFavorites: handleRemoveFromFavorites
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
                                 lineNumber: 93,
