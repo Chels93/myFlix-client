@@ -93,7 +93,7 @@ return (
             <FavoriteMovies
               movies={movies}
               user={user}
-              onRemoveFromFavorites={handleRemoveFromFavorites}
+              onRemoveFromFavorites={onRemoveFromFavorites}
             />
           ) : (
             <Col>

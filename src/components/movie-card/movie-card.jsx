@@ -14,6 +14,10 @@ const MovieCard = ({
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(fav);
 
+  useEffect(() => {
+    setIsFavorite(fav);
+  }, [fav]);
+
   const handleSeeMore = () => {
     navigate(`/movies/${movie._id}`);
     onMovieClick(movie);
@@ -38,6 +42,10 @@ const MovieCard = ({
     } else {
       handleAddToFavorites(event);
     }
+  };
+
+  const isAlreadyFavorite = () => {
+    return isFavorite || fav;
   };
 
   return (
@@ -67,9 +75,9 @@ const MovieCard = ({
           <Button
             className="favorite-button"
             variant={isFavorite ? "danger" : "outline-danger"}
-            onClick={handleFavoriteClick}
+            onClick={handleRemoveFromFavorites}
           >
-            {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+            Remove from Favorites
           </Button>
         )}
       </Card.Body>
@@ -97,7 +105,7 @@ MovieCard.propTypes = {
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
   onAddToFavorites: PropTypes.func.isRequired,
-  onRemoveFromFavorites: PropTypes.func,
+  onRemoveFromFavorites: PropTypes.func.isRequired,
 };
 
 export default MovieCard;

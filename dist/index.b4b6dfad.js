@@ -27365,6 +27365,11 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
     _s();
     const navigate = (0, _reactRouterDom.useNavigate)();
     const [isFavorite, setIsFavorite] = (0, _react.useState)(fav);
+    useEffect(()=>{
+        setIsFavorite(fav);
+    }, [
+        fav
+    ]);
     const handleSeeMore = ()=>{
         navigate(`/movies/${movie._id}`);
         onMovieClick(movie);
@@ -27384,6 +27389,9 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
         if (isFavorite) handleRemoveFromFavorites(event);
         else handleAddToFavorites(event);
     };
+    const isAlreadyFavorite = ()=>{
+        return isFavorite || fav;
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "h-100",
         style: {
@@ -27397,7 +27405,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
                 alt: `${movie.title} poster`
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 48,
+                lineNumber: 56,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27411,7 +27419,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 54,
+                        lineNumber: 62,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -27420,33 +27428,33 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
                         children: "See More"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 63,
+                        lineNumber: 71,
                         columnNumber: 9
                     }, undefined),
                     onRemoveFromFavorites && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                         className: "favorite-button",
                         variant: isFavorite ? "danger" : "outline-danger",
-                        onClick: handleFavoriteClick,
-                        children: isFavorite ? "Remove from Favorites" : "Add to Favorites"
+                        onClick: handleRemoveFromFavorites,
+                        children: "Remove from Favorites"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 67,
+                        lineNumber: 75,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 53,
+                lineNumber: 61,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 44,
+        lineNumber: 52,
         columnNumber: 5
     }, undefined);
 };
-_s(MovieCard, "ros9ldSAPfx28NBkvQ58Mx3s5Us=", false, function() {
+_s(MovieCard, "rAQEGDW1oQvhtdXXrQsGLfrJs98=", false, function() {
     return [
         (0, _reactRouterDom.useNavigate)
     ];
@@ -27472,7 +27480,7 @@ MovieCard.propTypes = {
     }).isRequired,
     onMovieClick: (0, _propTypesDefault.default).func.isRequired,
     onAddToFavorites: (0, _propTypesDefault.default).func.isRequired,
-    onRemoveFromFavorites: (0, _propTypesDefault.default).func
+    onRemoveFromFavorites: (0, _propTypesDefault.default).func.isRequired
 };
 exports.default = MovieCard;
 var _c;
@@ -42121,7 +42129,7 @@ const ProfileView = ({ user, movies, setUser, onRemoveFromFavorites })=>{
                             user.favoriteMovies && user.favoriteMovies.length > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMovies.FavoriteMovies), {
                                 movies: movies,
                                 user: user,
-                                onRemoveFromFavorites: handleRemoveFromFavorites
+                                onRemoveFromFavorites: onRemoveFromFavorites
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
                                 lineNumber: 93,
