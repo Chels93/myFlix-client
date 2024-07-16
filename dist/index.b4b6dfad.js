@@ -41989,7 +41989,7 @@ var _userInfo = require("./user-info");
 var _favoriteMovies = require("./favorite-movies");
 var _deregisterUser = require("./deregister-user");
 var _profileViewScss = require("./profile-view.scss");
-const ProfileView = ({ user, movies, setUser })=>{
+const ProfileView = ({ user, movies, setUser, onAddToFavorites })=>{
     const token = localStorage.getItem("token");
     const handleUpdate = (updatedUser)=>{
         setUser(updatedUser);

@@ -6,7 +6,7 @@ import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
-export const ProfileView = ({ user, movies, setUser }) => {
+export const ProfileView = ({ user, movies, setUser, onAddToFavorites }) => {
     const token = localStorage.getItem("token");
 
   const handleUpdate = (updatedUser) => {
