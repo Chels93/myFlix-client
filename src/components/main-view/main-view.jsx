@@ -24,7 +24,12 @@ export const MainView = () => {
     fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch movies.");
+        }
+            return response.json();
+        })
       .then((movies) => {
         console.log("Movies fetched successfully: ", movies); // Log movies here
         setMovies(movies);

@@ -71,7 +71,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
 
 MovieCard.propTypes = {
     fav: PropTypes.bool,
-  movie: PropTypes.shape({
+    movie: PropTypes.shape({
     imagePath: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     synopsis: PropTypes.string.isRequired,
