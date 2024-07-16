@@ -51,7 +51,7 @@ export const MainView = () => {
         alert("Movie added to Favorites!");
         setUser((prevUser) => ({
             ...prevUser,
-            FavoriteMovies: [...prevUser.FavoriteMovies, movieId],
+            FavoriteMovies: [...(prevUser.FavoriteMovies || []), movieId],
         }));
     })
     .catch((error) => {
@@ -76,7 +76,7 @@ export const MainView = () => {
         alert("Movie was successfully removed from list.");
         setUser((prevUser) => ({
             ...prevUser,
-            FavoriteMovies: prevUser.FavoriteMovies.filter((id) => id !== movieId),
+            FavoriteMovies: (prevUser.FavoriteMovies || []).filter((id) => id !== movieId),
         }));
     })
     .catch((error) => {
@@ -200,7 +200,7 @@ export const MainView = () => {
                           fav={user.FavoriteMovies.includes(movie._id)}
                           onAddToFavorites={() => handleAddToFavorites(movie._id)}
                           onRemoveFromFavorites={() => handleRemoveFromFavorites(movie._id)}
-                          onMovieClick={() => setSelectedMovie(movie)}
+                          onMovieClick={() => Navigate(`/movies/${movie._id}`)} 
                         />
                       </Col>
                     ))}
