@@ -57,6 +57,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
         <Button className="see-more" onClick={handleSeeMore}>
           See More
         </Button>
+        {onRemoveFromFavorites && (
         <Button 
         className="favorite-button" 
         variant={isFavorite ? "danger" : "outline-danger"}
@@ -64,6 +65,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
         >
         {isFavorite ? "Remove from Favorites" : "Add to Favorites"} 
         </Button>
+        )}
       </Card.Body>
     </Card>
   );
@@ -89,7 +91,7 @@ MovieCard.propTypes = {
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
   onAddToFavorites: PropTypes.func.isRequired,
-  onRemoveFromFavorites: PropTypes.func.isRequired,
+  onRemoveFromFavorites: PropTypes.func,
 };
 
 export default MovieCard;
