@@ -6,7 +6,7 @@ import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
-export const ProfileView = ({ user, movies, setUser, onAddToFavorites }) => {
+export const ProfileView = ({ user, movies, setUser, onAddToFavorites, onRemoveFavorites }) => {
     const token = localStorage.getItem("token");
 
   const handleUpdate = (updatedUser) => {
@@ -37,10 +37,33 @@ export const ProfileView = ({ user, movies, setUser, onAddToFavorites }) => {
         console.error("Error deregistering user: ", error);
         alert("Failed to deregister user. Please try again.");
       });
-      if (!user) {
-        return <div>User data not available</div>;
-      }
 
+const handleRemoveFromFavorites = (movieId) => {
+    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+    })
+    .then ((response) => {
+        if(!response.ok) {
+            throw new Error("Failed to remove movie from favorites.");
+        }
+        return response.json();
+    })
+    .then ((data) => {
+        console.log("Success: ", data);
+        setUser(data);
+        alert("Movie was successfully removed from favorites.");
+    })
+    .catch((error) => {
+        console.error("Error removing from favorites: ", error);
+        alert("Failed to remove movie from favorites. Please try again.");
+    });
+};
+
+if (!user) {
+    return <div>User data not available</div>;
+  }
+  
 return (
   <Container className="profile-view-container">
     <Row>
@@ -70,7 +93,7 @@ return (
             <FavoriteMovies
               movies={movies}
               user={user}
-              onAddToFavorites={onAddToFavorites}
+              onRemoveFromFavorites={handleRemoveFromFavorites}
             />
           ) : (
             <Col>
