@@ -27365,7 +27365,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
     _s();
     const navigate = (0, _reactRouterDom.useNavigate)();
     const [isFavorite, setIsFavorite] = (0, _react.useState)(fav);
-    useEffect(()=>{
+    (0, _react.useEffect)(()=>{
         setIsFavorite(fav);
     }, [
         fav
