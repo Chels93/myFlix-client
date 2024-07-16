@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -10,42 +10,26 @@ const MovieCard = ({
   onAddToFavorites,
   onRemoveFromFavorites,
   onMovieClick,
+  onFavoriteClick
 }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(fav);
-
-  useEffect(() => {
-    setIsFavorite(fav);
-  }, [fav]);
 
   const handleSeeMore = () => {
     navigate(`/movies/${movie._id}`);
     onMovieClick(movie);
   };
 
-  const handleAddToFavorites = (event) => {
-    event.preventDefault();
-    onAddToFavorites(movie._id);
-    setIsFavorite(true);
-  };
-
-  const handleRemoveFromFavorites = (event) => {
-    event.preventDefault();
-    onRemoveFromFavorites(movie._id);
-    setIsFavorite(false);
-  };
-
   const handleFavoriteClick = (event) => {
     event.preventDefault();
     if (isFavorite) {
-      handleRemoveFromFavorites(event);
+      onRemoveFromFavorites(movie._id);
+      setIsFavorite(false);
     } else {
-      handleAddToFavorites(event);
+      onAddToFavorites(movie._id);
+      setIsFavorite(true);
     }
-  };
-
-  const isAlreadyFavorite = () => {
-    return isFavorite || fav;
+    onFavoriteClick(movie._id, !isFavorite);
   };
 
   return (
@@ -71,22 +55,20 @@ const MovieCard = ({
         <Button className="see-more" onClick={handleSeeMore}>
           See More
         </Button>
-        {onRemoveFromFavorites && (
-          <Button
-            className="favorite-button"
-            variant={isFavorite ? "danger" : "outline-danger"}
-            onClick={handleRemoveFromFavorites}
-          >
-            Remove from Favorites
-          </Button>
-        )}
+        <Button
+          className="favorite-button"
+          variant={isFavorite ? "danger" : "outline-danger"}
+          onClick={handleFavoriteClick}
+        >
+          {isFavorite ? "Remove from Favoirtes" : "Add to Favorites"}
+        </Button>
       </Card.Body>
     </Card>
   );
 };
 
 MovieCard.propTypes = {
-  fav: PropTypes.bool,
+  fav: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
     imagePath: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -106,6 +88,7 @@ MovieCard.propTypes = {
   onMovieClick: PropTypes.func.isRequired,
   onAddToFavorites: PropTypes.func.isRequired,
   onRemoveFromFavorites: PropTypes.func.isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
 };
 
 export default MovieCard;

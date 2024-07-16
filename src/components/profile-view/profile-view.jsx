@@ -32,6 +32,9 @@ export const ProfileView = ({ user, movies, setUser, onRemoveFromFavorites }) =>
       })
       .then((data) => {
         alert("User deregistered successfully!");
+        setUser(null);
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
       })
       .catch((error) => {
         console.error("Error deregistering user: ", error);
@@ -43,13 +46,13 @@ const handleRemoveFromFavorites = (movieId) => {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
     })
-    .then ((response) => {
+    .then((response) => {
         if(!response.ok) {
             throw new Error("Failed to remove movie from favorites.");
         }
         return response.json();
     })
-    .then ((data) => {
+    .then((data) => {
         console.log("Success: ", data);
         setUser(data);
         alert("Movie was successfully removed from favorites.");

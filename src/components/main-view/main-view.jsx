@@ -97,8 +97,8 @@ export const MainView = () => {
   };
 
   const updateUser = user => {
-    setUser(user)
-    localStorage.setItem("user", JSON.stringify(user))
+    setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
   }
 
   if (!user) {
