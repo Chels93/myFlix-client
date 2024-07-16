@@ -17,6 +17,8 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!token) {
       return;
@@ -95,8 +97,6 @@ export const MainView = () => {
     setUser(user)
     localStorage.setItem("user", JSON.stringify(user))
   }
-
-  const navigate = navigate();
 
   if (!user) {
     return (
