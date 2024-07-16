@@ -27267,7 +27267,7 @@ const MainView = ()=>{
                                             md: 3,
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCardDefault.default), {
                                                 movie: movie,
-                                                fav: user.FavoriteMovies.includes(movie._id),
+                                                fav: user.FavoriteMovies(movie._id),
                                                 onAddToFavorites: ()=>handleAddToFavorites(movie._id),
                                                 onRemoveFromFavorites: ()=>handleRemoveFromFavorites(movie._id),
                                                 onMovieClick: ()=>(0, _reactRouterDom.Navigate)(`/movies/${movie._id}`)
