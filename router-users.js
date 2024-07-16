@@ -142,12 +142,12 @@ module.exports = (app) => {
 
   // Allows users to add a movie to their list of favorites
   app.post(
-    "/${user.username}/movies/${movieId}",
+    "/users/:username/movies/:movieId",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       await Users.findOneAndUpdate(
         { username: req.params.username },
-        { $addToSet: { favoriteMovies: req.params._id } },
+        { $addToSet: { favoriteMovies: req.params.movieId } },
         { new: true }
       )
         .then((updatedUser) => {
@@ -162,13 +162,13 @@ module.exports = (app) => {
 
   // Allows users to remove a movie from their list of favorites
   app.delete(
-    "/${user.username}/movies/${movieId}",
+    "/users/:username/movies/:movieId",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       await Users.findOneAndUpdate(
         { username: req.params.username },
         { username: req.params.username },
-        { $pull: { favoriteMovies: req.params.ObjectId } },
+        { $pull: { favoriteMovies: req.params.movieId } },
         { new: true }
       )
         .then((updatedUser) => {
