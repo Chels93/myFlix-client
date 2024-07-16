@@ -27043,7 +27043,7 @@ const MainView = ()=>{
             setUser((prevUser)=>({
                     ...prevUser,
                     FavoriteMovies: [
-                        ...prevUser.FavoriteMovies,
+                        ...prevUser.FavoriteMovies || [],
                         movieId
                     ]
                 }));
@@ -27066,7 +27066,7 @@ const MainView = ()=>{
             alert("Movie was successfully removed from list.");
             setUser((prevUser)=>({
                     ...prevUser,
-                    FavoriteMovies: prevUser.FavoriteMovies.filter((id)=>id !== movieId)
+                    FavoriteMovies: (prevUser.FavoriteMovies || []).filter((id)=>id !== movieId)
                 }));
         }).catch((error)=>{
             console.error("Error removing from favorites: ", error);
@@ -27270,7 +27270,7 @@ const MainView = ()=>{
                                                 fav: user.FavoriteMovies.includes(movie._id),
                                                 onAddToFavorites: ()=>handleAddToFavorites(movie._id),
                                                 onRemoveFromFavorites: ()=>handleRemoveFromFavorites(movie._id),
-                                                onMovieClick: ()=>setSelectedMovie(movie)
+                                                onMovieClick: ()=>(0, _reactRouterDom.Navigate)(`/movies/${movie._id}`)
                                             }, void 0, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
                                                 lineNumber: 198,
