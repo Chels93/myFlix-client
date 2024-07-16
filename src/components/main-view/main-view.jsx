@@ -155,7 +155,8 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user, token) => {
+                    <LoginView 
+                        onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
                         localStorage.setItem("user", JSON.stringify(user));
@@ -225,6 +226,7 @@ export const MainView = () => {
                   user={user}
                   movies={movies}
                   setUser={updateUser}
+                  onRemoveFromFavorites={handleRemoveFromFavorites}
                 />
               )
             }

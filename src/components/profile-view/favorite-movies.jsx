@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import MovieCard from "../movie-card/movie-card";
 
-export const FavoriteMovies = ({ movies, user, onAddToFavorites }) => {
+export const FavoriteMovies = ({ movies, user, onRemoveFromFavorites }) => {
     const [favoriteMovies, setFavoriteMovies] = useState([]);
     const token = localStorage.getItem("token");
   
@@ -49,7 +49,7 @@ export const FavoriteMovies = ({ movies, user, onAddToFavorites }) => {
             <Col key={movie._id} xs={12} sm={6} md={4} lg={3}>
               <MovieCard
                 movie={movie}
-                onAddToFavorites={() => onAddToFavorites(movie._id)}
+                onRemoveFromFavorites={() => onRemoveFromFavorites(movie._id)}
               />
             </Col>
           ))
