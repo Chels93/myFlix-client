@@ -200,7 +200,7 @@ export const MainView = () => {
                           fav={(user.FavoriteMovies || []).includes(movie._id)}
                           onAddToFavorites={() => handleAddToFavorites(movie._id)}
                           onRemoveFromFavorites={() => handleRemoveFromFavorites(movie._id)}
-                          onMovieClick={() => navigate(`/movies/${movie._id}`)} 
+                          onMovieClick={() => setSelectedMovie(movie)} 
                         />
                       </Col>
                     ))}
@@ -229,3 +229,5 @@ export const MainView = () => {
     </BrowserRouter>
   );
 };
+
+

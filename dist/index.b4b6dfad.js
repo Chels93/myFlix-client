@@ -27270,7 +27270,7 @@ const MainView = ()=>{
                                                 fav: (user.FavoriteMovies || []).includes(movie._id),
                                                 onAddToFavorites: ()=>handleAddToFavorites(movie._id),
                                                 onRemoveFromFavorites: ()=>handleRemoveFromFavorites(movie._id),
-                                                onMovieClick: ()=>navigate(`/movies/${movie._id}`)
+                                                onMovieClick: ()=>setSelectedMovie(movie)
                                             }, void 0, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
                                                 lineNumber: 198,
