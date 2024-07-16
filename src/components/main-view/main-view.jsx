@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import MovieCard from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view";
-import { LoginView } from "../login-view/login-view";
-import { SignupView } from "../signup-view/signup-view";
-import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { ProfileView } from "../profile-view/profile-view";
+import MovieView from "../movie-view/movie-view";
+import LoginView from "../login-view/login-view";
+import SignupView from "../signup-view/signup-view";
+import NavigationBar from "../navigation-bar/navigation-bar";
+import ProfileView from "../profile-view/profile-view";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
@@ -34,7 +35,7 @@ export const MainView = () => {
       .catch((error) => {
         console.error("Error fetching movies: ", error); // Log error here
       });
-  }, [token]);
+  }, [token, navigate]);
 
   const handleBackClick = () => {
     setSelectedMovie(null);
@@ -202,7 +203,7 @@ export const MainView = () => {
                           fav={(user.FavoriteMovies || []).includes(movie._id)}
                           onAddToFavorites={() => handleAddToFavorites(movie._id)}
                           onRemoveFromFavorites={() => handleRemoveFromFavorites(movie._id)}
-                          onMovieClick={() => Navigate(`/movies/${movie._id}`)} 
+                          onMovieClick={() => navigate(`/movies/${movie._id}`)} 
                         />
                       </Col>
                     ))}
