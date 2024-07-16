@@ -6,11 +6,11 @@ import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
-export const ProfileView = ({ user, movies, onAddToFavorites }) => {
+export const ProfileView = ({ user, movies, setUser }) => {
     const token = localStorage.getItem("token");
 
-  const handleUserUpdate = (updatedUser) => {
-    setCurrentUser(updatedUser);
+  const handleUpdate = (updatedUser) => {
+    setUser(updatedUser);
     console.log("Updated User: ", updatedUser);
   };
 
@@ -53,7 +53,7 @@ return (
           />
         </div>
         <div className="user-update">
-          <UpdateUser user={user} onUserUpdate={handleUserUpdate} />
+          <UpdateUser user={user} onUserUpdate={handleUpdate} />
         </div>
         <div>
           <DeregisterUser

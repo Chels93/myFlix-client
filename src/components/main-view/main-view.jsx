@@ -85,6 +85,11 @@ export const MainView = () => {
     localStorage.setItem("token", newToken);
   };
 
+  const updateUser = user => {
+    setUser(user)
+    localStorage.setItem("user", JSON.stringify(user))
+  }
+
   if (!user) {
     return (
       <Row className="justify-content-md-center">
@@ -205,7 +210,7 @@ export const MainView = () => {
                 <ProfileView
                   user={user}
                   movies={movies}
-                  onUserUpdate={(updatedUser) => setUser(updatedUser)}
+                  setUser={updateUser}
                 />
               )
             }
