@@ -27397,7 +27397,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
                 alt: `${movie.title} poster`
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 42,
+                lineNumber: 48,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27411,7 +27411,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 48,
+                        lineNumber: 54,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -27420,7 +27420,7 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
                         children: "See More"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 57,
+                        lineNumber: 63,
                         columnNumber: 9
                     }, undefined),
                     onRemoveFromFavorites && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -27430,19 +27430,19 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
                         children: isFavorite ? "Remove from Favorites" : "Add to Favorites"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 61,
-                        columnNumber: 9
+                        lineNumber: 67,
+                        columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 47,
+                lineNumber: 53,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 38,
+        lineNumber: 44,
         columnNumber: 5
     }, undefined);
 };
@@ -42000,7 +42000,7 @@ var _userInfo = require("./user-info");
 var _favoriteMovies = require("./favorite-movies");
 var _deregisterUser = require("./deregister-user");
 var _profileViewScss = require("./profile-view.scss");
-const ProfileView = ({ user, movies, setUser, onAddToFavorites, onRemoveFavorites })=>{
+const ProfileView = ({ user, movies, setUser, onRemoveFromFavorites })=>{
     const token = localStorage.getItem("token");
     const handleUpdate = (updatedUser)=>{
         setUser(updatedUser);
@@ -42121,7 +42121,7 @@ const ProfileView = ({ user, movies, setUser, onAddToFavorites, onRemoveFavorite
                             user.favoriteMovies && user.favoriteMovies.length > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMovies.FavoriteMovies), {
                                 movies: movies,
                                 user: user,
-                                onRemoveFromFavorites: handleRemoveFromFavorites
+                                onRemoveFromFavorites: onRemoveFromFavorites
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
                                 lineNumber: 93,

@@ -6,7 +6,7 @@ import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
-export const ProfileView = ({ user, movies, setUser, onAddToFavorites, onRemoveFavorites }) => {
+export const ProfileView = ({ user, movies, setUser, onRemoveFromFavorites }) => {
     const token = localStorage.getItem("token");
 
   const handleUpdate = (updatedUser) => {
@@ -63,7 +63,7 @@ const handleRemoveFromFavorites = (movieId) => {
 if (!user) {
     return <div>User data not available</div>;
   }
-  
+
 return (
   <Container className="profile-view-container">
     <Row>
@@ -93,7 +93,7 @@ return (
             <FavoriteMovies
               movies={movies}
               user={user}
-              onRemoveFromFavorites={handleRemoveFromFavorites}
+              onRemoveFromFavorites={onRemoveFromFavorites}
             />
           ) : (
             <Col>

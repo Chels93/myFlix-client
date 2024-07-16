@@ -4,7 +4,13 @@ import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./movie-card.scss";
 
-const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovieClick }) => {
+const MovieCard = ({
+  fav,
+  movie,
+  onAddToFavorites,
+  onRemoveFromFavorites,
+  onMovieClick,
+}) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(fav);
 
@@ -58,13 +64,13 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
           See More
         </Button>
         {onRemoveFromFavorites && (
-        <Button 
-        className="favorite-button" 
-        variant={isFavorite ? "danger" : "outline-danger"}
-        onClick={handleFavoriteClick} 
-        >
-        {isFavorite ? "Remove from Favorites" : "Add to Favorites"} 
-        </Button>
+          <Button
+            className="favorite-button"
+            variant={isFavorite ? "danger" : "outline-danger"}
+            onClick={handleFavoriteClick}
+          >
+            {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+          </Button>
         )}
       </Card.Body>
     </Card>
@@ -72,8 +78,8 @@ const MovieCard = ({ fav, movie, onAddToFavorites, onRemoveFromFavorites, onMovi
 };
 
 MovieCard.propTypes = {
-    fav: PropTypes.bool,
-    movie: PropTypes.shape({
+  fav: PropTypes.bool,
+  movie: PropTypes.shape({
     imagePath: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     synopsis: PropTypes.string.isRequired,
