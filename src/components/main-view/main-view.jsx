@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import MovieCard from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
@@ -18,8 +17,6 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     if (!token) {
       return;
@@ -35,7 +32,7 @@ export const MainView = () => {
       .catch((error) => {
         console.error("Error fetching movies: ", error); // Log error here
       });
-  }, [token, navigate]);
+  }, [token]);
 
   const handleBackClick = () => {
     setSelectedMovie(null);
