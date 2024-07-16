@@ -96,6 +96,8 @@ export const MainView = () => {
     localStorage.setItem("user", JSON.stringify(user))
   }
 
+  const navigate = navigate();
+
   if (!user) {
     return (
       <Row className="justify-content-md-center">
@@ -197,7 +199,7 @@ export const MainView = () => {
                       <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
-                          fav={user.FavoriteMovies(movie._id)}
+                          fav={(user.FavoriteMovies || []).includes(movie._id)}
                           onAddToFavorites={() => handleAddToFavorites(movie._id)}
                           onRemoveFromFavorites={() => handleRemoveFromFavorites(movie._id)}
                           onMovieClick={() => Navigate(`/movies/${movie._id}`)} 
