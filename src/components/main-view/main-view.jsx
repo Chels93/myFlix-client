@@ -34,49 +34,56 @@ export const MainView = () => {
       });
   }, [token]);
 
-  const handleMovieClick = (movie) => {
-    setSelectedMovie(movie);
-  };
-
   const handleBackClick = () => {
     setSelectedMovie(null);
   };
 
-  const handleAddToFavorites = (movieId, isFavoriteAlready) => {
-    const updatedMovies = movies.map((movie) =>
-      movie._id === movieId ? { ...movie, isFavorite: !isFavoriteAlready } : movie
-    );
-    console.log(`Adding movie ${movieId} to favorites`);
-
-    setMovies(updatedMovies);
-
-    const method = isFavoriteAlready ? "DELETE" : "POST";
-
-    fetch(
-      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
-      {
-        method,
+  const handleAddToFavorites = (movieId) => {
+    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`, {
+        method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify({ movieId }),
-      }
-    )
-      .then((response) => response.json())
-      .then(() => {
-        alert(`Toggle favorite success: The movie was ${isFavoriteAlready ? 'deleted' : 'added'} from the favorite list`);
+    })
+    .then((response) => response.json())
+    .then(() => {
+        alert("Movie added to Favorites!");
         setUser((prevUser) => ({
-          ...prevUser,
-          favoriteMovies: isFavoriteAlready
-            ? prevUser.favoriteMovies.filter((id) => id !== movieId)
-            : [...prevUser.favoriteMovies, movieId],
+            ...prevUser,
+            FavoriteMovies: [...prevUser.FavoriteMovies, movieId],
         }));
-      })
-      .catch((error) => {
-        console.error("Error toggling favorite: ", error);
-      });
-  };
+    })
+    .catch((error) => {
+        console.error("Error adding to favorites: ", error);
+    });
+};
+
+  const handleRemoveFromFavorites = (movieId) => {
+    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+        if(!response.ok) {
+            throw new Error("Failed to remove movie from favorites.");
+        }
+        return response.json();
+    })    
+    .then((data) => {
+        console.log("Success: ", data);
+        let newUserData = JSON.stringify(data);
+        localStorage.setItem("user", newUserData);
+        alert("Movie was successfully removed from list.");
+        setUser((prevUser) => ({
+            ...prevUser,
+            FavoriteMovies: prevUser.FavoriteMovies.filter((id) => !== movieId),
+        }));
+    })
+    .catch((error) => {
+        console.error("Error removing from favorites: ", error);
+    });
+    };
 
   const handleSignedUp = (newUser, newToken) => {
     setUser(newUser);
@@ -115,6 +122,9 @@ export const MainView = () => {
         user={user}
         onLoggedOut={() => {
           setUser(null);
+          setToken(null);
+          localStorage.removeItem("user");
+          localStorage.removeItem("token");
         }}
       />
       <Row className="justify-content-md-center">
@@ -188,10 +198,10 @@ export const MainView = () => {
                       <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
-                          onMovieClick={handleMovieClick}
-                          onAddToFavorites={handleAddToFavorites}
-                          user={user}
-                          token={token}
+                          fav={user.FavoriteMovies.includes(movie._id)}
+                          onAddToFavorites={(movie) => handleAddToFavorites(movie)}
+                          onRemoveFromFavorites={(movie) => handleRemoveFromFavorites}
+                          onMovieClick={() => setSelectedMovie(movie)}
                         />
                       </Col>
                     ))}
