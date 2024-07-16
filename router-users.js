@@ -11,9 +11,10 @@ module.exports = (app) => {
   app.use(
     cors({
       origin: "*",
-      credentials: true
+      credentials: true,
     })
   );
+
   // Returns a JSON object of all users
   app.get(
     "/users",
@@ -42,7 +43,6 @@ module.exports = (app) => {
       check("password", "Password is required").not().isEmpty(),
       check("email", "Email does not appear to be valid").isEmail(),
     ],
-
     async (req, res) => {
       let errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -51,92 +51,96 @@ module.exports = (app) => {
       if (!req.body.password || !req.body.username) {
         return res.status(400).json({ error: "username or password missing" });
       }
+
       let hashedPassword = Users.hashPassword(req.body.password);
-      await Users.findOne({ username: req.body.username })
-        .then((user) => {
-          if (user) {
-            return res.status(400).send(req.body.username + "already exists.");
-          } else {
-            Users.create({
-              username: req.body.username,
-              password: hashedPassword,
-              email: req.body.email,
-              birthdate: req.body.birthdate,
-            })
-              .then((user) => {
-                res.status(201).json(user);
-              })
-              .catch((error) => {
-                console.error(error);
-                res.status(500).send("Error: " + error);
-              });
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          res.status(500).send("Error: " + error);
+
+      try {
+        const existingUser = await Users.findOne({
+          username: req.body.username,
         });
+        if (existingUser) {
+          return res.status(400).send(req.body.username + "already exists.");
+        }
+
+        const newUser = await Users.create({
+          username: req.body.username,
+          password: hashedPassword,
+          email: req.body.email,
+          birthdate: req.body.birthdate,
+        });
+
+        res.status(201).json(newUser);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      }
     }
   );
 
   // Allows users to update their user info
-  app.put("/users/:username",
+  app.put(
+    "/users/:username",
     passport.authenticate("jwt", { session: false }),
     [
       check("username", "Username is required").isLength({ min: 5 }),
-      check("username", "Username contains non alpanumeric characters - not allowed.").isAlphanumeric(),
+      check(
+        "username",
+        "Username contains non alpanumeric characters - not allowed."
+      ).isAlphanumeric(),
       check("password", "Password is required").not().isEmpty(),
-      check("Password", "Password must be between 8 and 20 characters").isLength({ min: 5, max: 20 }),
-      check("email", "Email does not appear to be valid").isEmail()
+      check(
+        "Password",
+        "Password must be between 8 and 20 characters"
+      ).isLength({ min: 5, max: 20 }),
+      check("email", "Email does not appear to be valid").isEmail(),
     ],
-      (req, res, next) => {
-        let errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          return res.status(422).json({ errors: errors.array() })
-        }
+    async (req, res) => {
+      let errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+      }
 
-        let hashedPassword = Users.hashPassword(req.body.Password)
+      let hashedPassword = Users.hashPassword(req.body.Password);
 
-        Users.findOneAndUpdate({ username: req.params.username },
-        {
+      try {
+        const updatedUser = await Users.findOneAndUpdate(
+          { username: req.params.username },
+          {
             username: req.body.username,
             passwrod: hashedPassword,
             email: req.body.email,
-            birthdate: req.body.birthdate
-        },
-        { new: true })
-        .then(user => {
-            res.status(200).json(user)
-        })
-        .catch(err => {
-            console.error(err) 
-            res.status(500).send("Error: " + err)
-        })
-      }
-    )
+            birthdate: req.body.birthdate,
+          },
+          { new: true }
+        );
 
-  // get user info
+        if (!updatedUser) {
+          return res.status(404).send("User not found.");
+        }
+
+        res.status(200).json(updatedUser);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      }
+    }
+  );
+
+  // Get user info
   app.get(
     "/users/:username",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      await Users.findOne({ username: req.params.username })
-        .then((user) => {
-          if (!user) {
-            console.log("incorrect username");
-            return callback(null, false, {
-              message: "User doesnt exist",
-            });
-          }
-          console.log("finished");
-          return callback(null, user);
-        })
-        .catch((error) => {
-          if (error) {
-            console.log(error);
-            return callback(error);
-          }
-        });
+      try {
+        const user = await Users.findOne({ username: req.params.username });
+        if (!user) {
+          return res.status(404).send("User not found.");
+        }
+        res.status(200).json(user);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      }
     }
   );
 
