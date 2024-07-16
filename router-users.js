@@ -142,7 +142,7 @@ module.exports = (app) => {
 
   // Allows users to add a movie to their list of favorites
   app.post(
-    "/users/:username/movies/:_id",
+    "/${user.username}/movies/${movieId}",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       await Users.findOneAndUpdate(
@@ -162,7 +162,7 @@ module.exports = (app) => {
 
   // Allows users to remove a movie from their list of favorites
   app.delete(
-    "/users/:username/movies/:ObjectId",
+    "/${user.username}/movies/${movieId}",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       await Users.findOneAndUpdate(
