@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 
-const UpdateUser = ({ user }) => {
-    const [username, setUsername] = useState(user.username);
-    const [password, setPassword] = useState(user.password);
-    const [email, setEmail] = useState(user.email);
-    const [birthdate, setBirthdate] = useState(user.birthdate);
+const UpdateUser = ({ user, onUserUpdate }) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState(user.email || "");
+    const [birthdate, setBirthdate] = useState(user.birthdate || "");
     const token = localStorage.getItem("token");
 
     const handleUpdate = (event) => {
         event.preventDefault();
         const updatedUser = {
-            Name: username, 
+            Name: username || user.username, 
             Password: password,
             Email: email,
             Birthday: birthdate,

@@ -2,53 +2,73 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import MovieCard from "../movie-card/movie-card";
 
-export const FavoriteMovies = ({ movies, user, onMovieClick, onFavoriteClick, onAddToFavorites, onRemoveFromFavorites }) => {
-    const [favoriteMovies, setFavoriteMovies] = useState([]);
-    const token = localStorage.getItem("token");
-  
-    useEffect(() => {
-      const fetchFavoriteMovies = async () => {
-        if (!user || !user.username) {
-          console.error("User or username is undefined.");
-          return;
-        }
-  
-        try {
-          const response = await fetch(
-            `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, 
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-          );
-          if (!response.ok) {
-            throw new Error("Failed to fetch favorite movies");
-          }
-          const userdata = await response.json();
-          setFavoriteMovies(userdata.favoriteMovies);
-        } catch (error) {
-          console.error("Error fetching favorite movies:", error);
-        }
-      };
-  
-      fetchFavoriteMovies();
-    }, [user, token]);
-  
-    if (!movies || !user || !Array.isArray(movies) || !Array.isArray(favoriteMovies)) {
-      return <div>No favorite movies available</div>;
-    }
-  
-    const filteredMovies = movies.filter((movie) => favoriteMovies.includes(movie._id));
+export const FavoriteMovies = ({
+  movies,
+  user,
+  onAddToFavorites,
+  onRemoveFromFavorites,
+}) => {
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const token = localStorage.getItem("token");
 
-    const onFavoriteClick = (movieId, isFavorite) => {
-        if (isFavorite) {
-            onRemoveFromFavorites(movieId);
-        } else {
-            onAddToFavorites(movieId);
+  useEffect(() => {
+    const fetchFavoriteMovies = async () => {
+      if (!user || !user.username) {
+        console.error("User or username is undefined.");
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch favorite movies");
         }
+        const userdata = await response.json();
+        setFavoriteMovies(userdata.favoriteMovies);
+      } catch (error) {
+        console.error("Error fetching favorite movies:", error);
+      }
     };
-    
+
+    fetchFavoriteMovies();
+  }, [user, token]);
+
+  useEffect(() => {
+    setFavoriteMovies(user.favoriteMovies);
+  }, [user]);
+
+  if (
+    !movies ||
+    !user ||
+    !Array.isArray(movies) ||
+    !Array.isArray(favoriteMovies)
+  ) {
+    return <div>No favorite movies available</div>;
+  }
+
+  const filteredMovies = movies.filter((movie) =>
+    favoriteMovies.includes(movie._id)
+  );
+
+  const handleMovieClick = (movie) => {
+console.log("Clicked Movie: ", movie);
+  };
+
+  const onFavoriteClick = (movieId, isFavorite) => {
+    if (isFavorite) {
+      onRemoveFromFavorites(movieId);
+    } else {
+      onAddToFavorites(movieId);
+    }
+  };
+
   return (
     <Container className="favorite-movies">
       <Row>
@@ -58,9 +78,9 @@ export const FavoriteMovies = ({ movies, user, onMovieClick, onFavoriteClick, on
               <MovieCard
                 movie={movie}
                 fav={true}
-                onMovieClick={onMovieClick}
+                onMovieClick={() => handleMovieClick(movie)}
                 onFavoriteClick={onFavoriteClick}
-                onAddToFavorites={onAddToFavorites}
+                onAddToFavorites={() => onAddToFavorites(movie._id)}
                 onRemoveFromFavorites={() => onRemoveFromFavorites(movie._id)}
               />
             </Col>

@@ -7,6 +7,7 @@ import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { FavoriteMovies } from "../profile-view/favorite-movies";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -26,10 +27,10 @@ export const MainView = () => {
     })
       .then((response) => {
         if (!response.ok) {
-            throw new Error("Failed to fetch movies.");
+          throw new Error("Failed to fetch movies.");
         }
-            return response.json();
-        })
+        return response.json();
+      })
       .then((movies) => {
         console.log("Movies fetched successfully: ", movies); // Log movies here
         setMovies(movies);
@@ -44,50 +45,51 @@ export const MainView = () => {
   };
 
   const handleAddToFavorites = (movieId) => {
-    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`, {
+    fetch(
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
+      {
         method: "POST",
         headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-    })
-    .then((response) => response.json())
-    .then(() => {
+      }
+    )
+      .then((response) => response.json())
+      .then((updatedUser) => {
         alert("Movie added to Favorites!");
-        setUser((prevUser) => ({
-            ...prevUser,
-            FavoriteMovies: [...(prevUser.FavoriteMovies || []), movieId],
-        }));
-    })
-    .catch((error) => {
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+      })
+      .catch((error) => {
         console.error("Error adding to favorites: ", error);
-    });
-};
+      });
+  };
 
   const handleRemoveFromFavorites = (movieId) => {
-    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`, {
+    fetch(
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
+      {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-        if(!response.ok) {
-            throw new Error("Failed to remove movie from favorites.");
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to remove movie from favorites.");
         }
         return response.json();
-    })    
-    .then((data) => {
+      })
+      .then((updatedUser) => {
         console.log("Success: ", data);
-        localStorage.setItem("user", JSON.stringify(data));
         alert("Movie was successfully removed from list.");
-        setUser((prevUser) => ({
-            ...prevUser,
-            FavoriteMovies: (prevUser.FavoriteMovies || []).filter((id) => id !== movieId),
-        }));
-    })
-    .catch((error) => {
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(data));
+      })
+      .catch((error) => {
         console.error("Error removing from favorites: ", error);
-    });
-    };
+      });
+  };
 
   const handleSignedUp = (newUser, newToken) => {
     setUser(newUser);
@@ -96,10 +98,10 @@ export const MainView = () => {
     localStorage.setItem("token", newToken);
   };
 
-  const updateUser = user => {
+  const updateUser = (user) => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
-  }
+  };
 
   if (!user) {
     return (
@@ -155,13 +157,14 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView 
-                        onLoggedIn={(user, token) => {
+                    <LoginView
+                      onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
                         localStorage.setItem("user", JSON.stringify(user));
                         localStorage.setItem("token", token);
-                        }} />
+                      }}
+                    />
                   </Col>
                 )}
               </>
@@ -188,6 +191,22 @@ export const MainView = () => {
               )
             }
           />
+          <Route
+            path="/favorites"
+            element={
+              !user ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <FavoriteMovies
+                  movies={movies}
+                  user={user}
+                  onAddToFavorites={handleAddToFavorites}
+                  onRemoveFromFavorites={handleRemoveFromFavorites}
+                  onMovieClick={(movie) => setSelectedMovie(movie)}
+                />
+              )
+            }
+          />
 
           <Route
             path="/"
@@ -204,9 +223,13 @@ export const MainView = () => {
                         <MovieCard
                           movie={movie}
                           fav={(user.FavoriteMovies || []).includes(movie._id)}
-                          onAddToFavorites={() => handleAddToFavorites(movie._id)}
-                          onRemoveFromFavorites={() => handleRemoveFromFavorites(movie._id)}
-                          onMovieClick={() => setSelectedMovie(movie)} 
+                          onAddToFavorites={() =>
+                            handleAddToFavorites(movie._id)
+                          }
+                          onRemoveFromFavorites={() =>
+                            handleRemoveFromFavorites(movie._id)
+                          }
+                          onMovieClick={() => setSelectedMovie(movie)}
                         />
                       </Col>
                     ))}
@@ -236,5 +259,3 @@ export const MainView = () => {
     </BrowserRouter>
   );
 };
-
-

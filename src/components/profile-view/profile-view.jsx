@@ -6,7 +6,7 @@ import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
-export const ProfileView = ({ user, movies, setUser, onRemoveFromFavorites }) => {
+export const ProfileView = ({ user, movies, setUser, onAddToFavorites, onRemoveFromFavorites }) => {
     const token = localStorage.getItem("token");
 
   const handleUpdate = (updatedUser) => {
@@ -30,7 +30,7 @@ export const ProfileView = ({ user, movies, setUser, onRemoveFromFavorites }) =>
         }
         return response.json();
       })
-      .then((data) => {
+      .then(() => {
         alert("User deregistered successfully!");
         setUser(null);
         localStorage.removeItem("user");
@@ -41,7 +41,28 @@ export const ProfileView = ({ user, movies, setUser, onRemoveFromFavorites }) =>
         alert("Failed to deregister user. Please try again.");
       });
 
-const handleRemoveFromFavorites = (movieId) => {
+      const handleAddToFavorites = (movieId) => {
+        fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        }
+        )
+        .then((response) => response.json())
+        .then((updatedUser) => {
+            alert("Movie added to Favorites!");
+            setUser(updatedUser);
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+        })
+        .catch((error) => {
+            console.error("Error adding to favorites: ", error);
+        });
+    };
+
+      const handleRemoveFromFavorites = (movieId) => {
     fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
@@ -96,7 +117,8 @@ return (
             <FavoriteMovies
               movies={movies}
               user={user}
-              onRemoveFromFavorites={onRemoveFromFavorites}
+              onAddToFavorites={handleAddToFavorites}
+              onRemoveFromFavorites={handleRemoveFromFavorites}
             />
           ) : (
             <Col>

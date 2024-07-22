@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import "./movie-card.scss";
 
 const MovieCard = ({
-  fav,
   movie,
+  fav,
+  onMovieClick,
   onAddToFavorites,
   onRemoveFromFavorites,
-  onMovieClick,
-  onFavoriteClick
+  
 }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(fav);
@@ -29,7 +29,6 @@ const MovieCard = ({
       onAddToFavorites(movie._id);
       setIsFavorite(true);
     }
-    onFavoriteClick(movie._id, !isFavorite);
   };
 
   return (
@@ -88,7 +87,6 @@ MovieCard.propTypes = {
   onMovieClick: PropTypes.func.isRequired,
   onAddToFavorites: PropTypes.func.isRequired,
   onRemoveFromFavorites: PropTypes.func.isRequired,
-  onFavoriteClick: PropTypes.func.isRequired,
 };
 
 export default MovieCard;
