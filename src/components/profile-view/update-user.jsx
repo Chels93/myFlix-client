@@ -12,10 +12,12 @@ const UpdateUser = ({ user, onUserUpdate }) => {
         event.preventDefault();
         const updatedUser = {
             Name: username || user.username, 
-            Password: password,
-            Email: email,
-            Birthday: birthdate,
+            Password: password ? password: undefined,
+            Email: email || user.email,
+            Birthday: birthdate || user.birthdate,
         };
+
+        console.log("Updating user with payload:", updatedUser);
 
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "PUT",
