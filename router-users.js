@@ -216,28 +216,28 @@ app.post(
   }
 );
 
-// Allows users to remove a movie from their list of favorites
-app.delete(
-  "/users/:username/movies/:movieId",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    await Users.findOneAndUpdate(
-      { username: req.params.username },
-      { $pull: { favoriteMovies: req.params.movieId } },
-      { new: true }
-    )
-      .then((updatedUser) => {
-        if (!updatedUser) {
-          return res.status(404).send("User not found.");
-        }
-        res.status(200).json(updatedUser);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
+  // Allows users to remove a movie from their list of favorites
+  app.delete(
+    "/users/:username/movies/:movieId",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      await Users.findOneAndUpdate(
+        { username: req.params.username },
+        { $pull: { favoriteMovies: req.params.movieId } },
+        { new: true }
+      )
+        .then((updatedUser) => {
+            if (!updatedUser) {
+                return res.status(404).send("User not found.");
+            }
+          res.status(200).json(updatedUser);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        });
+    }
+  );
 
 // Allows existing users to deregister
 app.delete(
