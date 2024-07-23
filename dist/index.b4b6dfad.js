@@ -42432,13 +42432,14 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 const UserInfo = ({ username, email, birthdate })=>{
+    const formattedBirthdate = new Date(birthdate).toLocaleDateString();
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
                 children: "Your Info"
             }, void 0, false, {
                 fileName: "src/components/profile-view/user-info.jsx",
-                lineNumber: 6,
+                lineNumber: 7,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -42448,7 +42449,7 @@ const UserInfo = ({ username, email, birthdate })=>{
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/user-info.jsx",
-                lineNumber: 7,
+                lineNumber: 8,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -42458,17 +42459,17 @@ const UserInfo = ({ username, email, birthdate })=>{
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/user-info.jsx",
-                lineNumber: 8,
+                lineNumber: 9,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: [
                     "Birthdate: ",
-                    birthdate
+                    formattedBirthdate
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/user-info.jsx",
-                lineNumber: 9,
+                lineNumber: 10,
                 columnNumber: 7
             }, undefined)
         ]
