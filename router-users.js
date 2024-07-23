@@ -171,11 +171,13 @@ module.exports = (app) => {
     async (req, res) => {
       await Users.findOneAndUpdate(
         { username: req.params.username },
-        { username: req.params.username },
         { $pull: { favoriteMovies: req.params.movieId } },
         { new: true }
       )
         .then((updatedUser) => {
+            if (!updatedUser) {
+                return res.status(404).send("User not found.");
+            }
           res.status(200).json(updatedUser);
         })
         .catch((err) => {
