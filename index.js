@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -8,33 +9,33 @@ const auth = require("./auth");
 
 const app = express();
 
-// Middleware
-app.use(
-  cors({
-    origin: "http://localhost:1234",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
-// Body Parser Middleware
-app.use(bodyParser.json());
-
-// Loggin Middleware
-let myLogger = (req, res, next) => {
+// Logging Middleware
+const myLogger = (req, res, next) => {
   console.log(req.url);
   next();
 };
 
-let requestTime = (req, res, next) => {
+const requestTime = (req, res, next) => {
   req.requestTime = Date.now();
   next();
 };
 
+// Middleware
+app.use(cors({ origin: "*", credentials: true}));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Initialzie authentication middleware
+auth(app);
+
+// Use middleware
 app.use(myLogger);
 app.use(requestTime);
 
-// Database Connection
+// Use routers
+app.use("/users", routerUser);
+app.use("/movies", routerMovies);
 
 // mongoose.connect("mongodb://localhost:27017/moviesdb", {
 // useNewUrlParser: true,
@@ -45,10 +46,6 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
 });
 
-// Express routers
-auth(app);
-app.use("/users", routerUser);
-app.use("/movies", routerMovies);
 
 // Default text response
 app.get("/", (req, res) => {
