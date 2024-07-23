@@ -194,18 +194,18 @@ module.exports = (app) => {
     "/users/:username",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      await Users.findOneAndDelete({ username: req.params.username })
-        .then((user) => {
-          if (!user) {
-            res.status(400).send(req.params.username + " was not found.");
-          } else {
-            res.status(200).send(req.params.username + " was deleted.");
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          res.status(500).send("Error: " + err);
+      try {
+        const user = await Users.findOneAndDelete({
+          username: req.params.username,
         });
+        if (!user) {
+          return res.status(400).send(req.params.username + " was not found.");
+        }
+        res.status(200).send(req.params.username + " was deleted.");
+      } catch (err) {
+        console.error("Error deleting user:", err);
+        res.status(500).send("Error: " + err.message);
+      }
     }
   );
 };
