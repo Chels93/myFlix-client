@@ -117,7 +117,6 @@ export const ProfileView = ({
             <DeregisterUser
               user={user}
               token={token}
-              onDeregisterUser={handleDeregisterUser}
             />
           </div>
         </Col>

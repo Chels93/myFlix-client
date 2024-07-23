@@ -1,6 +1,6 @@
 import React from "react";
 
-export const DeregisterUser = (user, token) => {
+export const DeregisterUser = ({ user, token }) => {
   const handleDeregisterClick = () => {
     if (!user || !user.username) {
       console.error("User object or username is missing");
@@ -17,9 +17,10 @@ export const DeregisterUser = (user, token) => {
     )
       .then((response) => {
         if (!response.ok) {
+            console.error("Response text: ", responseText);
           throw new Error("Failed to deregister user");
         }
-        return response.json();
+        return responseText;
       })
       .then((data) => {
         alert("User deregistered successfully!", data);
