@@ -1,22 +1,24 @@
 const express = require("express");
-const cors = require("cors");
 const passport = require("passport");
 const Models = require("./models.js");
 const { check, validationResult } = require("express-validator");
+const cors = require("cors");
 
+const router = express.Router();
 const Users = Models.User;
 
-module.exports = (app) => {
-  // Enable CORS for all routes or specifies origins
-  app.use(
+  // Enable CORS for all routes or specify origins
+  router.use(
     cors({
       origin: "*",
       credentials: true,
     })
   );
 
+  router.use(express.json());
+
   // Returns a JSON object of all users
-  app.get(
+  router.get(
     "/users",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
@@ -32,13 +34,13 @@ module.exports = (app) => {
   );
 
   // Allows new users to register
-  app.post(
+  router.post(
     "/users",
     [
       check("username", "Username is required").isLength({ min: 5 }),
       check(
         "username",
-        "Username contains non alpanumeric characters - not allowed."
+        "Username contains non alphanumeric characters - not allowed."
       ).isAlphanumeric(),
       check("password", "Password is required").not().isEmpty(),
       check("email", "Email does not appear to be valid").isEmail(),
@@ -78,7 +80,7 @@ module.exports = (app) => {
   );
 
   // Allows users to update their user info
-  app.put(
+  router.put(
     "/users/:username",
     passport.authenticate("jwt", { session: false }),
     [
@@ -87,12 +89,10 @@ module.exports = (app) => {
         "username",
         "Username contains non alpanumeric characters - not allowed."
       ).isAlphanumeric(),
-      check("password", "Password is required").not().isEmpty(),
-      check(
-        "Password",
-        "Password must be between 8 and 20 characters"
-      ).isLength({ min: 5, max: 20 }),
       check("email", "Email does not appear to be valid").isEmail(),
+      check("password", "Password must be between 8 and 20 characters")
+        .optional()
+        .isLength({ min: 8, max: 20 }),
     ],
     async (req, res) => {
       let errors = validationResult(req);
@@ -100,17 +100,20 @@ module.exports = (app) => {
         return res.status(422).json({ errors: errors.array() });
       }
 
-      let hashedPassword = Users.hashPassword(req.body.Password);
+      let updateFields = {
+        username: req.body.username,
+        email: req.body.email,
+        birthdate: req.body.birthdate,
+      };
+
+      if (req.body.password) {
+        updateFields.password = Users.hashPassword(req.body.password);
+      }
 
       try {
         const updatedUser = await Users.findOneAndUpdate(
           { username: req.params.username },
-          {
-            username: req.body.username,
-            passwrod: hashedPassword,
-            email: req.body.email,
-            birthdate: req.body.birthdate,
-          },
+          updateFields,
           { new: true }
         );
 
@@ -126,84 +129,85 @@ module.exports = (app) => {
     }
   );
 
-  // Get user info
-  app.get(
-    "/users/:username",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-      try {
-        const user = await Users.findOne({ username: req.params.username });
-        if (!user) {
+// Get user info
+router.get(
+  "/users/:username",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const user = await Users.findOne({ username: req.params.username });
+      if (!user) {
+        return res.status(404).send("User not found.");
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    }
+  }
+);
+
+// Allows users to add a movie to their list of favorites
+router.post(
+  "/users/:username/movies/:movieId",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    await Users.findOneAndUpdate(
+      { username: req.params.username },
+      { $addToSet: { favoriteMovies: req.params.movieId } },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        res.status(200).json(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
+
+// Allows users to remove a movie from their list of favorites
+router.delete(
+  "/users/:username/movies/:movieId",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    await Users.findOneAndUpdate(
+      { username: req.params.username },
+      { $pull: { favoriteMovies: req.params.movieId } },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        if (!updatedUser) {
           return res.status(404).send("User not found.");
         }
-        res.status(200).json(user);
-      } catch (error) {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      }
-    }
-  );
+        res.status(200).json(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
-  // Allows users to add a movie to their list of favorites
-  app.post(
-    "/users/:username/movies/:movieId",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-      await Users.findOneAndUpdate(
-        { username: req.params.username },
-        { $addToSet: { favoriteMovies: req.params.movieId } },
-        { new: true }
-      )
-        .then((updatedUser) => {
-          res.status(200).json(updatedUser);
-        })
-        .catch((err) => {
-          console.error(err);
-          res.status(500).send("Error: " + err);
-        });
-    }
-  );
+// Allows existing users to deregister
+router.delete(
+  "/users/:username",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    await Users.findOneAndDelete({ username: req.params.username })
+      .then((user) => {
+        if (!user) {
+          res.status(400).send(req.params.username + " was not found.");
+        } else {
+          res.status(200).send(req.params.username + " was deleted.");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
-  // Allows users to remove a movie from their list of favorites
-  app.delete(
-    "/users/:username/movies/:movieId",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-      await Users.findOneAndUpdate(
-        { username: req.params.username },
-        { $pull: { favoriteMovies: req.params.movieId } },
-        { new: true }
-      )
-        .then((updatedUser) => {
-            if (!updatedUser) {
-                return res.status(404).send("User not found.");
-            }
-          res.status(200).json(updatedUser);
-        })
-        .catch((err) => {
-          console.error(err);
-          res.status(500).send("Error: " + err);
-        });
-    }
-  );
-
-  // Allows existing users to deregister
-  app.delete(
-    "/users/:username",
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-      await Users.findOneAndDelete({ username: req.params.username })
-        .then((user) => {
-          if (!user) {
-            res.status(400).send(req.params.username + " was not found.");
-          } else {
-            res.status(200).send(req.params.username + " was deleted.");
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          res.status(500).send("Error: " + err);
-        });
-    }
-  );
-};
+module.exports = router;

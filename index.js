@@ -1,10 +1,10 @@
-const cors = require("cors");
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const auth = require("./auth");
 const routerUser = require("./router-users.js");
 const routerMovies = require("./router-movies");
+const auth = require("./auth");
 
 const app = express();
 
@@ -47,8 +47,8 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 // Express routers
 auth(app);
-routerUser(app);
-routerMovies(app);
+app.use("/users", routerUser);
+app.use("/movies", routerMovies);
 
 // Default text response
 app.get("/", (req, res) => {
