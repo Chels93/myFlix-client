@@ -85,13 +85,12 @@ module.exports = (app) => {
       check("username", "Username is required").isLength({ min: 5 }),
       check(
         "username",
-        "Username contains non alpanumeric characters - not allowed."
+        "Username contains non-alpanumeric characters - not allowed."
       ).isAlphanumeric(),
-      check("password", "Password is required").not().isEmpty(),
       check(
-        "Password",
+        "password",
         "Password must be between 8 and 20 characters"
-      ).isLength({ min: 5, max: 20 }),
+      ).isLength({ min: 8, max: 20 }),
       check("email", "Email does not appear to be valid").isEmail(),
     ],
     async (req, res) => {
@@ -100,28 +99,31 @@ module.exports = (app) => {
         return res.status(422).json({ errors: errors.array() });
       }
 
-      let hashedPassword = Users.hashPassword(req.body.Password);
+      let hashedPassword;
+      if (req.body.password) {
+        hashedPassword = Users.hashPassword(req.body.password);
 
-      try {
-        const updatedUser = await Users.findOneAndUpdate(
-          { username: req.params.username },
-          {
-            username: req.body.username,
-            passwrod: hashedPassword,
-            email: req.body.email,
-            birthdate: req.body.birthdate,
-          },
-          { new: true }
-        );
+        try {
+          const updatedUser = await Users.findOneAndUpdate(
+            { username: req.params.username },
+            {
+              username: req.body.username,
+              passwrod: hashedPassword,
+              email: req.body.email,
+              birthdate: req.body.birthdate,
+            },
+            { new: true }
+          );
 
-        if (!updatedUser) {
-          return res.status(404).send("User not found.");
+          if (!updatedUser) {
+            return res.status(404).send("User not found.");
+          }
+
+          res.status(200).json(updatedUser);
+        } catch (error) {
+          console.error(error);
+          res.status(500).send("Error: " + error);
         }
-
-        res.status(200).json(updatedUser);
-      } catch (error) {
-        console.error(error);
-        res.status(500).send("Error: " + error);
       }
     }
   );
@@ -175,9 +177,9 @@ module.exports = (app) => {
         { new: true }
       )
         .then((updatedUser) => {
-            if (!updatedUser) {
-                return res.status(404).send("User not found.");
-            }
+          if (!updatedUser) {
+            return res.status(404).send("User not found.");
+          }
           res.status(200).json(updatedUser);
         })
         .catch((err) => {
