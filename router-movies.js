@@ -1,4 +1,3 @@
-const express = require("express");
 const passport = require("passport");
 const cors = require("cors");
 const Models = require("./models.js");
@@ -6,6 +5,10 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 
 module.exports = (app) => {
+    // Enables CORS for all routes or specifies origins as needed
+    app.use(cors({
+        origin: "*"
+    }));    
   // Returns a JSON object of all movies to the user
   app.get(
     "/movies",
@@ -17,7 +20,7 @@ module.exports = (app) => {
         })
         .catch((err) => {
           console.error(err);
-          res.status(500).send("Error: " + err.message);
+          res.status(500).send("Error: " + err);
         });
     }
   );
@@ -27,16 +30,14 @@ module.exports = (app) => {
     "/movies/:Title",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      try {
-        const movie = await Movies.findOne({ Title: req.params.Title });
-        if (!movie) {
-          return res.status(404).send("Movie not found.");
-        }
-        res.status(200).json(movie);
-      } catch (err) {
-        console.error("Error fetching movie:", err);
-        res.status(500).send("Error: " + err.message);
-      }
+      await Movies.findOne({ Title: req.params.Title })
+        .then((movie) => {
+          res.json(movie);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        });
     }
   );
 

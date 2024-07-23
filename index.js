@@ -1,41 +1,40 @@
-const express = require("express");
-const passport = require("passport");
 const cors = require("cors");
+const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const auth = require("./auth");
 const routerUser = require("./router-users.js");
 const routerMovies = require("./router-movies");
-const auth = require("./auth");
 
 const app = express();
 
-// Logging Middleware
-const myLogger = (req, res, next) => {
+// Middleware
+app.use(
+  cors({
+    origin: "http://localhost:1234",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Body Parser Middleware
+app.use(bodyParser.json());
+
+// Loggin Middleware
+let myLogger = (req, res, next) => {
   console.log(req.url);
   next();
 };
 
-const requestTime = (req, res, next) => {
+let requestTime = (req, res, next) => {
   req.requestTime = Date.now();
   next();
 };
 
-// Middleware
-app.use(cors({ origin: "*", credentials: true}));
-app.use(bodyParser.json());
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Initialzie authentication middleware
-auth(app);
-
-// Use middleware
 app.use(myLogger);
 app.use(requestTime);
 
-// Use routers
-app.use("/users", routerUser);
-app.use("/movies", routerMovies);
+// Database Connection
 
 // mongoose.connect("mongodb://localhost:27017/moviesdb", {
 // useNewUrlParser: true,
@@ -46,6 +45,10 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
 });
 
+// Express routers
+auth(app);
+routerUser(app);
+routerMovies(app);
 
 // Default text response
 app.get("/", (req, res) => {
