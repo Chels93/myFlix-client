@@ -60,6 +60,11 @@ export const MainView = () => {
         alert("Movie added to Favorites!");
         setUser(updatedUser);
         localStorage.setItem("user", JSON.stringify(updatedUser));
+        setMovies((prevMovies) =>
+          prevMovies.map((movie) =>
+            movie._id === movieId ? { ...movie, isFavorite: true } : movie
+          )
+        );
       })
       .catch((error) => {
         console.error("Error adding to favorites: ", error);
@@ -81,10 +86,15 @@ export const MainView = () => {
         return response.json();
       })
       .then((updatedUser) => {
-        console.log("Success: ", data);
+        console.log("Success: ", updatedUser);
         alert("Movie was successfully removed from list.");
         setUser(updatedUser);
-        localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        setMovies((prevMovies) =>
+          prevMovies.map((movie) =>
+            movie._id === movieId ? { ...movie, isFavorite: false } : movie
+          )
+        );
       })
       .catch((error) => {
         console.error("Error removing from favorites: ", error);

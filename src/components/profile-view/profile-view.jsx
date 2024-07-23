@@ -6,8 +6,14 @@ import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
-export const ProfileView = ({ user, movies, setUser, onAddToFavorites, onRemoveFromFavorites }) => {
-    const token = localStorage.getItem("token");
+export const ProfileView = ({
+  user,
+  movies,
+  setUser,
+  onAddToFavorites,
+  onRemoveFromFavorites,
+}) => {
+  const token = localStorage.getItem("token");
 
   const handleUpdate = (updatedUser) => {
     setUser(updatedUser);
@@ -41,92 +47,98 @@ export const ProfileView = ({ user, movies, setUser, onAddToFavorites, onRemoveF
         alert("Failed to deregister user. Please try again.");
       });
 
-      const handleAddToFavorites = (movieId) => {
-        fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
-        {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        }
-        )
-        .then((response) => response.json())
-        .then((updatedUser) => {
-            alert("Movie added to Favorites!");
-            setUser(updatedUser);
-            localStorage.setItem("user", JSON.stringify(updatedUser));
-        })
-        .catch((error) => {
-            console.error("Error adding to favorites: ", error);
-        });
-    };
+  const handleAddToFavorites = (movieId) => {
+    fetch(
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((updatedUser) => {
+        alert("Movie added to Favorites!");
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+      })
+      .catch((error) => {
+        console.error("Error adding to favorites: ", error);
+      });
+  };
 
-      const handleRemoveFromFavorites = (movieId) => {
-    fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`, {
+  const handleRemoveFromFavorites = (movieId) => {
+    fetch(
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
+      {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-        if(!response.ok) {
-            throw new Error("Failed to remove movie from favorites.");
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to remove movie from favorites.");
         }
         return response.json();
-    })
-    .then((data) => {
-        console.log("Success: ", data);
-        setUser(data);
+      })
+      .then((updatedUser) => {
+        console.log("Success: ", updatedUser);
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
         alert("Movie was successfully removed from favorites.");
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.error("Error removing from favorites: ", error);
         alert("Failed to remove movie from favorites. Please try again.");
-    });
-};
+      });
+  };
 
-if (!user) {
+  if (!user) {
     return <div>User data not available</div>;
   }
 
-return (
-  <Container className="profile-view-container">
-    <Row>
-      <Col xs={12} sm={6}>
-        <div className="user-info">
-          <UserInfo
-            username={user.username}
-            email={user.email}
-            birthdate={user.birthdate}
-          />
-        </div>
-        <div className="user-update">
-          <UpdateUser user={user} onUserUpdate={handleUpdate} />
-        </div>
-        <div>
-          <DeregisterUser
-            user={user}
-            token={token}
-            onDeregisterUser={handleDeregisterUser}
-          />
-        </div>
-      </Col>
-      <Col xs={12} sm={6}>
-        <div className="favorite-movies">
-          <h3>Favorite Movies</h3>
-          {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
-            <FavoriteMovies
-              movies={movies}
-              user={user}
-              onAddToFavorites={handleAddToFavorites}
-              onRemoveFromFavorites={handleRemoveFromFavorites}
+  return (
+    <Container className="profile-view-container">
+      <Row>
+        <Col xs={12} sm={6}>
+          <div className="user-info">
+            <UserInfo
+              username={user.username}
+              email={user.email}
+              birthdate={user.birthdate}
             />
-          ) : (
-            <Col>
-              <div>No favorite movies yet!</div>
-            </Col>
-          )}
-        </div>
-      </Col>
-    </Row>
-  </Container>
-)};
+          </div>
+          <div className="user-update">
+            <UpdateUser user={user} onUserUpdate={handleUpdate} />
+          </div>
+          <div>
+            <DeregisterUser
+              user={user}
+              token={token}
+              onDeregisterUser={handleDeregisterUser}
+            />
+          </div>
+        </Col>
+        <Col xs={12} sm={6}>
+          <div className="favorite-movies">
+            <h3>Favorite Movies</h3>
+            {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
+              <FavoriteMovies
+                movies={movies}
+                user={user}
+                onAddToFavorites={onAddToFavorites}
+                onRemoveFromFavorites={onRemoveFromFavorites}
+              />
+            ) : (
+              <Col>
+                <div>No favorite movies yet!</div>
+              </Col>
+            )}
+          </div>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
