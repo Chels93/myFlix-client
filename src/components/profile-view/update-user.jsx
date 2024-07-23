@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 
 const UpdateUser = ({ user, onUserUpdate }) => {
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState(user.username || "");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.email || "");
     const [birthdate, setBirthdate] = useState(user.birthdate || "");
@@ -12,7 +12,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
         event.preventDefault();
         const updatedUser = {
             username: username || user.username, 
-            password: password ? password: undefined,
+            password: password || undefined,
             email: email || user.email,
             birthdate: birthdate || user.birthdate,
         };
@@ -54,6 +54,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              disabled={!!user.username} 
             />
           </Form.Group>
 
@@ -63,6 +64,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Leave blank if you don't want to change."
             />
           </Form.Group>
 
