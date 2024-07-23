@@ -132,6 +132,10 @@ export const MainView = () => {
     );
   }
 
+  const filteredMovies = movies.filter(
+    (movie) => !user.favoriteMovies.includes(movie._id)
+  );
+
   return (
     <BrowserRouter>
       <NavigationBar
@@ -224,11 +228,11 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
+                ) : filteredMovies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    {filteredMovies.map((movie) => (
                       <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
