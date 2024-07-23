@@ -42162,8 +42162,8 @@ const ProfileView = ({ user, movies, setUser, onAddToFavorites, onRemoveFromFavo
                             user.favoriteMovies && user.favoriteMovies.length > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMovies.FavoriteMovies), {
                                 movies: movies,
                                 user: user,
-                                onAddToFavorites: onAddToFavorites,
-                                onRemoveFromFavorites: onRemoveFromFavorites
+                                onAddToFavorites: handleAddToFavorites,
+                                onRemoveFromFavorites: handleRemoveFromFavorites
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
                                 lineNumber: 128,
@@ -42237,12 +42237,11 @@ const UpdateUser = ({ user, onUserUpdate })=>{
     const handleUpdate = (event)=>{
         event.preventDefault();
         const updatedUser = {
-            Name: username || user.username,
-            Password: password ? password : undefined,
-            Email: email || user.email,
-            Birthday: birthdate || user.birthdate
+            username: username || user.username,
+            password: password ? password : undefined,
+            email: email || user.email,
+            birthdate: birthdate || user.birthdate
         };
-        console.log("Updating user with payload:", updatedUser);
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "PUT",
             headers: {
@@ -42251,7 +42250,9 @@ const UpdateUser = ({ user, onUserUpdate })=>{
             },
             body: JSON.stringify(updatedUser)
         }).then((response)=>{
-            if (!response.ok) throw new Error("Failed to update user");
+            if (!response.ok) return response.json().then((error)=>{
+                throw new Error(error.errors.map((err)=>err.msg).join(", "));
+            });
             return response.json();
         }).then((data)=>{
             alert("User updated successfully!");
@@ -42368,7 +42369,8 @@ const UpdateUser = ({ user, onUserUpdate })=>{
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                     type: "date",
                                     value: birthdate,
-                                    onChange: (e)=>setBirthdate(e.target.value)
+                                    onChange: (e)=>setBirthdate(e.target.value),
+                                    required: true
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/update-user.jsx",
                                     lineNumber: 79,
@@ -42386,7 +42388,7 @@ const UpdateUser = ({ user, onUserUpdate })=>{
                             children: "Update"
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 85,
+                            lineNumber: 86,
                             columnNumber: 11
                         }, undefined)
                     ]

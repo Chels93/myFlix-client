@@ -11,13 +11,11 @@ const UpdateUser = ({ user, onUserUpdate }) => {
     const handleUpdate = (event) => {
         event.preventDefault();
         const updatedUser = {
-            Name: username || user.username, 
-            Password: password ? password: undefined,
-            Email: email || user.email,
-            Birthday: birthdate || user.birthdate,
+            username: username || user.username, 
+            password: password ? password: undefined,
+            email: email || user.email,
+            birthdate: birthdate || user.birthdate,
         };
-
-        console.log("Updating user with payload:", updatedUser);
 
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "PUT",
@@ -29,8 +27,10 @@ const UpdateUser = ({ user, onUserUpdate }) => {
         })
         .then((response) => {
             if (!response.ok) {
-                throw new Error("Failed to update user");
-            }
+                return response.json().then((error) => {
+                throw new Error(error.errors.map(err => err.msg).join(", "));
+            });
+        }
             return response.json();
         })
         .then((data) => {
@@ -80,6 +80,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="date"
               value={birthdate}
               onChange={(e) => setBirthdate(e.target.value)}
+              required
             />
           </Form.Group>
           <Button variant="primary" type="submit" >

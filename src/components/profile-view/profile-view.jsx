@@ -128,8 +128,8 @@ export const ProfileView = ({
               <FavoriteMovies
                 movies={movies}
                 user={user}
-                onAddToFavorites={onAddToFavorites}
-                onRemoveFromFavorites={onRemoveFromFavorites}
+                onAddToFavorites={handleAddToFavorites}
+                onRemoveFromFavorites={handleRemoveFromFavorites}
               />
             ) : (
               <Col>
