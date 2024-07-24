@@ -17,6 +17,7 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (!token) {
@@ -32,11 +33,11 @@ export const MainView = () => {
         return response.json();
       })
       .then((movies) => {
-        console.log("Movies fetched successfully: ", movies); // Log movies here
+        console.log("Movies fetched successfully: ", movies);
         setMovies(movies);
       })
       .catch((error) => {
-        console.error("Error fetching movies: ", error); // Log error here
+        console.error("Error fetching movies: ", error);
       });
   }, [token]);
 
@@ -136,6 +137,10 @@ export const MainView = () => {
     (movie) => !user.favoriteMovies.includes(movie._id)
   );
 
+  const searchFilteredMovies = filteredMovies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <BrowserRouter>
       <NavigationBar
@@ -197,6 +202,8 @@ export const MainView = () => {
                     <MovieView
                       movie={selectedMovie}
                       onBackClick={handleBackClick}
+                      onAddToFavorites={handleAddToFavorites}
+                      onRemoveFromFavorites={handleRemoveFromFavorites}
                     />
                   ) : (
                     <Navigate to="/" replace />
@@ -228,11 +235,20 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : filteredMovies.length === 0 ? (
+                ) : searchFilteredMovies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {filteredMovies.map((movie) => (
+                    <Col md={12} className="mb-4">
+                      <input
+                        type="text"
+                        placeholder="Search for a movie..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="form-control"
+                      />
+                    </Col>
+                    {searchFilteredMovies.map((movie) => (
                       <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
