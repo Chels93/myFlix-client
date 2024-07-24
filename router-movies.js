@@ -7,7 +7,8 @@ const Movies = Models.Movie;
 module.exports = (app) => {
     // Enables CORS for all routes or specifies origins as needed
     app.use(cors({
-        origin: "*"
+        origin: "http://localhost:1234",
+        credentials: true,
     }));    
   // Returns a JSON object of all movies to the user
   app.get(
