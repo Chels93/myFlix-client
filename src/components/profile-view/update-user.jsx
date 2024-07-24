@@ -14,8 +14,11 @@ const UpdateUser = ({ user, onUserUpdate }) => {
             username: username || user.username, 
             password: password || undefined,
             email: email || user.email,
-            birthdate: birthdate || user.birthdate,
         };
+
+        if (birthdate) {
+            updatedUser.birthdate = birthdate;
+        }
 
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "PUT",
@@ -81,7 +84,6 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="date"
               value={birthdate}
               onChange={(e) => setBirthdate(e.target.value)}
-              required
             />
           </Form.Group>
           <Button variant="primary" type="submit" >
