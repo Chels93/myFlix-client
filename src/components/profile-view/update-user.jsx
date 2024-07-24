@@ -10,11 +10,20 @@ const UpdateUser = ({ user, onUserUpdate }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
+
+        if (passwrod && (password.length < 8 || password.length > 20)) {
+            alert("Password must be between 8 and 20 characters");
+            return;
+        }
+
         const updatedUser = {
             username: username || user.username, 
-            password: password || undefined,
             email: email || user.email,
         };
+
+        if (password) {
+            updatedUser.password = password;
+        }
 
         if (birthdate) {
             updatedUser.birthdate = birthdate;
@@ -57,6 +66,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Leave blank if you don't want to change."
             />
           </Form.Group>
 
@@ -76,6 +86,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Leave blank if you don't want to change."
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBirthdate">
