@@ -31,6 +31,7 @@ export const SignupView = ({ onSignedUp }) => {
           },
         }
       );
+
       if (response.ok) {
         const userData = await response.json();
         alert("Signup successful");
@@ -70,6 +71,7 @@ export const SignupView = ({ onSignedUp }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          minLength="6"
         />
       </Form.Group>
 
@@ -86,7 +88,7 @@ export const SignupView = ({ onSignedUp }) => {
       <Form.Group controlId="formEmail">
         <Form.Label>Email:</Form.Label>
         <Form.Control
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
