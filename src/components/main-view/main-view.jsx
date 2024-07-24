@@ -18,6 +18,8 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
     if (!token) {
       return;
@@ -136,6 +138,10 @@ export const MainView = () => {
     (movie) => !user.favoriteMovies.includes(movie._id)
   );
 
+  const searchFilteredMovies = filteredMovies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <BrowserRouter>
       <NavigationBar
@@ -228,11 +234,20 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : filteredMovies.length === 0 ? (
+                ) : searchFilteredMovies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {filteredMovies.map((movie) => (
+                    <Col md={12} className="mb-4">
+                      <input
+                        type="text"
+                        placeholder="Search for a movie..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="form-control"
+                      />
+                    </Col>
+                    {searchFilteredMovies.map((movie) => (
                       <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
