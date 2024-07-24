@@ -17,7 +17,6 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -34,11 +33,11 @@ export const MainView = () => {
         return response.json();
       })
       .then((movies) => {
-        console.log("Movies fetched successfully: ", movies); // Log movies here
+        console.log("Movies fetched successfully: ", movies);
         setMovies(movies);
       })
       .catch((error) => {
-        console.error("Error fetching movies: ", error); // Log error here
+        console.error("Error fetching movies: ", error);
       });
   }, [token]);
 
@@ -203,6 +202,8 @@ export const MainView = () => {
                     <MovieView
                       movie={selectedMovie}
                       onBackClick={handleBackClick}
+                      onAddToFavorites={handleAddToFavorites}
+                      onRemoveFromFavorites={handleRemoveFromFavorites}
                     />
                   ) : (
                     <Navigate to="/" replace />
