@@ -10,7 +10,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { FavoriteMovies } from "../profile-view/favorite-movies";
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem("user"));
+  let storedUser = null;
   const storedToken = localStorage.getItem("token");
 
   const [user, setUser] = useState(storedUser || null);

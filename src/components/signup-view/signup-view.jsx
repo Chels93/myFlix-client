@@ -18,25 +18,35 @@ export const SignupView = ({ onSignedUp }) => {
       birthdate: birthdate,
     };
 
-    try { 
-        const response = await fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
+    console.log("Data being sent:", data);
+
+    try {
+      const response = await fetch(
+        "https://mymoviesdb-6c5720b5bef1.herokuapp.com/users",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
         const userData = await response.json();
         alert("Signup successful");
         onSignedUp(userData.user, userData.token);
       } else {
-        const errorData = await response.json();
-        alert(`Signup failed: ${errorData.message || response.statusText}`);
+        try {
+          const errorData = await response.json();
+          alert(`Signup failed: ${errorData.message || response.statusText}`);
+        } catch (error) {
+          const errorText = await response.text();
+          alert(`Signup failed: $(errorText)`);
+        }
       }
     } catch (error) {
-        console.error("Error during fetch:", error);
-        alert("Signup failed: Network or server error");
+      console.error("Error during fetch:", error);
+      alert("Signup failed: Network or server error");
     }
   };
 
