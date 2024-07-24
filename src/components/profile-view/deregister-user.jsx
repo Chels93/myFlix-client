@@ -26,7 +26,7 @@ export const DeregisterUser = ({ user, token }) => {
         return response.text();
       })
       .then((data) => {
-        alert("User deregistered successfully!" + data);
+        alert("User deregistered successfully! " + data);
        localStorage.removeItem("token");
        localStorage.removeItem("user");
        window.location.reload();

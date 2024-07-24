@@ -59,7 +59,7 @@ const MovieCard = ({
           variant={isFavorite ? "danger" : "outline-danger"}
           onClick={handleFavoriteClick}
         >
-          {isFavorite ? "Remove from Favoirtes" : "Add to Favorites"}
+          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
         </Button>
       </Card.Body>
     </Card>

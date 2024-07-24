@@ -27449,7 +27449,7 @@ const MovieCard = ({ movie, fav, onMovieClick, onAddToFavorites, onRemoveFromFav
                         className: "favorite-button",
                         variant: isFavorite ? "danger" : "outline-danger",
                         onClick: handleFavoriteClick,
-                        children: isFavorite ? "Remove from Favoirtes" : "Add to Favorites"
+                        children: isFavorite ? "Remove from Favorites" : "Add to Favorites"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
                         lineNumber: 57,
@@ -42657,7 +42657,7 @@ const DeregisterUser = ({ user, token })=>{
             });
             return response.text();
         }).then((data)=>{
-            alert("User deregistered successfully!" + data);
+            alert("User deregistered successfully! " + data);
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             window.location.reload();
