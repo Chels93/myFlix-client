@@ -42646,16 +42646,17 @@ const DeregisterUser = ({ user, token })=>{
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
             }
         }).then((response)=>{
-            if (!response.ok) {
-                console.error("Response text: ", responseText);
-                throw new Error("Failed to deregister user");
-            }
-            return responseText;
+            if (!response.ok) return response.text().then((text)=>{
+                console.error("Error response text: ", text);
+                throw new Error(text || "Failed to deregister user");
+            });
+            return response.text();
         }).then((data)=>{
-            alert("User deregistered successfully!", data);
+            alert("User deregistered successfully!" + data);
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             window.location.reload();
@@ -42670,12 +42671,12 @@ const DeregisterUser = ({ user, token })=>{
             children: "Deregister User"
         }, void 0, false, {
             fileName: "src/components/profile-view/deregister-user.jsx",
-            lineNumber: 39,
+            lineNumber: 42,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/profile-view/deregister-user.jsx",
-        lineNumber: 38,
+        lineNumber: 41,
         columnNumber: 5
     }, undefined);
 };

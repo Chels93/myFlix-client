@@ -12,18 +12,21 @@ export const DeregisterUser = ({ user, token }) => {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
         },
       }
     )
       .then((response) => {
         if (!response.ok) {
-            console.error("Response text: ", responseText);
-          throw new Error("Failed to deregister user");
+            return response.text().then((text) => {
+                console.error("Error response text: ", text);
+                throw new Error(text || "Failed to deregister user");
+            });
         }
-        return responseText;
+        return response.text();
       })
       .then((data) => {
-        alert("User deregistered successfully!", data);
+        alert("User deregistered successfully!" + data);
        localStorage.removeItem("token");
        localStorage.removeItem("user");
        window.location.reload();
