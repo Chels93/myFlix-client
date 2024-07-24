@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie }) => {
+export const MovieView = ({ movie, onAddToFavorites, onRemoveFromFavorites, isFavorite }) => {
   const navigate = useNavigate();
+  const [favorite, setFavorite] = useState(isFavorite);
+
   if (!movie) {
     return null;
   }
@@ -13,6 +15,16 @@ export const MovieView = ({ movie }) => {
   const handleBackClick = () => {
     navigate("/");
   };
+
+  const handleFavoriteClick = () => {
+    if (favorite) {
+        onRemoveFromFavorites(movie._id);
+        setFavorite(false);
+    } else {
+        onAddToFavorites(movie._id);
+        setFavorite(true);
+    }
+};
 
   return (
     <div>
@@ -71,6 +83,13 @@ export const MovieView = ({ movie }) => {
       >
         Back
       </Button>
+      <Button
+        onClick={handleFavoriteClick}
+        variant={favorite ? "danger" : "outline-danger"}
+        style={{ cursor: "pointer" }}
+        >
+        {favorite ? "Remove from Favorites" : "Add to Favorites"}
+      </Button>
     </div>
   );
 };
@@ -93,4 +112,7 @@ MovieView.propTypes = {
     }).isRequired,
   }).isRequired,
   onBackClick: PropTypes.func.isRequired,
+  onAddToFavorites: PropTypes.func.isRequired,
+  onRemoveFromFavorites: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
 };
