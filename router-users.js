@@ -87,7 +87,7 @@ module.exports = (app) => {
       check(
         "password",
         "Password must be between 8 and 20 characters"
-      ).isLength({ min: 8, max: 20 }),
+      ).optional().isLength({ min: 8, max: 20 }),
       check("email", "Email does not appear to be valid").isEmail(),
     ],
     async (req, res) => {
