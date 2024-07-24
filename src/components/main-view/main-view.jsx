@@ -7,9 +7,10 @@ import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { FavoriteMovies } from "../profile-view/favorite-movies";
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem("user"));
+  let storedUser = null;
   const storedToken = localStorage.getItem("token");
 
   const [user, setUser] = useState(storedUser || null);
@@ -24,7 +25,12 @@ export const MainView = () => {
     fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch movies.");
+        }
+        return response.json();
+      })
       .then((movies) => {
         console.log("Movies fetched successfully: ", movies); // Log movies here
         setMovies(movies);
@@ -34,48 +40,77 @@ export const MainView = () => {
       });
   }, [token]);
 
-  const handleMovieClick = (movie) => {
-    setSelectedMovie(movie);
-  };
-
   const handleBackClick = () => {
     setSelectedMovie(null);
   };
 
-  const handleAddToFavorites = (movieId, isFavoriteAlready) => {
-    const updatedMovies = movies.map((movie) =>
-      movie._id === movieId ? { ...movie, isFavorite: !isFavoriteAlready } : movie
-    );
-    console.log(`Adding movie ${movieId} to favorites`);
-
-    setMovies(updatedMovies);
-
-    const method = isFavoriteAlready ? "DELETE" : "POST";
-
+  const handleAddToFavorites = (movieId) => {
     fetch(
       `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
       {
-        method,
+        method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ movieId }),
       }
     )
       .then((response) => response.json())
-      .then(() => {
-        alert(`Toggle favorite success: The movie was ${isFavoriteAlready ? 'deleted' : 'added'} from the favorite list`);
-        setUser((prevUser) => ({
-          ...prevUser,
-          favoriteMovies: isFavoriteAlready
-            ? prevUser.favoriteMovies.filter((id) => id !== movieId)
-            : [...prevUser.favoriteMovies, movieId],
-        }));
+      .then((updatedUser) => {
+        alert("Movie added to Favorites!");
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        setMovies((prevMovies) =>
+          prevMovies.map((movie) =>
+            movie._id === movieId ? { ...movie, isFavorite: true } : movie
+          )
+        );
       })
       .catch((error) => {
-        console.error("Error toggling favorite: ", error);
+        console.error("Error adding to favorites: ", error);
       });
+  };
+
+  const handleRemoveFromFavorites = (movieId) => {
+    fetch(
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}/movies/${movieId}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to remove movie from favorites.");
+        }
+        return response.json();
+      })
+      .then((updatedUser) => {
+        console.log("Success: ", updatedUser);
+        alert("Movie was successfully removed from list.");
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        setMovies((prevMovies) =>
+          prevMovies.map((movie) =>
+            movie._id === movieId ? { ...movie, isFavorite: false } : movie
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Error removing from favorites: ", error);
+      });
+  };
+
+  const handleSignedUp = (newUser, newToken) => {
+    setUser(newUser);
+    setToken(newToken);
+    localStorage.setItem("user", JSON.stringify(newUser));
+    localStorage.setItem("token", newToken);
+  };
+
+  const updateUser = (user) => {
+    setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   if (!user) {
@@ -91,11 +126,15 @@ export const MainView = () => {
             }}
           />
           or
-          <SignupView />
+          <SignupView onSignedUp={handleSignedUp} />
         </Col>
       </Row>
     );
   }
+
+  const filteredMovies = movies.filter(
+    (movie) => !user.favoriteMovies.includes(movie._id)
+  );
 
   return (
     <BrowserRouter>
@@ -103,6 +142,9 @@ export const MainView = () => {
         user={user}
         onLoggedOut={() => {
           setUser(null);
+          setToken(null);
+          localStorage.removeItem("user");
+          localStorage.removeItem("token");
         }}
       />
       <Row className="justify-content-md-center">
@@ -115,7 +157,7 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <SignupView />
+                    <SignupView onSignedUp={handleSignedUp} />
                   </Col>
                 )}
               </>
@@ -129,7 +171,14 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                        localStorage.setItem("user", JSON.stringify(user));
+                        localStorage.setItem("token", token);
+                      }}
+                    />
                   </Col>
                 )}
               </>
@@ -156,6 +205,22 @@ export const MainView = () => {
               )
             }
           />
+          <Route
+            path="/favorites"
+            element={
+              !user ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <FavoriteMovies
+                  movies={movies}
+                  user={user}
+                  onAddToFavorites={handleAddToFavorites}
+                  onRemoveFromFavorites={handleRemoveFromFavorites}
+                  onMovieClick={(movie) => setSelectedMovie(movie)}
+                />
+              )
+            }
+          />
 
           <Route
             path="/"
@@ -163,18 +228,22 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
+                ) : filteredMovies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    {filteredMovies.map((movie) => (
                       <Col className="mb-5" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
-                          onMovieClick={handleMovieClick}
-                          onAddToFavorites={handleAddToFavorites}
-                          user={user}
-                          token={token}
+                          fav={(user.FavoriteMovies || []).includes(movie._id)}
+                          onAddToFavorites={() =>
+                            handleAddToFavorites(movie._id)
+                          }
+                          onRemoveFromFavorites={() =>
+                            handleRemoveFromFavorites(movie._id)
+                          }
+                          onMovieClick={() => setSelectedMovie(movie)}
                         />
                       </Col>
                     ))}
@@ -193,7 +262,8 @@ export const MainView = () => {
                 <ProfileView
                   user={user}
                   movies={movies}
-                  onUserUpdate={(updatedUser) => setUser(updatedUser)}
+                  setUser={updateUser}
+                  onRemoveFromFavorites={handleRemoveFromFavorites}
                 />
               )
             }

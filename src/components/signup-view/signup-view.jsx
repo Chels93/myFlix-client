@@ -2,13 +2,13 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export const SignupView = () => {
+export const SignupView = ({ onSignedUp }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthdate, setBirthdate] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
@@ -18,20 +18,37 @@ export const SignupView = () => {
       birthdate: birthdate,
     };
 
-    fetch("https://mymoviesdb-6c5720b5bef1.herokuapp.com/users", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
+    console.log("Data being sent:", data);
+
+    try {
+      const response = await fetch(
+        "https://mymoviesdb-6c5720b5bef1.herokuapp.com/users",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       if (response.ok) {
+        const userData = await response.json();
         alert("Signup successful");
-        // window.location.reload();
+        onSignedUp(userData.user, userData.token);
       } else {
-        alert("Signup failed");
+        try {
+          const errorData = await response.json();
+          alert(`Signup failed: ${errorData.message || response.statusText}`);
+        } catch (error) {
+          const errorText = await response.text();
+          alert(`Signup failed: $(errorText)`);
+        }
       }
-    });
+    } catch (error) {
+      console.error("Error during fetch:", error);
+      alert("Signup failed: Network or server error");
+    }
   };
 
   return (
@@ -54,6 +71,7 @@ export const SignupView = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          minLength="6"
         />
       </Form.Group>
 
@@ -70,7 +88,7 @@ export const SignupView = () => {
       <Form.Group controlId="formEmail">
         <Form.Label>Email:</Form.Label>
         <Form.Control
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

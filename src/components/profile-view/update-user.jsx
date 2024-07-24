@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 
-const UpdateUser = ({ user }) => {
-    const [username, setUsername] = useState(user.username);
-    const [password, setPassword] = useState(user.password);
-    const [email, setEmail] = useState(user.email);
-    const [birthdate, setBirthdate] = useState(user.birthdate);
+const UpdateUser = ({ user, onUserUpdate }) => {
+    const [username, setUsername] = useState(user.username || "");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState(user.email || "");
+    const [birthdate, setBirthdate] = useState(user.birthdate || "");
     const token = localStorage.getItem("token");
 
     const handleUpdate = (event) => {
         event.preventDefault();
+
+        if (password && (password.length < 8 || password.length > 20)) {
+            alert("Password must be between 8 and 20 characters");
+            return;
+        }
+
         const updatedUser = {
-            Name: username, 
-            Password: password,
-            Email: email,
-            Birthday: birthdate,
+            username: username || user.username, 
+            email: email || user.email,
         };
+
+        if (password) {
+            updatedUser.password = password;
+        }
+
+        if (birthdate) {
+            updatedUser.birthdate = birthdate;
+        }
 
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "PUT",
@@ -27,8 +39,10 @@ const UpdateUser = ({ user }) => {
         })
         .then((response) => {
             if (!response.ok) {
-                throw new Error("Failed to update user");
-            }
+                return response.json().then((error) => {
+                throw new Error(error.errors.map(err => err.msg).join(", "));
+            });
+        }
             return response.json();
         })
         .then((data) => {
@@ -52,6 +66,7 @@ const UpdateUser = ({ user }) => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Leave blank if you don't want to change."
             />
           </Form.Group>
 
@@ -61,6 +76,7 @@ const UpdateUser = ({ user }) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Leave blank if you don't want to change."
             />
           </Form.Group>
 
@@ -70,6 +86,7 @@ const UpdateUser = ({ user }) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Leave blank if you don't want to change."
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBirthdate">
