@@ -11,7 +11,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
     const handleUpdate = (event) => {
         event.preventDefault();
 
-        if (passwrod && (password.length < 8 || password.length > 20)) {
+        if (password && (password.length < 8 || password.length > 20)) {
             alert("Password must be between 8 and 20 characters");
             return;
         }
