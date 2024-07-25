@@ -27,6 +27,8 @@ const UpdateUser = ({ user, onUserUpdate }) => {
             updatedUser.password = password;
         }
 
+        console.log("Updating user with:", updatedUser);
+
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "PUT",
             headers: {
@@ -36,6 +38,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
             body: JSON.stringify(updatedUser),
         })
         .then((response) => {
+            console.log("Response status:", response.status);
             if (!response.ok) {
                 return response.json().then((error) => {
                 throw new Error(error.errors.map(err => err.msg).join(", "));
@@ -95,7 +98,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               onChange={(e) => setBirthdate(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" type="submit" >
+          <Button variant="primary" type="submit" onClick={handleUpdate}>
             Update
           </Button>
         </Form>
