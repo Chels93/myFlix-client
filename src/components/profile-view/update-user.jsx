@@ -10,7 +10,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        console.log("Updated button clicked)");
+        console.log("Updated button clicked");
 
         if (password && (password.length < 8 || password.length > 20)) {
             alert("Password must be between 8 and 20 characters");
@@ -20,14 +20,11 @@ const UpdateUser = ({ user, onUserUpdate }) => {
         const updatedUser = {
             username: username || user.username, 
             email: email || user.email,
+            birthdate: birthdate || user.birthdate
         };
 
         if (password) {
             updatedUser.password = password;
-        }
-
-        if (birthdate) {
-            updatedUser.birthdate = birthdate;
         }
 
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
