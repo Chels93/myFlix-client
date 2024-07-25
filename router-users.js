@@ -36,7 +36,10 @@ module.exports = (app) => {
     "/users",
     [
       check("username", "Username is required").isLength({ min: 5 }),
-      check("username", "Username contains non alpanumeric characters - not allowed.").isAlphanumeric(),
+      check(
+        "username",
+        "Username contains non alpanumeric characters - not allowed."
+      ).isAlphanumeric(),
       check("password", "Password is required").not().isEmpty(),
       check("email", "Email does not appear to be valid").isEmail(),
     ],
@@ -84,43 +87,39 @@ module.exports = (app) => {
         "username",
         "Username contains non-alpanumeric characters - not allowed."
       ).isAlphanumeric(),
-      check(
-        "password",
-        "Password must be between 8 and 20 characters"
-      ).optional().isLength({ min: 8, max: 20 }),
+      check("password", "Password must be between 8 and 20 characters")
+        .optional()
+        .isLength({ min: 8, max: 20 }),
       check("email", "Email does not appear to be valid").isEmail(),
     ],
     async (req, res) => {
-      let errors = validationResult(req);
+      const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
       }
 
-      let hashedPassword;
-      if (req.body.password) {
-        hashedPassword = Users.hashPassword(req.body.password);
+      try {
+        const updateData = {};
+        if (req.body.username) updateData.username = req.body.username;
+        if (req.body.password)
+          updateData.password = Users.hashPassword(req.body.password);
+        if (req.body.email) updateData.email = req.body.email;
+        if (req.body.birthdate) updateData.birthdate = req.body.birthdate;
 
-        try {
-          const updatedUser = await Users.findOneAndUpdate(
-            { username: req.params.username },
-            {
-              username: req.body.username,
-              password: hashedPassword,
-              email: req.body.email,
-              birthdate: req.body.birthdate,
-            },
-            { new: true }
-          );
+        const updatedUser = await Users.findOneAndUpdate(
+          { username: req.params.username },
+          updateData,
+          { new: true }
+        );
 
-          if (!updatedUser) {
-            return res.status(404).send("User not found.");
-          }
-
-          res.status(200).json(updatedUser);
-        } catch (error) {
-          console.error(error);
-          res.status(500).send("Error: " + error);
+        if (!updatedUser) {
+          return res.status(404).send("User not found.");
         }
+
+        res.status(200).json(updatedUser);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Error: " + error);
       }
     }
   );
