@@ -11,7 +11,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: ["http://localhost:1234", "https://mymoviesdb-6c5720b5bef1.herokuapp.com"],
+    origin: "*",
     credentials: true,
   })
 );
