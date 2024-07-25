@@ -10,7 +10,7 @@ module.exports = (app) => {
   // Enable CORS for all routes or specifies origins
   app.use(
     cors({
-      origin: "*",
+      origin: "http://localhost:1234",
       credentials: true,
     })
   );
