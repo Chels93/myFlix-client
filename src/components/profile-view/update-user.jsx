@@ -10,6 +10,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
+        console.log("Updated button clicked");
 
         if (password && (password.length < 8 || password.length > 20)) {
             alert("Password must be between 8 and 20 characters");
@@ -19,15 +20,14 @@ const UpdateUser = ({ user, onUserUpdate }) => {
         const updatedUser = {
             username: username || user.username, 
             email: email || user.email,
+            birthdate: birthdate || user.birthdate
         };
 
         if (password) {
             updatedUser.password = password;
         }
 
-        if (birthdate) {
-            updatedUser.birthdate = birthdate;
-        }
+        console.log("Updating user with:", updatedUser);
 
         fetch(`https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`, {
             method: "PUT",
@@ -38,6 +38,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
             body: JSON.stringify(updatedUser),
         })
         .then((response) => {
+            console.log("Response status:", response.status);
             if (!response.ok) {
                 return response.json().then((error) => {
                 throw new Error(error.errors.map(err => err.msg).join(", "));
@@ -97,7 +98,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               onChange={(e) => setBirthdate(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" type="submit" >
+          <Button variant="primary" type="submit" onClick={handleUpdate}>
             Update
           </Button>
         </Form>
