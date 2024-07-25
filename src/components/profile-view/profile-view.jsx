@@ -16,8 +16,40 @@ export const ProfileView = ({
   const token = localStorage.getItem("token");
 
   const handleUpdate = (updatedUser) => {
-    setUser(updatedUser);
-    console.log("Updated User: ", updatedUser);
+    const token = localStorage.getItem("token");
+
+    fetch(
+      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedUser),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((error) => {
+            throw new Error(
+              error.errors
+                ? error.errors.map((err) => err.msg).joing(", ")
+                : "Failed to update user"
+            );
+          });
+        }
+        return response.json();
+      })
+      .then((data) => {
+        alert("User updated successfully!");
+        setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
+      })
+      .catch((error) => {
+        console.error("Error updating user: ", error);
+        alert("Failed to update user. Please try again.");
+      });
   };
 
   const handleDeregisterUser = () =>
@@ -114,10 +146,7 @@ export const ProfileView = ({
             <UpdateUser user={user} onUserUpdate={handleUpdate} />
           </div>
           <div>
-            <DeregisterUser
-              user={user}
-              token={token}
-            />
+            <DeregisterUser user={user} token={token} />
           </div>
         </Col>
         <Col xs={12} sm={6}>
