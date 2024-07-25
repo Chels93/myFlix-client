@@ -10,7 +10,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { FavoriteMovies } from "../profile-view/favorite-movies";
 
 export const MainView = () => {
-  let storedUser = JSON.parse(localStorage.getItem("user"));
+  let storedUser = null;
   const storedToken = localStorage.getItem("token");
 
   const [user, setUser] = useState(storedUser || null);
@@ -204,6 +204,7 @@ export const MainView = () => {
                       onBackClick={handleBackClick}
                       onAddToFavorites={handleAddToFavorites}
                       onRemoveFromFavorites={handleRemoveFromFavorites}
+                      isFavorite={user.favoriteMovies.includes(selectedMovie._id)}
                     />
                   ) : (
                     <Navigate to="/" replace />
