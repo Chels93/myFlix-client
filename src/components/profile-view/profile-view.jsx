@@ -23,8 +23,8 @@ export const ProfileView = ({
       {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedUser),
       }
@@ -33,18 +33,13 @@ export const ProfileView = ({
         if (!response.ok) {
           return response.json().then((error) => {
             throw new Error(
-              error.errors
-                ? error.errors.map((err) => err.msg).joing(", ")
-                : "Failed to update user"
-            );
+              errorData.errors.map((error) => error.msg).join(", "));
           });
         }
         return response.json();
       })
-      .then((data) => {
-        alert("User updated successfully!");
-        setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));
+      .then((userData) => {
+        handleUpdate(userData);
       })
       .catch((error) => {
         console.error("Error updating user: ", error);
