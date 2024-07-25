@@ -105,7 +105,7 @@ module.exports = (app) => {
             { username: req.params.username },
             {
               username: req.body.username,
-              passwrod: hashedPassword,
+              password: hashedPassword,
               email: req.body.email,
               birthdate: req.body.birthdate,
             },
