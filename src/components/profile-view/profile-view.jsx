@@ -16,35 +16,8 @@ export const ProfileView = ({
   const token = localStorage.getItem("token");
 
   const handleUpdate = (updatedUser) => {
-    fetch(
-      `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedUser),
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((error) => {
-            throw new Error(
-              error.errors ? error.errors.map((e) => e.msg).join(", ") : "UNKNOWN ERROR OCCURRED."
-          );
-        });
-    }
-        return response.json();
-      })
-      .then((userData) => {
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
-      })
-      .catch((error) => {
-        console.error("Error updating user: ", error);
-        alert("Failed to update user. Please try again.");
-      });
+    setUser(updatedUser);
+    console.log("Updated User: ", updatedUser);
   };
 
   const handleDeregisterUser = () =>

@@ -10,13 +10,6 @@ const UpdateUser = ({ user, onUserUpdate }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        console.log("Updated button clicked");
-
-        if (password && (password.length < 8 || password.length > 20)) {
-            alert("Password must be between 8 and 20 characters");
-            return;
-        }
-
         const updatedUser = {
             username: username || user.username, 
             email: email || user.email,
@@ -40,13 +33,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
         .then((response) => {
             console.log("Response status:", response.status);
             if (!response.ok) {
-                return response.json().then((error) => {
-                    if (error.errors) {
-                        throw new Error(error.errors.map(err => err.msg).join(", "));
-                    } else {
-                        throw new Error("Unknown error occurred.");
-                    }
-            });
+                throw new Error("Failed to update user.");
         }
             return response.json();
         })
