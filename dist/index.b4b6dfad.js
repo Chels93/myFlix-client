@@ -27229,7 +27229,10 @@ const MainView = ()=>{
                                 },
                                 children: selectedMovie ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                                     movie: selectedMovie,
-                                    onBackClick: handleBackClick
+                                    onBackClick: handleBackClick,
+                                    onAddToFavorites: handleAddToFavorites,
+                                    onRemoveFromFavorites: handleRemoveFromFavorites,
+                                    isFavorit: user.favoriteMovies.includes(selectedMovie._id)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
                                     lineNumber: 203,
@@ -27239,7 +27242,7 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 208,
+                                    lineNumber: 211,
                                     columnNumber: 21
                                 }, void 0)
                             }, void 0, false, {
@@ -27259,7 +27262,7 @@ const MainView = ()=>{
                                 replace: true
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 218,
+                                lineNumber: 221,
                                 columnNumber: 17
                             }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMovies.FavoriteMovies), {
                                 movies: movies,
@@ -27269,12 +27272,12 @@ const MainView = ()=>{
                                 onMovieClick: (movie)=>setSelectedMovie(movie)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 220,
+                                lineNumber: 223,
                                 columnNumber: 17
                             }, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 214,
+                            lineNumber: 217,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27285,13 +27288,13 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 236,
+                                    lineNumber: 239,
                                     columnNumber: 19
                                 }, void 0) : searchFilteredMovies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                     children: "The list is empty!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 238,
+                                    lineNumber: 241,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: [
@@ -27306,12 +27309,12 @@ const MainView = ()=>{
                                                 className: "form-control"
                                             }, void 0, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
-                                                lineNumber: 242,
+                                                lineNumber: 245,
                                                 columnNumber: 23
                                             }, void 0)
                                         }, void 0, false, {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 241,
+                                            lineNumber: 244,
                                             columnNumber: 21
                                         }, void 0),
                                         searchFilteredMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -27325,12 +27328,12 @@ const MainView = ()=>{
                                                     onMovieClick: ()=>setSelectedMovie(movie)
                                                 }, void 0, false, {
                                                     fileName: "src/components/main-view/main-view.jsx",
-                                                    lineNumber: 252,
+                                                    lineNumber: 255,
                                                     columnNumber: 25
                                                 }, void 0)
                                             }, movie._id, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
-                                                lineNumber: 251,
+                                                lineNumber: 254,
                                                 columnNumber: 23
                                             }, void 0))
                                     ]
@@ -27338,7 +27341,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 231,
+                            lineNumber: 234,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27348,7 +27351,7 @@ const MainView = ()=>{
                                 replace: true
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 275,
+                                lineNumber: 278,
                                 columnNumber: 17
                             }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
                                 user: user,
@@ -27357,12 +27360,12 @@ const MainView = ()=>{
                                 onRemoveFromFavorites: handleRemoveFromFavorites
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 277,
+                                lineNumber: 280,
                                 columnNumber: 17
                             }, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 271,
+                            lineNumber: 274,
                             columnNumber: 11
                         }, undefined)
                     ]

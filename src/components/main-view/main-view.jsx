@@ -203,6 +203,9 @@ export const MainView = () => {
                     <MovieView
                       movie={selectedMovie}
                       onBackClick={handleBackClick}
+                      onAddToFavorites={handleAddToFavorites}
+                      onRemoveFromFavorites={handleRemoveFromFavorites}
+                      isFavorit={user.favoriteMovies.includes(selectedMovie._id)}
                     />
                   ) : (
                     <Navigate to="/" replace />
