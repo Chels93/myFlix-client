@@ -10,13 +10,14 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { FavoriteMovies } from "../profile-view/favorite-movies";
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem("user"));
+  let storedUser = null;
   const storedToken = localStorage.getItem("token");
 
   const [user, setUser] = useState(storedUser || null);
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -33,11 +34,11 @@ export const MainView = () => {
         return response.json();
       })
       .then((movies) => {
-        console.log("Movies fetched successfully: ", movies);
+        console.log("Movies fetched successfully: ", movies); // Log movies here
         setMovies(movies);
       })
       .catch((error) => {
-        console.error("Error fetching movies: ", error);
+        console.error("Error fetching movies: ", error); // Log error here
       });
   }, [token]);
 
@@ -202,9 +203,6 @@ export const MainView = () => {
                     <MovieView
                       movie={selectedMovie}
                       onBackClick={handleBackClick}
-                      onAddToFavorites={handleAddToFavorites}
-                      onRemoveFromFavorites={handleRemoveFromFavorites}
-                      isFavorite={user.favoriteMovies.includes(selectedMovie._id)}
                     />
                   ) : (
                     <Navigate to="/" replace />
