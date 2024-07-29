@@ -41,7 +41,11 @@ const UpdateUser = ({ user, onUserUpdate }) => {
             console.log("Response status:", response.status);
             if (!response.ok) {
                 return response.json().then((error) => {
-                throw new Error(error.errors.map(err => err.msg).join(", "));
+                    if (error.errors) {
+                        throw new Error(error.errors.map(err => err.msg).join(", "));
+                    } else {
+                        throw new Error("Unknown error occurred.");
+                    }
             });
         }
             return response.json();
@@ -52,7 +56,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
         })
         .catch((error) => {
             console.error("Error updating user: ", error);
-            alert("Failed to update user. Please try again.");
+            alert(`Failed to update user: ${error.message}`);
         });
     };
 
@@ -98,7 +102,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               onChange={(e) => setBirthdate(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={handleUpdate}>
+          <Button variant="primary" type="submit" >
             Update
           </Button>
         </Form>

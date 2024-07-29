@@ -16,8 +16,6 @@ export const ProfileView = ({
   const token = localStorage.getItem("token");
 
   const handleUpdate = (updatedUser) => {
-    const token = localStorage.getItem("token");
-
     fetch(
       `https://mymoviesdb-6c5720b5bef1.herokuapp.com/users/${user.username}`,
       {
@@ -33,13 +31,15 @@ export const ProfileView = ({
         if (!response.ok) {
           return response.json().then((error) => {
             throw new Error(
-              errorData.errors.map((error) => error.msg).join(", "));
-          });
-        }
+              error.errors ? error.errors.map((e) => e.msg).join(", ") : "UNKNOWN ERROR OCCURRED."
+          );
+        });
+    }
         return response.json();
       })
       .then((userData) => {
-        handleUpdate(userData);
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
       })
       .catch((error) => {
         console.error("Error updating user: ", error);
