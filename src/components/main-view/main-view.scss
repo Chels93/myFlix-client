@@ -1,0 +1,52 @@
+// Define colors and common variables
+$primary-color: #118ab2; // Primary button color
+$input-border-color: #ffd166; // Border color for inputs
+$input-focus-border-color: #007bff; // Border color for inputs on focus
+$form-background-color: #f8f9fa; // Background color for the form
+$form-padding: 20px; // Padding for the form
+$form-border-radius: 8px; // Border radius for the form
+$form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Box shadow for the form
+$form-outline-color: #ffd166; // Outline color for the form
+
+// Search input style
+.search-input {
+  border: 2px solid $input-border-color; // Border color for search input
+  border-radius: 4px;
+  padding: 2rem;
+  transition: border-color 0.3s ease; // Smooth transition for border color
+
+  &:focus {
+    border-color: $input-focus-border-color; // Border color on focus
+  }
+}
+
+// MovieCard styles
+.movie-card {
+  border: 2px solid $primary-color; // Border color for movie cards
+  border-radius: 8px; // Rounded corners
+  padding: 1rem; // Padding inside the card
+  transition: border-color 0.3s ease; // Smooth transition for border color
+
+  &:hover {
+    border-color: darken($primary-color, 10%); // Change border color on hover
+  }
+}
+
+// Responsive styles
+@media (min-width: 576px) {
+  .form-container {
+    padding: 30px; // Increase padding on larger screens
+  }
+
+  .submit-button {
+    padding: 0.75rem 1.5rem; // Increase button padding on larger screens
+  }
+
+  .search-input {
+    padding: 0.75rem; // Increase padding on larger screens
+  }
+
+  .movie-card {
+    padding: 1.5rem; // Increase padding inside the card on larger screens
+  }
+}

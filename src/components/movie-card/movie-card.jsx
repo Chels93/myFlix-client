@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./movie-card.scss";
 
 const MovieCard = ({
   movie,

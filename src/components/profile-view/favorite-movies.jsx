@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import MovieCard from "../movie-card/movie-card";
+import "./profile-view.scss"
 
 export const FavoriteMovies = ({
   movies,

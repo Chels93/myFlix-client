@@ -3,7 +3,6 @@ import { Row, Col } from "react-bootstrap";
 import MovieCard from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
-import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -34,11 +33,11 @@ export const MainView = () => {
         return response.json();
       })
       .then((movies) => {
-        console.log("Movies fetched successfully: ", movies); // Log movies here
+        console.log("Movies fetched successfully: ", movies); 
         setMovies(movies);
       })
       .catch((error) => {
-        console.error("Error fetching movies: ", error); // Log error here
+        console.error("Error fetching movies: ", error); 
       });
   }, [token]);
 
@@ -103,13 +102,6 @@ export const MainView = () => {
       });
   };
 
-  const handleSignedUp = (newUser, newToken) => {
-    setUser(newUser);
-    setToken(newToken);
-    localStorage.setItem("user", JSON.stringify(newUser));
-    localStorage.setItem("token", newToken);
-  };
-
   const updateUser = (user) => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
@@ -127,8 +119,6 @@ export const MainView = () => {
               localStorage.setItem("token", token);
             }}
           />
-          or
-          <SignupView onSignedUp={handleSignedUp} />
         </Col>
       </Row>
     );
@@ -155,20 +145,6 @@ export const MainView = () => {
       />
       <Row className="justify-content-md-center">
         <Routes>
-          <Route
-            path="/signup"
-            element={
-              <>
-                {user ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Col md={5}>
-                    <SignupView onSignedUp={handleSignedUp} />
-                  </Col>
-                )}
-              </>
-            }
-          />
           <Route
             path="/login"
             element={
@@ -205,7 +181,9 @@ export const MainView = () => {
                       onBackClick={handleBackClick}
                       onAddToFavorites={handleAddToFavorites}
                       onRemoveFromFavorites={handleRemoveFromFavorites}
-                      isFavorit={user.favoriteMovies.includes(selectedMovie._id)}
+                      isFavorit={user.favoriteMovies.includes(
+                        selectedMovie._id
+                      )}
                     />
                   ) : (
                     <Navigate to="/" replace />
@@ -247,24 +225,31 @@ export const MainView = () => {
                         placeholder="Search for a movie..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="form-control"
+                        className="search-input"
                       />
                     </Col>
-                    {searchFilteredMovies.map((movie) => (
-                      <Col className="mb-5" key={movie._id} md={3}>
-                        <MovieCard
-                          movie={movie}
-                          fav={(user.FavoriteMovies || []).includes(movie._id)}
-                          onAddToFavorites={() =>
-                            handleAddToFavorites(movie._id)
-                          }
-                          onRemoveFromFavorites={() =>
-                            handleRemoveFromFavorites(movie._id)
-                          }
-                          onMovieClick={() => setSelectedMovie(movie)}
-                        />
-                      </Col>
-                    ))}
+                    {searchFilteredMovies.length === 0 ? (
+                      <Col>No matching movis found. Try another search.</Col>
+                    ) : (
+                      searchFilteredMovies.map((movie) => (
+                        <Col className="mb-5" key={movie._id} md={3}>
+                          <MovieCard
+                            className="movie-card"
+                            movie={movie}
+                            fav={(user.FavoriteMovies || []).includes(
+                              movie._id
+                            )}
+                            onAddToFavorites={() =>
+                              handleAddToFavorites(movie._id)
+                            }
+                            onRemoveFromFavorites={() =>
+                              handleRemoveFromFavorites(movie._id)
+                            }
+                            onMovieClick={() => setSelectedMovie(movie)}
+                          />
+                        </Col>
+                      ))
+                    )}
                   </>
                 )}
               </>

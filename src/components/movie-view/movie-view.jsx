@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import "./movie-view.scss";
 
 export const MovieView = ({ movie, onAddToFavorites, onRemoveFromFavorites, isFavorite }) => {
   const navigate = useNavigate();
@@ -41,52 +40,50 @@ export const MovieView = ({ movie, onAddToFavorites, onRemoveFromFavorites, isFa
         />
       </div>
       <div>
-        <span>Title: </span>
+        <span className="movie-title">Title: </span>
         <span>{movie.title}</span>
       </div>
       <div>
-        <span>Synopsis: </span>
+        <span ckassName="movie-title">Synopsis: </span>
         <span>{movie.synopsis}</span>
       </div>
       <div>
-        <span>Release Year: </span>
+        <span className="movie-title">Release Year: </span>
         <span>{movie.year}</span>
       </div>
       <div>
-        <span>Genre: </span>
+        <span className="movie-title">Genre: </span>
         <span>{movie.genre.name}</span>
       </div>
       <div>
-        <span>Genre Description: </span>
+        <span className="movie-title">Genre Description: </span>
         <span>{movie.genre.description}</span>
       </div>
       <div>
-        <span>Director: </span>
+        <span className="movie-title">Director: </span>
         <span>{movie.director.name}</span>
       </div>
       <div>
-        <span>Director Bio: </span>
+        <span className="movie-title">Director Bio: </span>
         <span>{movie.director.bio}</span>
       </div>
       <div>
-        <span>Director Birthyear: </span>
+        <span className="movie-title">Director Birthyear: </span>
         <span>{movie.director.birthYear}</span>
       </div>
       <div>
-        <span>Director Deathyear: </span>
+        <span className="movie-title">Director Deathyear: </span>
         <span>{movie.director.deathYear}</span>
       </div>
       <Button
         onClick={handleBackClick}
         className="back-button"
-        style={{ cursor: "pointer" }}
       >
         Back
       </Button>
       <Button
         onClick={handleFavoriteClick}
-        variant={favorite ? "danger" : "outline-danger"}
-        style={{ cursor: "pointer" }}
+        className={`favorites-button ${favorite ? 'favorited' : ''}`}
         >
         {favorite ? "Remove from Favorites" : "Add to Favorites"}
       </Button>

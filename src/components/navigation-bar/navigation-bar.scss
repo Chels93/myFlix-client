@@ -1,0 +1,83 @@
+// Define colors and common variables
+$navbar-bg-color: #f8f9fa; // Light background color
+$brand-color: #118ab2; // Dark color for the brand
+$link-color: #118ab2; // Primary link color
+$link-hover-color: darken($link-color, 10%); // Darker shade for hover
+$link-active-color: #0056b3; // Active link color
+$dropdown-bg-color: #ffffff; // Background color for the dropdown
+$border-color: #ffd166; // Border color
+$home-link-color: #ffd166;
+$profile-link-color: #ffd166;
+
+// Navbar styles
+.navbar {
+  background-color: $navbar-bg-color;
+
+  .navbar-brand {
+    color: $brand-color;
+    font-size: 3rem;
+    font-weight: bold;
+    text-decoration: #ffd166 underline;
+  }
+
+  .navbar-toggler {
+    border-color: $border-color;
+    &:hover{
+        color: darken($border-color, 20%);
+    }
+  }
+
+  .navbar-collapse {
+    border-top: 1px solid $border-color;
+
+    .nav {
+      .nav-link {
+        color: $link-color;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+
+        &:hover,
+        &:focus {
+          color: $link-hover-color;
+        }
+
+        &.active {
+          color: $link-active-color;
+        }
+      }
+
+      .nav-home {
+        color: $home-link-color;
+        &:hover {
+            color: darken($home-link-color, 20%);
+        }
+      }
+      
+      .nav-profile {
+        color: $profile-link-color;
+        &:hover {
+            color: darken($profile-link-color, 20%);
+        }
+      }
+
+      .nav-link.logout {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (min-width: 992px) {
+  .navbar {
+    .navbar-collapse {
+      border-top: none;
+
+      .nav {
+        .nav-link {
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
+}

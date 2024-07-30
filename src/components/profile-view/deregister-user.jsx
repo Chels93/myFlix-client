@@ -1,4 +1,5 @@
 import React from "react";
+import "./profile-view.scss";
 
 export const DeregisterUser = ({ user, token }) => {
   const handleDeregisterClick = () => {

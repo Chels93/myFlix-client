@@ -1,0 +1,80 @@
+// Define colors and common variables
+$primary-color: #118ab2; // Updated primary button color
+$input-border-color: #ffd166; // Updated border color for inputs
+$input-focus-border-color: #007bff; // Border color for inputs on focus
+$form-background-color: #f8f9fa; // Background color for the form
+$form-padding: 20px; // Padding for the form
+$form-border-radius: 8px; // Border radius for the form
+$form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Box shadow for the form
+$form-outline-color: #ffd166; // Outline color for the form
+
+// Form container
+.form-container {
+  background-color: $form-background-color;
+  padding: $form-padding;
+  border-radius: $form-border-radius;
+  box-shadow: $form-box-shadow;
+  border: 2px solid $form-outline-color; // Outline the form container
+  max-width: 400px; // Maximum width for the form container
+  margin: 0 auto; // Center align the form container
+  position: absolute; // Absolute positioning to center horizontally and vertically
+  top: 50%; // Center vertically
+  left: 50%; // Center horizontally
+  transform: translate(-50%, -50%); // Center the form container
+}
+
+// Form styles
+form {
+  display: flex;
+  flex-direction: column;
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    .form-label {
+      font-weight: bold;
+      color: #333; // Dark color for labels
+    }
+
+    .form-control {
+      border: 1px solid $input-border-color; // Updated border color
+      border-radius: 4px;
+      padding: 0.5rem;
+      transition: border-color 0.3s ease; // Smooth transition for border color
+
+      &:focus {
+        border-color: $input-focus-border-color; // Border color on focus
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); // Blue glow effect on focus
+      }
+    }
+  }
+
+  .submit-button {
+    margin-top: 1rem; // Space between form inputs and the submit button
+    background-color: $primary-color;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease; // Smooth transition for background color
+
+    &:hover {
+      background-color: darken($primary-color, 10%); // Darker shade on hover
+    }
+  }
+
+  .toggle-button {
+    margin-top: 1rem; // Space between the submit button and the toggle button
+    // Customize toggle button styles as needed
+  }
+}
+
+// Responsive styles
+@media (min-width: 576px) {
+  .form-container {
+    padding: 30px; // Increase padding on larger screens
+  }
+
+  .submit-button {
+    padding: 0.75rem 1.5rem; // Increase button padding on larger screens
+  }
+}
