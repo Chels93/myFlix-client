@@ -1,14 +1,27 @@
+.login-container {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+}
+
+.login-container .navbar-brand {
+  color: #118ab2;
+  margin-bottom: 1rem;
+  font-size: 3rem;
+  font-weight: bold;
+  text-decoration: underline #ffd166;
+}
+
 .form-container {
   background-color: #f8f9fa;
   border: 2px solid #ffd166;
   border-radius: 8px;
+  width: 100%;
   max-width: 400px;
-  margin: 0 auto;
   padding: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   box-shadow: 0 4px 8px #0000001a;
 }
 

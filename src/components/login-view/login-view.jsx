@@ -60,63 +60,68 @@ export const LoginView = ({ onLoggedIn, onSignedUp }) => {
   };
 
   return (
-    <div className="form-container">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            minLength="3"
-          />
-        </Form.Group>
+    <div className="login-container">
+      <div className="navbar-brand">
+        CineVault
+      </div>
+      <div className="form-container">
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              minLength="3"
+            />
+          </Form.Group>
 
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={isLogin ? "6" : undefined}
-          />
-        </Form.Group>
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={isLogin ? "6" : undefined}
+            />
+          </Form.Group>
 
-        {!isLogin && (
-          <>
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email:</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </Form.Group>
+          {!isLogin && (
+            <>
+              <Form.Group controlId="formEmail">
+                <Form.Label>Email:</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </Form.Group>
 
-            <Form.Group controlId="formBirthday">
-              <Form.Label>Birthday:</Form.Label>
-              <Form.Control
-                type="date"
-                value={birthdate}
-                onChange={(e) => setBirthdate(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </>
-        )}
+              <Form.Group controlId="formBirthday">
+                <Form.Label>Birthday:</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={birthdate}
+                  onChange={(e) => setBirthdate(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            </>
+          )}
 
-        <Button variant="primary" type="submit" className="submit-button">
-          {isLogin ? "Login" : "Sign Up"}
+          <Button variant="primary" type="submit" className="submit-button">
+            {isLogin ? "Login" : "Sign Up"}
+          </Button>
+        </Form>
+        <Button variant="link" onClick={toggleForm} className="toggle-button">
+          {isLogin
+            ? "Don't have an account? Sign up."
+            : "Already have an account? Login."}
         </Button>
-      </Form>
-      <Button variant="link" onClick={toggleForm} className="toggle-button">
-        {isLogin
-          ? "Don't have an account? Sign up."
-          : "Already have an account? Login."}
-      </Button>
+      </div>
     </div>
   );
 };

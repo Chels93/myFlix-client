@@ -8,6 +8,30 @@ $form-border-radius: 8px; // Border radius for the form
 $form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Box shadow for the form
 $form-outline-color: #ffd166; // Outline color for the form
 
+// Brand styles
+$brand-color: #118ab2; // Brand color
+$brand-font-size: 3rem; // Font size for brand text
+$brand-font-weight: bold; // Font weight for brand text
+$brand-underline-color: #ffd166; // Underline color for brand text
+
+// Login container
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; // Full viewport height to center vertically
+  text-align: center; // Center align text inside the container
+
+  .navbar-brand {
+    color: $brand-color;
+    font-size: $brand-font-size;
+    font-weight: $brand-font-weight;
+    text-decoration: underline $brand-underline-color;
+    margin-bottom: 1rem; // Space between brand text and form
+  }
+}
+
 // Form container
 .form-container {
   background-color: $form-background-color;
@@ -16,11 +40,7 @@ $form-outline-color: #ffd166; // Outline color for the form
   box-shadow: $form-box-shadow;
   border: 2px solid $form-outline-color; // Outline the form container
   max-width: 400px; // Maximum width for the form container
-  margin: 0 auto; // Center align the form container
-  position: absolute; // Absolute positioning to center horizontally and vertically
-  top: 50%; // Center vertically
-  left: 50%; // Center horizontally
-  transform: translate(-50%, -50%); // Center the form container
+  width: 100%; // Ensure it takes up full width of its container
 }
 
 // Form styles
