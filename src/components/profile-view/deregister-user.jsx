@@ -40,7 +40,7 @@ export const DeregisterUser = ({ user, token }) => {
 
   return (
     <div>
-      <button onClick={handleDeregisterClick}>Deregister User</button>
+      <button onClick={handleDeregisterClick} className="btn-secondary">Deregister User</button>
     </div>
   );
 };

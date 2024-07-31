@@ -1,9 +1,62 @@
-@import '~bootstrap/scss/bootstrap.scss';
+// Define colors and common variables
+$primary-color: #118ab2; // Primary blue color
+$header-font-size: 2rem; // Font size for headers
+$header-font-weight: bold; // Font weight for headers
+$value-font-weight: normal; // Font weight for values
+$info-label-color: #073b4c; // Color for labels
 
-.profile-color {
-  background-color: $blue-100;
+// Apply header styles to headers in the profile view
+.profile-view-container {
+  .info-header,
+  .header {
+   color: #118ab2;
+   font-weight: normal;
+   font-size: 2rem;
+  }
+
+  .info-label {
+    color: $info-label-color;
+    font-weight: bold; // Font weight for labels
+    margin: 0.5rem 0; // Margin between label lines
+  }
+
+  .info-value {
+    font-weight: normal; // Font weight for information values
+  }
 }
 
-h4 {
-  color: $blue-800;
+// Apply header styles to specific components
+.update-user {
+  .card-title {
+   color: #118ab2;
+   font-weight: normal;
+   font-size: 2rem;
+  }
+
+  .form-header {
+    color: #073b4c;
+    font-weight: bold;
+  }
+
+  .form-input {
+    color: #073b4c;
+    margin-bottom: 1rem; // Add some space below form inputs
+  }
+
+  .btn-primary {
+    background-color: #118ab2; // Blue button background
+    border: #ffd166; // Remove button border
+    &:hover {
+      color: darken 10%; // Darken button on hover
+    }
+  }
+}
+
+.btn-secondary {
+    background-color: #ffd166;
+    text-decoration-color: #118ab2;
+    border: #118ab2;
+    &:hover {
+        color: darken 10%; // Darken button on hover
+      }
 }

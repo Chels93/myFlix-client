@@ -103,7 +103,7 @@ export const ProfileView = ({
     <Container className="profile-view-container">
       <Row>
         <Col xs={12} sm={6}>
-          <div className="user-info">
+          <div>
             <UserInfo
               username={user.username}
               email={user.email}
@@ -119,7 +119,7 @@ export const ProfileView = ({
         </Col>
         <Col xs={12} sm={6}>
           <div className="favorite-movies">
-            <h3>Favorite Movies</h3>
+            <h3 className="header">Favorite Movies</h3>
             {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
               <FavoriteMovies
                 movies={movies}
