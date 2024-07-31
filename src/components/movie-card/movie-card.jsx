@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./movie-card.scss";
 
 const MovieCard = ({
   movie,
@@ -32,9 +33,7 @@ const MovieCard = ({
 
   return (
     <Card
-      className="h-100"
-      style={{ width: "18rem", border: "3px solid gray" }}
-    >
+      className="movie-titles">
       <Card.Img
         variant="top"
         src={movie.imagePath}

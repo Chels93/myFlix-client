@@ -1,0 +1,106 @@
+// Define colors
+$button-text-color: #ffffff; // White color for button text
+$card-background-color: #ffffff; // Background color for cards
+
+// Card Container
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); // Responsive columns
+  gap: 1rem; // Space between cards
+  justify-content: center; // Center cards horizontally
+}
+
+// Style for the MovieCard component
+.movie-titles {
+  border: 3px solid #ffd166; // Yellow border
+  background-color: $card-background-color; // Set card background color
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // Ensure space between title and buttons
+  text-align: center; // Center text
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: Add shadow for better visual separation
+  overflow: hidden; // Ensure content doesn’t overflow
+  height: 32rem; // Fixed height for consistency
+  width: 100%; // Ensure it takes full width available
+
+  .card-img {
+    height: 14rem; // Fixed height for image
+    object-fit: cover; // Ensure image covers the space without distortion
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    padding: 1rem; // Adjust padding as needed
+  }
+}
+
+// Card Title
+.card-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic; // Make the title italic
+  margin-bottom: 1rem; // Space below title
+  overflow: hidden; // Hide overflow text
+  text-overflow: ellipsis; // Show ellipsis if text overflows
+  white-space: normal; // Allow text wrapping
+  line-height: 1.4; // Improve readability by adjusting line height
+}
+
+// Button styles
+.see-more, .favorite-button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  width: 100%; // Make buttons full width
+  margin-top: 0.5rem; // Add spacing above buttons
+}
+
+// See More button styles
+.see-more {
+  background-color: #118ab2; // Blue background
+  color: $button-text-color; // White text
+  border: 1px solid $button-text-color; // Blue border color
+
+  &:hover {
+    background-color: darken(#118ab2, 10%); // Darker blue on hover
+    color: $button-text-color; // White text color on hover
+    border: 1px solid $button-text-color; // Blue border color on hover
+  }
+}
+
+// Favorite Button styles
+.favorite-button {
+  &.btn-outline-danger {
+    border-color: #ef476f; // Set border color for outline variant
+    border-width: medium;
+    color: #ef476f; // Set text color for outline variant
+    font-weight: bold;
+
+    &:hover {
+      background-color: darken(#ef476f, 10%); // Background color on hover
+      color: white; // Text color on hover
+    }
+  }
+}
+
+// Media Queries for Adjustments
+@media (max-width: 1200px) {
+  .movie-titles {
+    height: auto; // Adjust height for medium screens
+  }
+}
+
+@media (max-width: 992px) {
+  .movie-titles {
+    height: auto; // Adjust height for small screens
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-titles {
+    height: auto; // Adjust height for very small screens
+  }
+}
