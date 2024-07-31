@@ -8,6 +8,22 @@ import { ProfileView } from "../profile-view/profile-view";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { FavoriteMovies } from "../profile-view/favorite-movies";
 
+// FUNCTION TO CALCULATE STRING SIMILARITY USING THE LEVENSHTEIN DISTANCE
+const getSimilarity = (a, b) => {
+  const matrix = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+  for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      matrix[i][j] = a[i - 1] === b[j - 1]
+        ? matrix[i - 1][j - 1]
+        : Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+    }
+  }
+  return 1 - (matrix[a.length][b.length] / Math.max(a.length, b.length));
+};
+
 export const MainView = () => {
   let storedUser = null;
   const storedToken = localStorage.getItem("token");
@@ -18,6 +34,7 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     if (!token) {
@@ -33,13 +50,31 @@ export const MainView = () => {
         return response.json();
       })
       .then((movies) => {
-        console.log("Movies fetched successfully: ", movies); 
+        console.log("Movies fetched successfully: ", movies);
         setMovies(movies);
       })
       .catch((error) => {
-        console.error("Error fetching movies: ", error); 
+        console.error("Error fetching movies: ", error);
       });
   }, [token]);
+
+  useEffect(() => {
+    if (searchQuery === "") {
+      setSuggestions([]);
+      return;
+    }
+
+    const lowerSearchQuery = searchQuery.toLowerCase();
+    const filteredSuggestions = movies
+      .map((movie) => ({
+        ...movie,
+        similarity: getSimilarity(movie.title.toLowerCase(), lowerSearchQuery),
+      }))
+      .filter((movie) => movie.similarity > 0.3)
+      .sort((a, b) => b.similarity - a.similarity);
+
+    setSuggestions(filteredSuggestions);
+  }, [searchQuery, movies]);
 
   const handleBackClick = () => {
     setSelectedMovie(null);
@@ -181,7 +216,7 @@ export const MainView = () => {
                       onBackClick={handleBackClick}
                       onAddToFavorites={handleAddToFavorites}
                       onRemoveFromFavorites={handleRemoveFromFavorites}
-                      isFavorit={user.favoriteMovies.includes(
+                      isFavorite={user.favoriteMovies.includes(
                         selectedMovie._id
                       )}
                     />
@@ -215,8 +250,6 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : searchFilteredMovies.length === 0 ? (
-                  <Col>The list is empty!</Col>
                 ) : (
                   <>
                     <Col md={12} className="mb-4">
@@ -228,27 +261,36 @@ export const MainView = () => {
                         className="search-input"
                       />
                     </Col>
-                    {searchFilteredMovies.length === 0 ? (
-                      <Col>No matching movis found. Try another search.</Col>
+                    {searchFilteredMovies.length === 0 && suggestions.length === 0 ? (
+                      <Col>The list is empty or no matching movies found.</Col>
                     ) : (
-                      searchFilteredMovies.map((movie) => (
-                        <Col className="mb-5" key={movie._id} md={3}>
-                          <MovieCard
-                            className="movie-card"
-                            movie={movie}
-                            fav={(user.FavoriteMovies || []).includes(
-                              movie._id
-                            )}
-                            onAddToFavorites={() =>
-                              handleAddToFavorites(movie._id)
-                            }
-                            onRemoveFromFavorites={() =>
-                              handleRemoveFromFavorites(movie._id)
-                            }
-                            onMovieClick={() => setSelectedMovie(movie)}
-                          />
+                      searchFilteredMovies.length === 0 ? (
+                        <Col>
+                          No matching movies found. Try another search or check these suggestions:
+                          {suggestions.map((movie) => (
+                            <div key={movie._id}>{movie.title}</div>
+                          ))}
                         </Col>
-                      ))
+                      ) : (
+                        searchFilteredMovies.map((movie) => (
+                          <Col className="mb-5" key={movie._id} md={3}>
+                            <MovieCard
+                              className="movie-card"
+                              movie={movie}
+                              fav={(user.favoriteMovies || []).includes(
+                                movie._id
+                              )}
+                              onAddToFavorites={() =>
+                                handleAddToFavorites(movie._id)
+                              }
+                              onRemoveFromFavorites={() =>
+                                handleRemoveFromFavorites(movie._id)
+                              }
+                              onMovieClick={() => setSelectedMovie(movie)}
+                            />
+                          </Col>
+                        ))
+                      )
                     )}
                   </>
                 )}
