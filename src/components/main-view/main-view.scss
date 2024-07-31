@@ -10,15 +10,14 @@ $form-outline-color: #ffd166; // Outline color for the form
 
 // Search input style
 .search-input {
-  border: 2px solid $input-border-color; // Border color for search input
-  border-radius: 4px;
-  padding: 2rem;
-  transition: border-color 0.3s ease; // Smooth transition for border color
-
-  &:focus {
-    border-color: $input-focus-border-color; // Border color on focus
+    border: 2px solid #ffd166;  // Yellow border
+    border-radius: 4px;         // Optional: rounded corners
+    padding: 8px;               // Optional: padding inside the input
+    font-size: 16px;            // Optional: font size
+    width: 100%;                 // Optional: full width
+    box-sizing: border-box;     // Optional: ensures padding and border are included in the width
   }
-}
+  
 
 // MovieCard styles
 .movie-card {

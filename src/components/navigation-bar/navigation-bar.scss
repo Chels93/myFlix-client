@@ -2,12 +2,13 @@
 $navbar-bg-color: #f8f9fa; // Light background color
 $brand-color: #118ab2; // Dark color for the brand
 $link-color: #118ab2; // Primary link color
-$link-hover-color: darken($link-color, 10%); // Darker shade for hover
-$link-active-color: #0056b3; // Active link color
+$link-hover-color: #ffd166; // Yellow for hover
+$link-active-color: #073b4c; // Active link color
 $dropdown-bg-color: #ffffff; // Background color for the dropdown
 $border-color: #ffd166; // Border color
-$home-link-color: #ffd166;
-$profile-link-color: #ffd166;
+$home-link-color: $link-color; // Blue color
+$profile-link-color: $link-color; // Blue color
+$logout-link-color: $link-color; // Blue color
 
 // Navbar styles
 .navbar {
@@ -17,13 +18,17 @@ $profile-link-color: #ffd166;
     color: $brand-color;
     font-size: 3rem;
     font-weight: bold;
-    text-decoration: #ffd166 underline;
+    text-decoration: underline #ffd166;
+
+    &:hover {
+      color: $border-color; // Use yellow color on hover
+    }
   }
 
   .navbar-toggler {
     border-color: $border-color;
-    &:hover{
-        color: darken($border-color, 20%);
+    &:hover {
+      color: darken($border-color, 10%); // Darken yellow for hover
     }
   }
 
@@ -32,36 +37,19 @@ $profile-link-color: #ffd166;
 
     .nav {
       .nav-link {
-        color: $link-color;
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
+        color: $link-color; // Set the color to blue
+        font-size: 1.25rem; // Increase font size
+        font-weight: bold; // Make text bold
+        padding: 0.75rem 1.25rem; // Increase padding for a larger clickable area
+        text-decoration: underline #ffd166; // Set underline color to yellow
 
-        &:hover,
-        &:focus {
-          color: $link-hover-color;
+        &:hover {
+          color: $link-hover-color; // Yellow on hover
         }
 
         &.active {
-          color: $link-active-color;
+          color: $link-active-color; // Active link color
         }
-      }
-
-      .nav-home {
-        color: $home-link-color;
-        &:hover {
-            color: darken($home-link-color, 20%);
-        }
-      }
-      
-      .nav-profile {
-        color: $profile-link-color;
-        &:hover {
-            color: darken($profile-link-color, 20%);
-        }
-      }
-
-      .nav-link.logout {
-        cursor: pointer;
       }
     }
   }
