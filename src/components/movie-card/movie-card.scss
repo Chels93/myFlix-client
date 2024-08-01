@@ -1,5 +1,7 @@
 // Define colors and common variables
 $button-text-color: #ffffff; // White color for button text
+$button-background-color: #ef476f; // Background color for buttons
+$button-border-color: #ef476f; // Border color for buttons
 $card-background-color: #ffffff; // Background color for cards
 $card-image-height: 15rem; // Fixed height for images
 
@@ -56,20 +58,20 @@ $card-image-height: 15rem; // Fixed height for images
   }
 }
 
-.favorite-button {
-  &.btn-outline-danger {
-    font-family: "Montserrat", sans-serif;
-    font-weight: bold;
-    width: 100%; // Make buttons full width
-    margin-top: 0.5rem; // Add spacing above buttons
-    border-color: #ef476f; // Set border color for outline variant
-    border-width: medium;
-    color: #ef476f; // Set text color for outline variant
-    font-weight: bold;
+.favorites-button {
+  background-color: $button-background-color; // Background color
+  border: 2px solid $button-border-color; // Border color
+  color: $button-text-color; // Text color
+  font-weight: bold;
+  width: 100%; // Full width of the card
+  margin-top: 2rem; // Space above the button
+  padding: 0.75rem; // Padding for the button
+  border-radius: 0.5rem; // Rounded corners for the button
+  display: block; // Ensure the button is a block element to span full width
 
-    &:hover {
-      background-color: darken(#ef476f, 10%); // Background color on hover
-      color: white; // Text color on hover
-    }
+  &:hover {
+    background-color: darken($button-background-color, 10%); // Darker color on hover
+    border-color: darken($button-border-color, 10%); // Darker border color on hover
+    color: $button-text-color; // Text color on hover
   }
 }
