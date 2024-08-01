@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
+import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
 
 const UpdateUser = ({ user, onUserUpdate }) => {
@@ -100,6 +101,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
           <Button className="btn-primary" variant="primary" type="submit">
             Update
           </Button>
+          <DeregisterUser user={user} token={token} />
         </Form>
       </Card.Body>
     </Card>

@@ -5,6 +5,8 @@ import { UserInfo } from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
 import { DeregisterUser } from "./deregister-user";
 import "./profile-view.scss";
+import "../movie-card/movie-card.scss";
+
 
 export const ProfileView = ({
   user,
@@ -112,9 +114,6 @@ export const ProfileView = ({
           </div>
           <div className="user-update">
             <UpdateUser user={user} onUserUpdate={handleUpdate} />
-          </div>
-          <div>
-            <DeregisterUser user={user} token={token} />
           </div>
         </Col>
         <Col xs={12} sm={6}>

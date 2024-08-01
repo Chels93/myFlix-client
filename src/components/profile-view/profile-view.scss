@@ -4,14 +4,15 @@ $header-font-size: 2rem; // Font size for headers
 $header-font-weight: bold; // Font weight for headers
 $value-font-weight: normal; // Font weight for values
 $info-label-color: #073b4c; // Color for labels
+$secondary-color: #ffd166; // Secondary color for buttons
 
 // Apply header styles to headers in the profile view
 .profile-view-container {
   .info-header,
   .header {
-   color: #118ab2;
-   font-weight: normal;
-   font-size: 2rem;
+    color: $primary-color;
+    font-weight: $header-font-weight;
+    font-size: $header-font-size;
   }
 
   .info-label {
@@ -21,42 +22,73 @@ $info-label-color: #073b4c; // Color for labels
   }
 
   .info-value {
-    font-weight: normal; // Font weight for information values
+    font-weight: $value-font-weight; // Font weight for information values
   }
 }
 
 // Apply header styles to specific components
 .update-user {
   .card-title {
-   color: #118ab2;
-   font-weight: normal;
-   font-size: 2rem;
+    color: $primary-color;
+    font-weight: $header-font-weight;
+    font-size: $header-font-size;
   }
 
   .form-header {
-    color: #073b4c;
+    color: $info-label-color;
     font-weight: bold;
   }
 
   .form-input {
-    color: #073b4c;
+    color: $info-label-color;
     margin-bottom: 1rem; // Add some space below form inputs
   }
 
+  .btn-primary, .btn-secondary {
+    padding: 0.375rem 0.75rem; // Ensure padding for both buttons
+    font-size: 1rem; // Font size for both buttons
+    border: none; // Remove button border
+    width: 100%; // Ensure both buttons take the full width of the container
+  }
+
   .btn-primary {
-    background-color: #118ab2; // Blue button background
-    border: #ffd166; // Remove button border
+    background-color: $primary-color; // Blue button background
+    color: #ffffff;
+    font-weight: bold;
     &:hover {
-      color: darken 10%; // Darken button on hover
+      background-color: darken($primary-color, 10%); // Darken button on hover
+      color: white; // Ensure text color is white on hover
+    }
+  }
+  
+  .btn-secondary {
+    background-color: #ffffff; // White button background
+    border: 2px solid #ef476f; // Yellow border, 2px thick
+    color: #073b4c; // Text color to match primary color
+    font-weight: bold;
+    margin-top: 1rem; // Add some space above the button
+    padding: 0.375rem 0.75rem; // Padding for the button
+    border-radius: 0.5rem; // Rounded corners for the button
+  
+    &:hover {
+      background-color: darken(#ef476f, 10%); // Darken button background on hover
+      border-color: darken(#ef476f, 10%); // Darken border color on hover
+      color: #ffffff; // Change text color to white on hover
     }
   }
 }
 
-.btn-secondary {
-    background-color: #ffd166;
-    text-decoration-color: #118ab2;
-    border: #118ab2;
-    &:hover {
-        color: darken 10%; // Darken button on hover
-      }
+// Ensure no conflicting styles for MovieCard
+.favorite-movies, .movie-titles {
+  // Ensure container styles don't affect the card appearance
+  .row {
+    margin: 0; // Reset any margin on rows
+  }
+
+  .col {
+    padding: 0; // Reset padding on columns if needed
+  }
 }
+
+// Import movie-card styles
+@import '../movie-card/movie-card.scss';

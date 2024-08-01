@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import "./profile-view.scss";
 
 export const DeregisterUser = ({ user, token }) => {
@@ -19,18 +20,18 @@ export const DeregisterUser = ({ user, token }) => {
     )
       .then((response) => {
         if (!response.ok) {
-            return response.text().then((text) => {
-                console.error("Error response text: ", text);
-                throw new Error(text || "Failed to deregister user");
-            });
+          return response.text().then((text) => {
+            console.error("Error response text: ", text);
+            throw new Error(text || "Failed to deregister user");
+          });
         }
         return response.text();
       })
       .then((data) => {
         alert("User deregistered successfully! " + data);
-       localStorage.removeItem("token");
-       localStorage.removeItem("user");
-       window.location.reload();
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error deregistering user: ", error);
@@ -40,7 +41,7 @@ export const DeregisterUser = ({ user, token }) => {
 
   return (
     <div>
-      <button onClick={handleDeregisterClick} className="btn-secondary">Deregister User</button>
+      <Button onClick={handleDeregisterClick} className="btn-secondary">Deregister User</Button>
     </div>
   );
 };
