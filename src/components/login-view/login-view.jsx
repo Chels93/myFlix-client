@@ -61,10 +61,10 @@ export const LoginView = ({ onLoggedIn, onSignedUp }) => {
 
   return (
     <div className="login-container">
-      <div className="navbar-brand">
-        CineVault
-      </div>
       <div className="form-container">
+        <div className="navbar-brand">
+          CineVault
+        </div>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formUsername">
             <Form.Label>Username:</Form.Label>
