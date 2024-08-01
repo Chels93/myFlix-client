@@ -10,7 +10,6 @@ const MovieCard = ({
   onMovieClick,
   onAddToFavorites,
   onRemoveFromFavorites,
-  
 }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(fav);
@@ -32,23 +31,17 @@ const MovieCard = ({
   };
 
   return (
-    <Card
-      className="movie-titles">
-      <Card.Img
-        variant="top"
-        src={movie.imagePath}
-        alt={`${movie.title} poster`}
-      />
-      <Card.Body>
-        <Card.Title
-          style={{
-            fontFamily: "Montserrat, sans-serif",
-            fontSize: "1.5rem",
-            fontWeight: "bold",
-          }}
-        >
-          {movie.title}
-        </Card.Title>
+    <Card className="movie-card">
+      <div className="card-img-container">
+        <Card.Img
+          variant="top"
+          src={movie.imagePath}
+          alt={`${movie.title} poster`}
+          className="card-img"
+        />
+      </div>
+      <Card.Body className="card-body">
+        <Card.Title className="card-title">{movie.title}</Card.Title>
         <Button className="see-more" onClick={handleSeeMore}>
           See More
         </Button>

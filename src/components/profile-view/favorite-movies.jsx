@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import MovieCard from "../movie-card/movie-card";
-import "./profile-view.scss"
+import "./profile-view.scss";
 import "../movie-card/movie-card.scss";
 
 export const FavoriteMovies = ({
@@ -60,7 +60,7 @@ export const FavoriteMovies = ({
   );
 
   const handleMovieClick = (movie) => {
-console.log("Clicked Movie: ", movie);
+    console.log("Clicked Movie: ", movie);
   };
 
   const onFavoriteClick = (movieId, isFavorite) => {
@@ -75,18 +75,20 @@ console.log("Clicked Movie: ", movie);
     <Container className="favorite-movies">
       <Row>
         {filteredMovies.length > 0 ? (
-          filteredMovies.map((movie) => (
-            <Col key={movie._id} xs={12} sm={6} md={4} lg={3}>
-              <MovieCard
-                movie={movie}
-                fav={true}
-                onMovieClick={() => handleMovieClick(movie)}
-                onFavoriteClick={onFavoriteClick}
-                onAddToFavorites={() => onAddToFavorites(movie._id)}
-                onRemoveFromFavorites={() => onRemoveFromFavorites(movie._id)}
-              />
-            </Col>
-          ))
+          <div className="card-container">
+            {filteredMovies.map((movie) => (
+              <Col key={movie._id} xs={12} sm={6} md={4} lg={3}>
+                <MovieCard
+                  movie={movie}
+                  fav={true}
+                  onMovieClick={() => handleMovieClick(movie)}
+                  onFavoriteClick={onFavoriteClick}
+                  onAddToFavorites={() => onAddToFavorites(movie._id)}
+                  onRemoveFromFavorites={() => onRemoveFromFavorites(movie._id)}
+                />
+              </Col>
+            ))}
+          </div>
         ) : (
           <Col>
             <Card>

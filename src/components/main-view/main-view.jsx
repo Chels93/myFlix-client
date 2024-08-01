@@ -7,6 +7,8 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { FavoriteMovies } from "../profile-view/favorite-movies";
+import "./main-view.scss";
+import "../movie-card/movie-card.scss";
 
 // FUNCTION TO CALCULATE STRING SIMILARITY USING THE LEVENSHTEIN DISTANCE
 const getSimilarity = (a, b) => {
@@ -261,6 +263,7 @@ export const MainView = () => {
                         className="search-input"
                       />
                     </Col>
+                    <div className="card-container">
                     {searchFilteredMovies.length === 0 && suggestions.length === 0 ? (
                       <Col>The list is empty or no matching movies found.</Col>
                     ) : (
@@ -292,6 +295,7 @@ export const MainView = () => {
                         ))
                       )
                     )}
+                    </div>
                   </>
                 )}
               </>
