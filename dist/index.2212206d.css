@@ -180,11 +180,16 @@ form .toggle-button {
 }
 
 .navbar .navbar-toggler {
+  box-shadow: none;
+  background: none;
+  border-width: .25rem;
   border-color: #ffd166;
+  outline: none;
 }
 
-.navbar .navbar-toggler:hover {
-  color: #ffc233;
+.navbar .navbar-toggler:focus, .navbar .navbar-toggler:hover {
+  border-color: #ffc233;
+  box-shadow: 0 0 0 .2rem #ffd16680;
 }
 
 .navbar .navbar-collapse {

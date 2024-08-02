@@ -27,8 +27,14 @@ $logout-link-color: $link-color; // Blue color
 
   .navbar-toggler {
     border-color: $border-color;
+    border-width: 0.25rem;
+    background: none; // Remove background to prevent default styling
+    box-shadow: none; // Remove any box-shadow that might appear on click
+    outline: none; // Remove outline to ensure no default focus styles
+    &:focus,
     &:hover {
-      color: darken($border-color, 10%); // Darken yellow for hover
+        border-color: darken($border-color, 10%); // Darken border color on hover
+        box-shadow: 0 0 0 0.2rem rgba($border-color, 0.5); // Add a subtle shadow on hover
     }
   }
 
