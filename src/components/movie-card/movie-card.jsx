@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./movie-card.scss";
-import "../movie-view/movie-view.scss";
 
 const MovieCard = ({
   movie,
@@ -43,7 +42,11 @@ const MovieCard = ({
       </div>
       <Card.Body className="card-body">
         <Card.Title className="card-title">{movie.title}</Card.Title>
-        <Button className="see-more" onClick={handleSeeMore}>
+        <Button
+          className="see-more"
+          onClick={handleSeeMore}
+          variant="primary"
+        >
           See More
         </Button>
         <Button
@@ -61,6 +64,7 @@ const MovieCard = ({
 MovieCard.propTypes = {
   fav: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     imagePath: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     synopsis: PropTypes.string.isRequired,

@@ -241,6 +241,15 @@ form .toggle-button {
   font-weight: normal;
 }
 
+.update-user {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: .5rem;
+  max-width: 30rem;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
 .update-user .card-title {
   color: #118ab2;
   font-size: 2rem;
@@ -307,9 +316,11 @@ form .toggle-button {
   justify-content: space-between;
   width: 20rem;
   height: 32rem;
-  margin: 0 auto;
+  margin: 1rem;
+  padding: 1.5rem;
   display: flex;
   overflow: hidden;
+  box-shadow: 0 0 1rem #0000001a;
 }
 
 .movie-card .card-img-container {
@@ -350,7 +361,7 @@ form .toggle-button {
   border: 1px solid #fff;
 }
 
-.favorites-button {
+.favorite-button {
   color: #fff;
   background-color: #ef476f;
   border: 2px solid #ef476f;
@@ -362,7 +373,7 @@ form .toggle-button {
   display: block;
 }
 
-.favorites-button:hover {
+.favorite-button:hover {
   color: #fff;
   background-color: #eb184a;
   border-color: #eb184a;
@@ -377,16 +388,40 @@ form .toggle-button {
   font-size: 16px;
 }
 
+.main-view-container {
+  padding: 1rem;
+}
+
 .card-container {
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
+  margin: 0 auto;
   display: flex;
 }
 
 @media (width <= 768px) {
   .card-container {
     gap: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+.movie-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  width: 20rem;
+  height: 32rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px #0000001a;
+}
+
+@media (width <= 768px) {
+  .movie-card {
+    width: calc(100% - 2rem);
+    max-width: 20rem;
   }
 }
 

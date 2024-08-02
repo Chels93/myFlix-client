@@ -15,8 +15,10 @@ $card-image-height: 15rem; // Fixed height for images
   overflow: hidden; // Prevent overflow of content
   border: 1px solid #ddd; // Example border, adjust as needed
   border-radius: 0.5rem; // Example border radius, adjust as needed
-  margin: 0 auto; // Center cards horizontally if needed
+  margin: 1rem; // Margin around cards to prevent overlap
   background-color: $card-background-color; // Ensure background color
+  padding: 1.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); // Add subtle shadow for better visual separation
 }
 
 .movie-card .card-img-container {
@@ -58,7 +60,7 @@ $card-image-height: 15rem; // Fixed height for images
   }
 }
 
-.favorites-button {
+.favorite-button {
   background-color: $button-background-color; // Background color
   border: 2px solid $button-border-color; // Border color
   color: $button-text-color; // Text color

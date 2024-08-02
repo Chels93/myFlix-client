@@ -36,6 +36,13 @@ $secondary-color: #ffd166; // Secondary color for buttons
 
 // Apply header styles to specific components
 .update-user {
+  max-width: 30rem; // Reduce the width of the update user information form box
+  margin: 1rem 0; // Adjust the vertical margin and remove horizontal centering
+  padding: 1rem; // Add some padding around the form box
+  border: 1px solid #ddd; // Add a border for better visibility
+  border-radius: 0.5rem; // Rounded corners for the form box
+  background-color: #f9f9f9; // Light background color for the form box
+
   .card-title {
     color: $primary-color;
     font-weight: $header-font-weight;
@@ -68,7 +75,7 @@ $secondary-color: #ffd166; // Secondary color for buttons
       color: white; // Ensure text color is white on hover
     }
   }
-  
+
   .btn-secondary {
     background-color: #ffffff; // White button background
     border: 2px solid #ef476f; // Yellow border, 2px thick
