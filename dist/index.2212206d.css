@@ -217,27 +217,19 @@ form .toggle-button {
   }
 }
 
-.profile-view-container .card-container {
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
-  display: flex;
-}
-
-.profile-view-container .info-header, .profile-view-container .header {
+.info-header, .header {
   color: #118ab2;
   font-size: 2rem;
   font-weight: bold;
 }
 
-.profile-view-container .info-label {
+.info-label {
   color: #073b4c;
   margin: .5rem 0;
   font-weight: bold;
 }
 
-.profile-view-container .info-value {
+.info-value {
   font-weight: normal;
 }
 
@@ -316,31 +308,31 @@ form .toggle-button {
   justify-content: space-between;
   width: 20rem;
   height: 32rem;
-  margin: 1rem;
-  padding: 1.5rem;
+  margin-bottom: 1rem;
   display: flex;
   overflow: hidden;
   box-shadow: 0 0 1rem #0000001a;
 }
 
 .movie-card .card-img-container {
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 15rem;
+  display: flex;
   overflow: hidden;
 }
 
 .movie-card .card-img {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   width: 100%;
   height: 100%;
-  display: block;
 }
 
 .movie-card .card-body {
   flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 1rem;
   display: flex;
 }
@@ -350,7 +342,7 @@ form .toggle-button {
   background-color: #118ab2;
   border: 1px solid #fff;
   width: 100%;
-  margin-top: .5rem;
+  margin-bottom: .5rem;
   font-family: Montserrat, sans-serif;
   font-weight: bold;
 }
@@ -367,7 +359,6 @@ form .toggle-button {
   border: 2px solid #ef476f;
   border-radius: .5rem;
   width: 100%;
-  margin-top: 2rem;
   padding: .75rem;
   font-weight: bold;
   display: block;

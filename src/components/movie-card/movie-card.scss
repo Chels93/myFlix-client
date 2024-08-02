@@ -15,9 +15,8 @@ $card-image-height: 15rem; // Fixed height for images
   overflow: hidden; // Prevent overflow of content
   border: 1px solid #ddd; // Example border, adjust as needed
   border-radius: 0.5rem; // Example border radius, adjust as needed
-  margin: 1rem; // Margin around cards to prevent overlap
+  margin-bottom: 1rem; // Space between cards vertically
   background-color: $card-background-color; // Ensure background color
-  padding: 1.5rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); // Add subtle shadow for better visual separation
 }
 
@@ -25,33 +24,34 @@ $card-image-height: 15rem; // Fixed height for images
   width: 100%; // Full width of the card
   height: $card-image-height; // Fixed height for the image container
   overflow: hidden; // Hide any overflow content
+  display: flex; // Use flexbox to center image
+  align-items: center; // Center image vertically
+  justify-content: center; // Center image horizontally
 }
 
 .movie-card .card-img {
-  width: 100%; // Full width of the container
-  height: 100%; // Full height of the container
-  object-fit: cover; // Ensure image covers the container without distortion
-  object-position: center; // Center the image within its container
-  display: block; // Prevent extra space below the image
+    width: 100%; // Full width of the container
+    height: 100%; // Full height of the container
+    object-fit: contain; // Ensure image covers the container without distortion
+    object-position: center; // Center the image within its container
 }
 
 .movie-card .card-body {
-  display: flex; // Flex layout for card body
-  flex-direction: column;
-  justify-content: space-between; // Ensure space between title and buttons
   padding: 1rem; // Adjust padding as needed
-  flex-grow: 1; // Ensure the body grows to fill available space
+  display: flex;
+    flex-direction: column;
+    justify-content: flex-end; // Push buttons towards the bottom
 }
 
-// Button styles (if applicable)
+// Button styles
 .see-more {
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  width: 100%; // Make buttons full width
-  margin-top: 0.5rem; // Add spacing above buttons
-  background-color: #118ab2; // Blue background
-  color: $button-text-color; // White text
-  border: 1px solid $button-text-color; // Blue border color
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    width: 100%; // Make buttons full width
+    background-color: #118ab2; // Blue background
+    color: $button-text-color; // White text
+    border: 1px solid $button-text-color; // Blue border color
+    margin-bottom: 0.5rem; // Add spacing between buttons
 
   &:hover {
     background-color: darken(#118ab2, 10%); // Darker blue on hover
@@ -61,15 +61,14 @@ $card-image-height: 15rem; // Fixed height for images
 }
 
 .favorite-button {
-  background-color: $button-background-color; // Background color
-  border: 2px solid $button-border-color; // Border color
-  color: $button-text-color; // Text color
-  font-weight: bold;
-  width: 100%; // Full width of the card
-  margin-top: 2rem; // Space above the button
-  padding: 0.75rem; // Padding for the button
-  border-radius: 0.5rem; // Rounded corners for the button
-  display: block; // Ensure the button is a block element to span full width
+    background-color: $button-background-color; // Background color
+    border: 2px solid $button-border-color; // Border color
+    color: $button-text-color; // Text color
+    font-weight: bold;
+    width: 100%; // Full width of the card
+    padding: 0.75rem; // Padding for the button
+    border-radius: 0.5rem; // Rounded corners for the button
+    display: block; // Ensure the button is a block element to span full width
 
   &:hover {
     background-color: darken($button-background-color, 10%); // Darker color on hover

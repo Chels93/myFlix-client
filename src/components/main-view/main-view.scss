@@ -10,29 +10,30 @@ $form-outline-color: #ffd166; // Outline color for the form
 
 // Search input style
 .search-input {
-    border: 2px solid #ffd166;  // Yellow border
-    border-radius: 4px;         // Optional: rounded corners
-    padding: 8px;               // Optional: padding inside the input
-    font-size: 16px;            // Optional: font size
-    width: 100%;                 // Optional: full width
-    box-sizing: border-box;     // Optional: ensures padding and border are included in the width
+    border: 2px solid $input-border-color; // Yellow border
+    border-radius: 4px; // Rounded corners
+    padding: 8px; // Padding inside the input
+    font-size: 16px; // Font size
+    width: 100%; // Full width
+    box-sizing: border-box; // Include padding and border in width
 }
 
+// Main view container padding
 .main-view-container {
-    padding: 1rem; // Add padding around the main view content
-  }
+    padding: 1rem; // Padding around the main view content
+}
 
-// MovieCard styles
+// MovieCard container styles
 .card-container {
     display: flex;
-    flex-wrap: wrap; // Allow cards to wrap to the next line on smaller screens
+    flex-wrap: wrap; // Allow cards to wrap to the next line
     justify-content: center; // Center the cards in the container
-    gap: 1.5rem; // Space between the cards (adjust as needed)
+    gap: 1.5rem; // Space between the cards
     margin: 0 auto; // Center the container horizontally
 
     @media (max-width: 768px) {
-      gap: 1rem; // Reduce the gap between cards on smaller screens
-      padding: 0 1rem; // Add padding to prevent cards from touching the edges
+        gap: 1rem; // Reduce gap between cards on smaller screens
+        padding: 0 1rem; // Add padding to prevent edge touching
     }
 }
 
@@ -40,43 +41,43 @@ $form-outline-color: #ffd166; // Outline color for the form
 .movie-card {
     width: 20rem; // Fixed width for all cards
     height: 32rem; // Fixed height for all cards
-    overflow: hidden; // Prevent overflow of content
+    overflow: hidden; // Prevent content overflow
     border: 1px solid #ddd; // Border for the card
-    border-radius: 1rem; // Rounded corners for the card
-    background-color: #ffffff; // Background color for the card
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Box shadow for card
+    border-radius: 1rem; // Rounded corners
+    background-color: #ffffff; // Background color
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Box shadow
     margin-bottom: 2rem; // Space between cards
 
     @media (max-width: 768px) {
-      width: calc(100% - 2rem); // Adjust width for smaller screens with margin consideration
-      max-width: 20rem; // Optional: limit the maximum width
+        width: calc(100% - 2rem); // Adjust width for smaller screens
+        max-width: 20rem; // Limit maximum width
     }
 }
 
-// Example adjustments in MainView.scss
+// Adjustments for rows and columns
 .row {
-    margin-bottom: 2rem; // Adjust bottom margin to space out rows
+    margin-bottom: 2rem; // Space out rows
 }
 
 .col-md-3 {
-    padding: 0.5rem; // Adjust padding as needed
+    padding: 0.5rem; // Adjust padding for columns
 }
 
-// Responsive styles
+// Responsive styles for larger screens
 @media (min-width: 576px) {
-  .form-container {
-    padding: 30px; // Increase padding on larger screens
-  }
+    .form-container {
+        padding: 30px; // Increase padding on larger screens
+    }
 
-  .submit-button {
-    padding: 0.75rem 1.5rem; // Increase button padding on larger screens
-  }
+    .submit-button {
+        padding: 0.75rem 1.5rem; // Increase button padding
+    }
 
-  .search-input {
-    padding: 0.75rem; // Increase padding on larger screens
-  }
+    .search-input {
+        padding: 0.75rem; // Increase padding inside the search input
+    }
 
-  .movie-card {
-    padding: 1.5rem; // Increase padding inside the card on larger screens
-  }
+    .movie-card {
+        padding: 1.5rem; // Increase padding inside the card
+    }
 }

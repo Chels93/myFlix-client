@@ -6,16 +6,6 @@ $value-font-weight: normal; // Font weight for values
 $info-label-color: #073b4c; // Color for labels
 $secondary-color: #ffd166; // Secondary color for buttons
 
-// Apply header styles to headers in the profile view
-.profile-view-container {
-  .card-container {
-    display: flex;
-    flex-wrap: wrap; // Wrap cards to the next line if needed
-    gap: 1rem; // Adjust gap between cards as needed
-    justify-content: center; // Center align cards
-    padding: 1rem; // Adjust padding if needed
-  }
-
   .info-header,
   .header {
     color: $primary-color;
@@ -32,7 +22,7 @@ $secondary-color: #ffd166; // Secondary color for buttons
   .info-value {
     font-weight: $value-font-weight; // Font weight for information values
   }
-}
+
 
 // Apply header styles to specific components
 .update-user {

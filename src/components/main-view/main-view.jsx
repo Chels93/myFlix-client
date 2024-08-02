@@ -34,7 +34,6 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -245,7 +244,6 @@ export const MainView = () => {
               )
             }
           />
-
           <Route
             path="/"
             element={
@@ -263,45 +261,39 @@ export const MainView = () => {
                         className="search-input"
                       />
                     </Col>
-                    <div className="card-container">
-                    {searchFilteredMovies.length === 0 && suggestions.length === 0 ? (
-                      <Col>The list is empty or no matching movies found.</Col>
-                    ) : (
-                      searchFilteredMovies.length === 0 ? (
-                        <Col>
-                          No matching movies found. Try another search or check these suggestions:
-                          {suggestions.map((movie) => (
-                            <div key={movie._id}>{movie.title}</div>
-                          ))}
-                        </Col>
+                    <Row className="card-container">
+                      {searchFilteredMovies.length === 0 && suggestions.length === 0 ? (
+                        <Col className="text-center">The list is empty or no matching movies found.</Col>
                       ) : (
-                        searchFilteredMovies.map((movie) => (
-                          <Col className="mb-5" key={movie._id} md={3}>
-                            <MovieCard
-                              className="movie-card"
-                              movie={movie}
-                              fav={(user.favoriteMovies || []).includes(
-                                movie._id
-                              )}
-                              onAddToFavorites={() =>
-                                handleAddToFavorites(movie._id)
-                              }
-                              onRemoveFromFavorites={() =>
-                                handleRemoveFromFavorites(movie._id)
-                              }
-                              onMovieClick={() => setSelectedMovie(movie)}
-                            />
+                        searchFilteredMovies.length === 0 ? (
+                          <Col className="text-center">
+                            No matching movies found. Try another search or check these suggestions:
+                            <div>
+                              {suggestions.map((movie) => (
+                                <div key={movie._id}>{movie.title}</div>
+                              ))}
+                            </div>
                           </Col>
-                        ))
-                      )
-                    )}
-                    </div>
+                        ) : (
+                          searchFilteredMovies.map((movie) => (
+                            <Col className="mb-5" key={movie._id} md={3}>
+                              <MovieCard
+                                movie={movie}
+                                fav={(user.favoriteMovies || []).includes(movie._id)}
+                                onAddToFavorites={() => handleAddToFavorites(movie._id)}
+                                onRemoveFromFavorites={() => handleRemoveFromFavorites(movie._id)}
+                                onMovieClick={() => setSelectedMovie(movie)}
+                              />
+                            </Col>
+                          ))
+                        )
+                      )}
+                    </Row>
                   </>
                 )}
               </>
             }
           />
-
           <Route
             path="/profile"
             element={

@@ -34,10 +34,10 @@ const MovieCard = ({
     <Card className="movie-card">
       <div className="card-img-container">
         <Card.Img
+          className="card-img"
           variant="top"
           src={movie.imagePath}
           alt={`${movie.title} poster`}
-          className="card-img"
         />
       </div>
       <Card.Body className="card-body">
