@@ -6,7 +6,6 @@ import { FavoriteMovies } from "./favorite-movies";
 import "./profile-view.scss";
 import "../main-view/main-view.scss";
 
-
 export const ProfileView = ({
   user,
   movies,
@@ -119,19 +118,19 @@ export const ProfileView = ({
           <div className="favorite-movies">
             <h3 className="header">Favorite Movies</h3>
             <div className="card-container">
-            {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
-              <FavoriteMovies
-                movies={movies}
-                user={user}
-                onAddToFavorites={handleAddToFavorites}
-                onRemoveFromFavorites={handleRemoveFromFavorites}
-              />
-            ) : (
-              <Col>
-                <div>No favorite movies yet!</div>
-              </Col>
-            )}
-          </div>
+              {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
+                <FavoriteMovies
+                  movies={movies}
+                  user={user}
+                  onAddToFavorites={handleAddToFavorites}
+                  onRemoveFromFavorites={handleRemoveFromFavorites}
+                />
+              ) : (
+                <Col>
+                  <div>No favorite movies yet!</div>
+                </Col>
+              )}
+            </div>
           </div>
         </Col>
       </Row>

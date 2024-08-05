@@ -213,22 +213,20 @@
 .profile-view-container .favorite-movies .card .card-body .see-more:hover {
   color: #fff;
   background-color: #0d6683;
-  border: 1px solid #fff;
 }
 
-.profile-view-container .favorite-movies .card .card-body .favorite-button {
+.profile-view-container .favorite-movies .card .card-body .see-more .favorite-button {
   color: #ef476f;
   background-color: #fff;
   border: 2px solid #ef476f;
 }
 
-.profile-view-container .favorite-movies .card .card-body .favorite-button:hover {
+.profile-view-container .favorite-movies .card .card-body .see-more .favorite-button:hover {
   color: #fff;
   background-color: #eb184a;
-  border: 1px solid #ef476f;
 }
 
-.update-user {
+.profile-view-container .update-user {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: .5rem;
@@ -237,41 +235,41 @@
   padding: 1rem;
 }
 
-.update-user .card-title {
+.profile-view-container .update-user .card-title {
   color: #118ab2;
   font-size: 2rem;
   font-weight: bold;
 }
 
-.update-user .form-header {
+.profile-view-container .update-user .form-header {
   color: #073b4c;
   font-weight: bold;
 }
 
-.update-user .form-input {
+.profile-view-container .update-user .form-input {
   color: #073b4c;
   margin-bottom: 1rem;
 }
 
-.update-user .btn-primary, .update-user .btn-secondary {
+.profile-view-container .update-user .btn-primary, .profile-view-container .update-user .btn-secondary {
   border: none;
   width: 100%;
   padding: .375rem .75rem;
   font-size: 1rem;
 }
 
-.update-user .btn-primary {
+.profile-view-container .update-user .btn-primary {
   color: #fff;
   background-color: #118ab2;
   font-weight: bold;
 }
 
-.update-user .btn-primary:hover {
+.profile-view-container .update-user .btn-primary:hover {
   color: #fff;
   background-color: #0d6683;
 }
 
-.update-user .btn-secondary {
+.profile-view-container .update-user .btn-secondary {
   color: #073b4c;
   background-color: #fff;
   border: 2px solid #ffd166;
@@ -281,7 +279,7 @@
   font-weight: bold;
 }
 
-.update-user .btn-secondary:hover {
+.profile-view-container .update-user .btn-secondary:hover {
   color: #fff;
   background-color: #ffc233;
   border-color: #ffc233;
@@ -522,10 +520,6 @@ form .toggle-button {
 
 .navbar .navbar-collapse .nav .nav-link:hover {
   color: #ffd166;
-}
-
-.navbar .navbar-collapse .nav .nav-link.active {
-  color: #073b4c;
 }
 
 @media (width >= 992px) {

@@ -14,7 +14,7 @@ export const DeregisterUser = ({ user, token }) => {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
       }
     )
@@ -41,7 +41,9 @@ export const DeregisterUser = ({ user, token }) => {
 
   return (
     <div>
-      <Button onClick={handleDeregisterClick} className="btn-secondary">Deregister User</Button>
+      <Button onClick={handleDeregisterClick} className="btn-secondary">
+        Deregister User
+      </Button>
     </div>
   );
 };

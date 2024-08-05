@@ -5,7 +5,12 @@ import { useNavigate } from "react-router-dom";
 import "./movie-view.scss";
 import "../movie-card/movie-card.scss";
 
-export const MovieView = ({ movie, onAddToFavorites, onRemoveFromFavorites, isFavorite }) => {
+export const MovieView = ({
+  movie,
+  onAddToFavorites,
+  onRemoveFromFavorites,
+  isFavorite,
+}) => {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(isFavorite);
 
@@ -19,21 +24,18 @@ export const MovieView = ({ movie, onAddToFavorites, onRemoveFromFavorites, isFa
 
   const handleFavoriteClick = () => {
     if (favorite) {
-        onRemoveFromFavorites(movie._id);
-        setFavorite(false);
+      onRemoveFromFavorites(movie._id);
+      setFavorite(false);
     } else {
-        onAddToFavorites(movie._id);
-        setFavorite(true);
+      onAddToFavorites(movie._id);
+      setFavorite(true);
     }
   };
 
   return (
     <div className="movie-view">
       <div className="image-container">
-        <img
-          src={movie.imagePath}
-          alt={`${movie.title} poster`}
-        />
+        <img src={movie.imagePath} alt={`${movie.title} poster`} />
       </div>
       <div className="movie-details">
         <div>
@@ -74,18 +76,15 @@ export const MovieView = ({ movie, onAddToFavorites, onRemoveFromFavorites, isFa
         </div>
       </div>
       <div className="buttons-container">
-      <Button
-        onClick={handleBackClick}
-        className="back-button"
-      >
-        Back
-      </Button>
-      <Button
-        onClick={handleFavoriteClick}
-        className={`favorites-button ${favorite ? 'favorited' : ''}`}
-      >
-        {favorite ? "Remove from Favorites" : "Add to Favorites"}
-      </Button>
+        <Button onClick={handleBackClick} className="back-button">
+          Back
+        </Button>
+        <Button
+          onClick={handleFavoriteClick}
+          className={`favorites-button ${favorite ? "favorited" : ""}`}
+        >
+          {favorite ? "Remove from Favorites" : "Add to Favorites"}
+        </Button>
       </div>
     </div>
   );

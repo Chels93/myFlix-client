@@ -1,115 +1,118 @@
-// Define variables for styling
-$image-height: 400px; // Height for the image container
-$button-text-color: #ffffff; // White color for button text
-$button-border-color: #ef476f; // Border color for buttons
-$card-background-color: #ffffff; // Background color for the card
-$button-spacing: 1rem; // Space around the button
-$button-width: 100%; // Full width for buttons
-$card-padding-large: 1.5rem; // Standard padding for larger screens
-$card-padding-small: 1rem; // Reduced padding for smaller screens
+// Common variables for styling
+$image-height: 400px;
+$button-text-color: #ffffff;
+$button-border-color: #ef476f;
+$card-background-color: #ffffff;
+$button-spacing: 1rem;
+$button-width: 100%;
+$card-padding-large: 1.5rem;
+$card-padding-small: 1rem;
 
-$breakpoint-lg: 992px; // Large screens (e.g., tablets)
-$breakpoint-md: 768px; // Medium screens (e.g., small tablets)
-$breakpoint-sm: 576px; // Small screens (e.g., mobile phones)
+// Breakpoints for different screen sizes
+$breakpoint-lg: 992px;
+$breakpoint-md: 768px;
+$breakpoint-sm: 576px;
 
 // Style for the MovieView component
 .movie-view {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; // Required for absolute positioning of buttons
-  padding: 1rem; // Padding around the view
+  position: relative;
+  padding: 1rem;
 
   .image-container {
     width: 100%;
-    height: $image-height; // Fixed height for the image container
+    height: $image-height;
     overflow: hidden;
-    position: relative; // Position relative for child absolute positioning
+    position: relative;
 
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain; // Ensure the full image is visible without cropping
-      object-position: center; // Center the image within its container
-      display: block; // Remove extra space below the image
+      object-fit: contain;
+      object-position: center;
+      display: block;
     }
   }
 
   .movie-details {
-    margin-top: 1rem; // Space between the image and details
+    margin-top: 1rem;
     width: 100%;
-    background-color: $card-background-color; // Background color for movie details
-    border-radius: 0.5rem; // Rounded corners for the details section
-    padding: 1rem; // Padding inside the details section
+    background-color: $card-background-color;
+    border-radius: 0.5rem;
+    padding: 1rem;
 
     .movie-title {
-      font-size: 1.25rem; // Title font size
+      font-size: 1.25rem;
       font-weight: bold;
-      color: #073b4c; // Title text color
-      margin-bottom: 0.5rem; // Space below the title
+      color: #073b4c;
+      margin-bottom: 0.5rem;
     }
 
     .movie-description {
-      font-size: 1rem; // Description font size
-      color: #333; // Description text color
-      margin-bottom: 1rem; // Space below the description
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 1rem;
     }
 
     .movie-director {
-      font-size: 0.875rem; // Director font size
-      color: #666; // Director text color
-      margin-bottom: 1rem; // Space below the director info
+      font-size: 0.875rem;
+      color: #666;
+      margin-bottom: 1rem;
     }
   }
 
   .back-button {
     position: absolute;
-    top: $button-spacing; // Space from the top
-    left: $button-spacing; // Space from the left edge
-    transform: none; // Remove horizontal centering
-    color: $button-text-color; // Text color for the button
+    top: $button-spacing;
+    left: $button-spacing;
+    transform: none;
+    color: $button-text-color;
     background-color: #118ab2;
-    padding: 0.5rem 1rem; // Padding for the button
-    border-radius: 0.5rem; // Rounded corners for the button
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
     font-weight: bold;
     cursor: pointer;
 
     &:hover {
-        background-color: darken(#118ab2, 10%); // Darker blue on hover
-        color: $button-text-color; // White text color on hover
-        border: 1px solid $button-text-color; // Blue border color on hover
+      background-color: darken(#118ab2, 10%);
+      color: $button-text-color;
+      border: 1px solid $button-text-color;
     }
   }
 
   .favorites-button {
     width: 100%;
-      background-color: #ffffff;
-      color: #ef476f;
-      border: 2px solid $button-border-color;
-      margin-bottom: $button-spacing; // Space between this button and the "See More" button
-  
+    background-color: #ffffff;
+    color: #ef476f;
+    border: 2px solid $button-border-color;
+    margin-bottom: $button-spacing;
+
     &:hover {
-      background-color: darken(#ef476f, 10%); // Darker color on hover
-      color: #ffffff; // Text color on hover
+      background-color: darken(#ef476f, 10%);
+      color: #ffffff;
       border: none;
       outline: none;
     }
-}
-@media (max-width: $breakpoint-lg) {
-    max-width: 18rem; // Adjust width for large tablets
+  }
+
+  // Responsive styles
+  @media (max-width: $breakpoint-lg) {
+    max-width: 18rem;
     justify-content: center;
   }
 
   @media (max-width: $breakpoint-md) {
-    max-width: 15rem; // Adjust width for small tablets and larger phones
-    padding: $card-padding-small; // Adjust padding for medium screens
+    max-width: 15rem;
+    padding: $card-padding-small;
     justify-content: center;
   }
 
   @media (max-width: $breakpoint-sm) {
-    max-width: 12rem; // Adjust width for mobile phones
-    margin: 0.5rem; // Reduce margin for smaller screens
-    padding: $card-padding-small; // Further reduced padding for small screens
+    max-width: 12rem;
+    margin: 0.5rem;
+    padding: $card-padding-small;
     justify-content: center;
   }
 }

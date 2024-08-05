@@ -43,11 +43,7 @@ const MovieCard = ({
       </div>
       <Card.Body className="card-body">
         <Card.Title className="card-title">{movie.title}</Card.Title>
-        <Button
-          className="see-more"
-          onClick={handleSeeMore}
-          variant="primary"
-        >
+        <Button className="see-more" onClick={handleSeeMore} variant="primary">
           See More
         </Button>
         <Button

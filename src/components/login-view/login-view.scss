@@ -1,16 +1,16 @@
 // Common variables
-$primary-color: #118ab2; 
-$input-border-color: #ffd166; 
-$input-focus-border-color: #007bff; 
-$form-background-color: #f8f9fa; 
-$form-padding: 20px; 
-$form-border-radius: 8px; 
-$form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-$form-outline-color: #ffd166; 
-$brand-color: #118ab2; 
-$brand-font-size: 3rem; 
-$brand-font-weight: bold; 
-$brand-underline-color: #ffd166; 
+$primary-color: #118ab2;
+$input-border-color: #ffd166;
+$input-focus-border-color: #007bff;
+$form-background-color: #f8f9fa;
+$form-padding: 20px;
+$form-border-radius: 8px;
+$form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$form-outline-color: #ffd166;
+$brand-color: #118ab2;
+$brand-font-size: 3rem;
+$brand-font-weight: bold;
+$brand-underline-color: #ffd166;
 
 // Login container
 .login-container {
@@ -18,8 +18,8 @@ $brand-underline-color: #ffd166;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; 
-  text-align: center; 
+  height: 100vh;
+  text-align: center;
 
   .form-container {
     background-color: $form-background-color;
@@ -55,13 +55,13 @@ form {
     }
 
     .form-control {
-      border: 1px solid $input-border-color; 
+      border: 1px solid $input-border-color;
       border-radius: 4px;
       padding: 0.5rem;
-      transition: border-color 0.3s ease; 
+      transition: border-color 0.3s ease;
 
       &:focus {
-        border-color: $input-focus-border-color; 
+        border-color: $input-focus-border-color;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
       }
     }
@@ -72,30 +72,30 @@ form {
   }
 
   .submit-button {
-    margin-top: 1rem; 
+    margin-top: 1rem;
     background-color: $primary-color;
     border: none;
     border-radius: 4px;
     padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease; 
+    transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darken($primary-color, 10%); 
+      background-color: darken($primary-color, 10%);
     }
   }
 
   .toggle-button {
-    margin-top: 1rem; 
+    margin-top: 1rem;
   }
 }
 
 // Responsive styles
 @media (min-width: 576px) {
   .form-container {
-    padding: 30px; 
+    padding: 30px;
   }
 
   .submit-button {
-    padding: 0.75rem 1.5rem; 
+    padding: 0.75rem 1.5rem;
   }
 }
