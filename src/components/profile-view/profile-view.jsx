@@ -4,7 +4,7 @@ import UpdateUser from "./update-user";
 import { UserInfo } from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
 import "./profile-view.scss";
-import "../movie-card/movie-card.scss";
+import "../main-view/main-view.scss";
 
 
 export const ProfileView = ({
@@ -118,6 +118,7 @@ export const ProfileView = ({
         <Col xs={12} sm={6}>
           <div className="favorite-movies">
             <h3 className="header">Favorite Movies</h3>
+            <div className="card-container">
             {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
               <FavoriteMovies
                 movies={movies}
@@ -130,6 +131,7 @@ export const ProfileView = ({
                 <div>No favorite movies yet!</div>
               </Col>
             )}
+          </div>
           </div>
         </Col>
       </Row>

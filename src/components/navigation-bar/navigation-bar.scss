@@ -18,7 +18,7 @@ $logout-link-color: $link-color; // Blue color
     color: $brand-color;
     font-size: 3rem;
     font-weight: bold;
-    text-decoration: underline #ffd166;
+    text-decoration: underline 0.25rem #ffd166;
 
     &:hover {
       color: $border-color; // Use yellow color on hover

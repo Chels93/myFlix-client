@@ -7,10 +7,16 @@ $form-padding: 20px; // Padding for the form
 $form-border-radius: 8px; // Border radius for the form
 $form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Box shadow for the form
 $form-outline-color: #ffd166; // Outline color for the form
+$card-gap-large: 1rem; // Reduced gap between cards on large screens
+$card-gap-medium: 0.75rem; // Reduced gap between cards on medium screens
+$card-gap-small: 0.5rem; // Reduced gap between cards on small screens
+$card-padding-small: 1rem; // Increased padding for small screens
+$card-padding-large: 1.5rem; // Standard padding for larger screens
 
 // Search input style
 .search-input {
     border: 2px solid $input-border-color; // Yellow border
+    border-width: 0.25rem;
     border-radius: 4px; // Rounded corners
     padding: 8px; // Padding inside the input
     font-size: 16px; // Font size
@@ -23,44 +29,52 @@ $form-outline-color: #ffd166; // Outline color for the form
     padding: 1rem; // Padding around the main view content
 }
 
-// MovieCard container styles
+// Main container for movie cards
 .card-container {
-    display: flex;
-    flex-wrap: wrap; // Allow cards to wrap to the next line
-    justify-content: center; // Center the cards in the container
-    gap: 1.5rem; // Space between the cards
-    margin: 0 auto; // Center the container horizontally
-
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); // Default layout with flexible columns
+    gap: 1rem; // Space between cards
+    padding: 1rem; // Padding around the grid
+    justify-content: center;
+  
     @media (max-width: 768px) {
-        gap: 1rem; // Reduce gap between cards on smaller screens
-        padding: 0 1rem; // Add padding to prevent edge touching
+      grid-template-columns: repeat(2, 1fr); // Two cards per row on medium screens
+      gap: 0.5rem; // Adjust gap for smaller screens
     }
-}
+  
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr; // One card per row on small screens
+      gap: 0.5rem; // Adjust gap for smaller screens
+    }
+  }
+  
 
-// Styles for movie cards
+// MovieCard styles
 .movie-card {
-    width: 20rem; // Fixed width for all cards
-    height: 32rem; // Fixed height for all cards
-    overflow: hidden; // Prevent content overflow
-    border: 1px solid #ddd; // Border for the card
-    border-radius: 1rem; // Rounded corners
-    background-color: #ffffff; // Background color
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Box shadow
-    margin-bottom: 2rem; // Space between cards
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 30rem; // Fixed height for all cards
+    width: 18rem; // Fixed width for all cards
+    overflow: hidden; // Prevent overflow of content
+    border: 1px solid #ddd; // Example border, adjust as needed
+    border-radius: 0.5rem; // Example border radius, adjust as needed
+    margin-bottom: 1rem; // Space between cards vertically
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); // Add subtle shadow for better visual separation
+    flex: 1 1 calc(25% - 1.5rem); // Adjust width for responsiveness with space for gap
+    box-sizing: border-box; // Include padding and border in the width
+    padding: $card-padding-large; // Standard padding
 
+    // Adjust the size and padding of movie cards on smaller screens
     @media (max-width: 768px) {
-        width: calc(100% - 2rem); // Adjust width for smaller screens
-        max-width: 20rem; // Limit maximum width
+        flex: 1 1 calc(50% - 1rem); // Two cards per row with space for gap
+        padding: $card-padding-small; // Increased padding inside the card
     }
-}
 
-// Adjustments for rows and columns
-.row {
-    margin-bottom: 2rem; // Space out rows
-}
-
-.col-md-3 {
-    padding: 0.5rem; // Adjust padding for columns
+    @media (max-width: 480px) {
+        flex: 1 1 100%; // One card per row on very small screens
+        padding: $card-padding-small; // Increased padding inside the card
+    }
 }
 
 // Responsive styles for larger screens
@@ -78,6 +92,6 @@ $form-outline-color: #ffd166; // Outline color for the form
     }
 
     .movie-card {
-        padding: 1.5rem; // Increase padding inside the card
+        padding: $card-padding-large; // Increase padding inside the card
     }
 }
