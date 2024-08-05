@@ -64,7 +64,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Leave blank if you don't want to change."
+              placeholder="Please enter a new username."
             />
           </Form.Group>
 
@@ -75,7 +75,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Leave blank if you don't want to change."
+              placeholder="Please enter a new password."
             />
           </Form.Group>
 
@@ -86,7 +86,7 @@ const UpdateUser = ({ user, onUserUpdate }) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Leave blank if you don't want to change."
+              placeholder="Please enter a new e-mail address."
             />
           </Form.Group>
           <Form.Group className="update-header" controlId="formBirthdate">

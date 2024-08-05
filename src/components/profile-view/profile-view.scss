@@ -153,6 +153,12 @@ $card-image-height: 15rem;
     .form-input {
       color: $info-label-color;
       margin-bottom: 1rem;
+
+      &::placeholder {
+        color: $info-label-color !important;
+        opacity: 0.7 !important;
+        font-style: italic !important;
+      }
     }
 
     .btn-primary,

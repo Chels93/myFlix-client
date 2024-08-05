@@ -42305,7 +42305,7 @@ const UpdateUser = ({ user, onUserUpdate })=>{
                                     type: "text",
                                     value: username,
                                     onChange: (e)=>setUsername(e.target.value),
-                                    placeholder: "Leave blank if you don't want to change."
+                                    placeholder: "Please enter a new username."
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/update-user.jsx",
                                     lineNumber: 62,
@@ -42334,7 +42334,7 @@ const UpdateUser = ({ user, onUserUpdate })=>{
                                     type: "password",
                                     value: password,
                                     onChange: (e)=>setPassword(e.target.value),
-                                    placeholder: "Leave blank if you don't want to change."
+                                    placeholder: "Please enter a new password."
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/update-user.jsx",
                                     lineNumber: 73,
@@ -42363,7 +42363,7 @@ const UpdateUser = ({ user, onUserUpdate })=>{
                                     type: "email",
                                     value: email,
                                     onChange: (e)=>setEmail(e.target.value),
-                                    placeholder: "Leave blank if you don't want to change."
+                                    placeholder: "Please enter a new e-mail address."
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/update-user.jsx",
                                     lineNumber: 84,

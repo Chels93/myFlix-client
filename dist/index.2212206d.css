@@ -251,6 +251,12 @@
   margin-bottom: 1rem;
 }
 
+.profile-view-container .update-user .form-input::placeholder {
+  color: #073b4c !important;
+  opacity: .7 !important;
+  font-style: italic !important;
+}
+
 .profile-view-container .update-user .btn-primary, .profile-view-container .update-user .btn-secondary {
   border: none;
   width: 100%;
