@@ -77,7 +77,7 @@ export const LoginView = ({ onLoggedIn, onSignedUp }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formPassword">
+          <Form.Group controlId="formPassword" className="password-group">
             <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"

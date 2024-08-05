@@ -411,6 +411,7 @@ form .form-group {
 
 form .form-group .form-label {
   color: #333;
+  padding: 1rem;
   font-weight: bold;
 }
 
@@ -424,6 +425,10 @@ form .form-group .form-control {
 form .form-group .form-control:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 .2rem #007bff40;
+}
+
+form .password-group {
+  margin-top: 1rem;
 }
 
 form .submit-button {

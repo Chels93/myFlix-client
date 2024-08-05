@@ -1,6 +1,6 @@
 // Define colors and common variables
-$primary-color: #118ab2; // Updated primary button color
-$input-border-color: #ffd166; // Updated border color for inputs
+$primary-color: #118ab2; // Primary button color
+$input-border-color: #ffd166; // Border color for inputs
 $input-focus-border-color: #007bff; // Border color for inputs on focus
 $form-background-color: #f8f9fa; // Background color for the form
 $form-padding: 20px; // Padding for the form
@@ -10,7 +10,7 @@ $form-outline-color: #ffd166; // Outline color for the form
 
 // Brand styles
 $brand-color: #118ab2; // Brand color
-$brand-font-size: 3rem; // Font size for brand text (adjusted)
+$brand-font-size: 3rem; // Font size for brand text
 $brand-font-weight: bold; // Font weight for brand text
 $brand-underline-color: #ffd166; // Underline color for brand text
 
@@ -53,10 +53,11 @@ form {
     .form-label {
       font-weight: bold;
       color: #333; // Dark color for labels
+      padding: 1rem;
     }
 
     .form-control {
-      border: 1px solid $input-border-color; // Updated border color
+      border: 1px solid $input-border-color; // Border color for inputs
       border-radius: 4px;
       padding: 0.5rem;
       transition: border-color 0.3s ease; // Smooth transition for border color
@@ -66,6 +67,10 @@ form {
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); // Blue glow effect on focus
       }
     }
+  }
+
+  .password-group {
+    margin-top: 1rem; // Add space between the "Password" label and the form input for "username"
   }
 
   .submit-button {

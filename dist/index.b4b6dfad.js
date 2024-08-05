@@ -41762,6 +41762,7 @@ const LoginView = ({ onLoggedIn, onSignedUp })=>{
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
                             controlId: "formPassword",
+                            className: "password-group",
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                                     children: "Password:"
