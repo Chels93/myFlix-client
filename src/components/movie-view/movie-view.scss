@@ -5,6 +5,12 @@ $button-border-color: #ef476f; // Border color for buttons
 $card-background-color: #ffffff; // Background color for the card
 $button-spacing: 1rem; // Space around the button
 $button-width: 100%; // Full width for buttons
+$card-padding-large: 1.5rem; // Standard padding for larger screens
+$card-padding-small: 1rem; // Reduced padding for smaller screens
+
+$breakpoint-lg: 992px; // Large screens (e.g., tablets)
+$breakpoint-md: 768px; // Medium screens (e.g., small tablets)
+$breakpoint-sm: 576px; // Small screens (e.g., mobile phones)
 
 // Style for the MovieView component
 .movie-view {
@@ -69,26 +75,41 @@ $button-width: 100%; // Full width for buttons
     cursor: pointer;
 
     &:hover {
-      background-color: darken 10%; // Darken button background on hover
-      border: 2px solid #ffd166;; // Border color for the button
-      color: $button-text-color; // Text color on hover
+        background-color: darken(#118ab2, 10%); // Darker blue on hover
+        color: $button-text-color; // White text color on hover
+        border: 1px solid $button-text-color; // Blue border color on hover
     }
   }
 
   .favorites-button {
-    background-color: #ffffff; // Background color
-    border: 2px solid #ef476f; // Border color
-    color: #ef476f; // Text color
-    font-weight: bold;
-    width: 100%; // Full width of the card
-    margin-top: 2rem; // Space above the button
-    padding: 0.75rem; // Padding for the button
-    border-radius: 0.5rem; // Rounded corners for the button
-    display: block; // Ensure the button is a block element to span full width
+    width: 100%;
+      background-color: #ffffff;
+      color: #ef476f;
+      border: 2px solid $button-border-color;
+      margin-bottom: $button-spacing; // Space between this button and the "See More" button
   
     &:hover {
       background-color: darken(#ef476f, 10%); // Darker color on hover
       color: #ffffff; // Text color on hover
+      border: none;
+      outline: none;
     }
 }
+@media (max-width: $breakpoint-lg) {
+    max-width: 18rem; // Adjust width for large tablets
+    justify-content: center;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    max-width: 15rem; // Adjust width for small tablets and larger phones
+    padding: $card-padding-small; // Adjust padding for medium screens
+    justify-content: center;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    max-width: 12rem; // Adjust width for mobile phones
+    margin: 0.5rem; // Reduce margin for smaller screens
+    padding: $card-padding-small; // Further reduced padding for small screens
+    justify-content: center;
+  }
 }

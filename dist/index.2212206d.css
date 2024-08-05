@@ -351,26 +351,48 @@
 }
 
 .movie-view .back-button:hover {
-  background-color: darken 10%;
   color: #fff;
-  border: 2px solid #ffd166;
+  background-color: #0d6683;
+  border: 1px solid #fff;
 }
 
 .movie-view .favorites-button {
   color: #ef476f;
   background-color: #fff;
   border: 2px solid #ef476f;
-  border-radius: .5rem;
   width: 100%;
-  margin-top: 2rem;
-  padding: .75rem;
-  font-weight: bold;
-  display: block;
+  margin-bottom: 1rem;
 }
 
 .movie-view .favorites-button:hover {
   color: #fff;
   background-color: #eb184a;
+  border: none;
+  outline: none;
+}
+
+@media (width <= 992px) {
+  .movie-view {
+    justify-content: center;
+    max-width: 18rem;
+  }
+}
+
+@media (width <= 768px) {
+  .movie-view {
+    justify-content: center;
+    max-width: 15rem;
+    padding: 1rem;
+  }
+}
+
+@media (width <= 576px) {
+  .movie-view {
+    justify-content: center;
+    max-width: 12rem;
+    margin: .5rem;
+    padding: 1rem;
+  }
 }
 
 .login-container {
