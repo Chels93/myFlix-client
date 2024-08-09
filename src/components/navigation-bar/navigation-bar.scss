@@ -1,0 +1,72 @@
+// Common variables
+$navbar-bg-color: #f8f9fa; 
+$brand-color: #118ab2; 
+$link-color: #118ab2; 
+$link-hover-color: #ffd166; 
+$dropdown-bg-color: #ffffff; 
+$border-color: #ffd166; 
+$home-link-color: $link-color; 
+$profile-link-color: $link-color; 
+$logout-link-color: $link-color; 
+
+// Navbar styles
+.navbar {
+  background-color: $navbar-bg-color;
+
+  .navbar-brand {
+    color: $brand-color;
+    font-size: 3rem;
+    font-weight: bold;
+    text-decoration: underline 0.25rem #ffd166;
+
+    &:hover {
+      color: $border-color; 
+    }
+  }
+
+  .navbar-toggler {
+    border-color: $border-color;
+    border-width: 0.25rem;
+    background: none; 
+    box-shadow: none; 
+    outline: none; 
+    &:focus,
+    &:hover {
+        border-color: darken($border-color, 10%); 
+        box-shadow: 0 0 0 0.2rem rgba($border-color, 0.5); 
+    }
+  }
+
+  .navbar-collapse {
+    border-top: 1px solid $border-color;
+
+    .nav {
+      .nav-link {
+        color: $link-color;
+        font-size: 1.25rem; 
+        font-weight: bold;
+        padding: 0.75rem 1.25rem; 
+        text-decoration: underline #ffd166; 
+
+        &:hover {
+          color: $link-hover-color; 
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (min-width: 992px) {
+  .navbar {
+    .navbar-collapse {
+      border-top: none;
+
+      .nav {
+        .nav-link {
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
+}

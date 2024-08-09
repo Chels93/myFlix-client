@@ -1,0 +1,96 @@
+// Common variables
+$primary-color: #118ab2;
+$input-border-color: #ffd166;
+$input-focus-border-color: #007bff;
+$form-background-color: #f8f9fa;
+$form-padding: 20px;
+$form-border-radius: 8px;
+$form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$form-outline-color: #ffd166;
+$card-gap-large: 1rem;
+$card-gap-medium: 0.75rem;
+$card-gap-small: 0.5rem;
+$card-padding-small: 1rem;
+$card-padding-large: 1.5rem;
+
+// Search input style
+.search-input {
+  border: 2px solid $input-border-color;
+  border-width: 0.25rem;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// Main view container padding
+.main-view-container {
+  padding: 1rem;
+}
+
+// Main container for movie cards
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+// MovieCard styles
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30rem;
+  width: 18rem;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(25% - 1.5rem);
+  box-sizing: border-box;
+  padding: $card-padding-large;
+
+  // Responsive styles
+  @media (max-width: 768px) {
+    flex: 1 1 calc(50% - 1rem);
+    padding: $card-padding-small;
+  }
+
+  @media (max-width: 480px) {
+    flex: 1 1 100%;
+    padding: $card-padding-small;
+  }
+}
+
+// Responsive styles for larger screens
+@media (min-width: 576px) {
+  .form-container {
+    padding: 30px;
+  }
+
+  .submit-button {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .search-input {
+    padding: 0.75rem;
+  }
+
+  .movie-card {
+    padding: $card-padding-large;
+  }
+}
