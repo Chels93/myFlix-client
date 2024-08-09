@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./movie-card.scss";
-import "../profile-view/profile-view.scss";
 
 const MovieCard = ({
   movie,
@@ -11,6 +10,7 @@ const MovieCard = ({
   onMovieClick,
   onAddToFavorites,
   onRemoveFromFavorites,
+  
 }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(fav);
@@ -32,18 +32,26 @@ const MovieCard = ({
   };
 
   return (
-    <Card className="movie-card">
-      <div className="card-img-container">
-        <Card.Img
-          className="card-img"
-          variant="top"
-          src={movie.imagePath}
-          alt={`${movie.title} poster`}
-        />
-      </div>
-      <Card.Body className="card-body">
-        <Card.Title className="card-title">{movie.title}</Card.Title>
-        <Button className="see-more" onClick={handleSeeMore} variant="primary">
+    <Card
+      className="h-100"
+      style={{ width: "18rem", border: "3px solid gray" }}
+    >
+      <Card.Img
+        variant="top"
+        src={movie.imagePath}
+        alt={`${movie.title} poster`}
+      />
+      <Card.Body>
+        <Card.Title
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+          }}
+        >
+          {movie.title}
+        </Card.Title>
+        <Button className="see-more" onClick={handleSeeMore}>
           See More
         </Button>
         <Button
@@ -61,7 +69,6 @@ const MovieCard = ({
 MovieCard.propTypes = {
   fav: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
     imagePath: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     synopsis: PropTypes.string.isRequired,
