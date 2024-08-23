@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./movie-view.scss";
 import "../movie-card/movie-card.scss";
 
 export const MovieView = ({
-  movie,
+  movies,
   onAddToFavorites,
   onRemoveFromFavorites,
   isFavorite,
 }) => {
+  const { movieId } = useParams(); // Get the movieId from the URL
   const navigate = useNavigate();
+  const [movie, setMovie] = useState(null);
   const [favorite, setFavorite] = useState(isFavorite);
 
+  useEffect(() => {
+    const foundMovie = movies.find((movie) => movie._id === movieId);
+    if (foundMovie) {
+      setMovie(foundMovie);
+      setFavorite(foundMovie.isFavorite || false); // Initialize favorite state
+    } else {
+      // Handle case where movie is not found
+      console.error("Movie not found:", movieId);
+    }
+  }, [movieId, movies]);
+
   if (!movie) {
-    return null;
+    return <div>Loading...</div>;
   }
 
   const handleBackClick = () => {
@@ -91,23 +104,27 @@ export const MovieView = ({
 };
 
 MovieView.propTypes = {
-  movie: PropTypes.shape({
-    imagePath: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    synopsis: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    genre: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-    }).isRequired,
-    director: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      bio: PropTypes.string.isRequired,
-      birthYear: PropTypes.string,
-      deathYear: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      imagePath: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      synopsis: PropTypes.string.isRequired,
+      year: PropTypes.string.isRequired,
+      genre: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      }).isRequired,
+      director: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        bio: PropTypes.string.isRequired,
+        birthYear: PropTypes.string,
+        deathYear: PropTypes.string,
+      }).isRequired,
+      isFavorite: PropTypes.bool, // Add isFavorite to match the state
+    })
+  ).isRequired,
   onAddToFavorites: PropTypes.func.isRequired,
   onRemoveFromFavorites: PropTypes.func.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool,
 };

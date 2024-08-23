@@ -17,7 +17,11 @@ const MovieCard = ({
 
   const handleSeeMore = () => {
     navigate(`/movies/${movie._id}`);
-    onMovieClick(movie);
+    if (typeof onMovieClick === 'function') {
+      onMovieClick(movie);
+    } else {
+      console.error("onMovieClick is not a function");
+    }
   };
 
   const handleFavoriteClick = (event) => {
@@ -77,7 +81,7 @@ MovieCard.propTypes = {
       deathYear: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  onMovieClick: PropTypes.func,
   onAddToFavorites: PropTypes.func.isRequired,
   onRemoveFromFavorites: PropTypes.func.isRequired,
 };

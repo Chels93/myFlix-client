@@ -213,6 +213,7 @@ export const MainView = () => {
                 <Col md={8} style={{ border: "1px solid black" }}>
                   {selectedMovie ? (
                     <MovieView
+                      movies={movies}
                       movie={selectedMovie}
                       onBackClick={handleBackClick}
                       onAddToFavorites={handleAddToFavorites}

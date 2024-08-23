@@ -42,7 +42,6 @@
 }
 
 .movie-card .card-body .card-title {
-  -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   margin: 2rem 0 .5rem;

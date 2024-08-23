@@ -33,7 +33,7 @@ export const FavoriteMovies = ({
           throw new Error("Failed to fetch favorite movies");
         }
         const userdata = await response.json();
-        setFavoriteMovies(userdata.favoriteMovies);
+        setFavoriteMovies(userdata.favoriteMovies || []);
       } catch (error) {
         console.error("Error fetching favorite movies:", error);
       }
@@ -43,7 +43,9 @@ export const FavoriteMovies = ({
   }, [user, token]);
 
   useEffect(() => {
-    setFavoriteMovies(user.favoriteMovies);
+    if (user && user.favoriteMovies) {
+      setFavoriteMovies(user.favoriteMovies);
+    }
   }, [user]);
 
   if (
@@ -82,7 +84,7 @@ export const FavoriteMovies = ({
                   movie={movie}
                   fav={true}
                   onMovieClick={() => handleMovieClick(movie)}
-                  onFavoriteClick={onFavoriteClick}
+                  onFavoriteClick={() => onFavoriteClick(movie._id, true)}
                   onAddToFavorites={() => onAddToFavorites(movie._id)}
                   onRemoveFromFavorites={() => onRemoveFromFavorites(movie._id)}
                 />
