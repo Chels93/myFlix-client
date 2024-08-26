@@ -24,6 +24,23 @@ $card-padding-large: 1.5rem;
   box-sizing: border-box;
 }
 
+.filter-container {
+  display: flex;
+  justify-content: flex-end; // Align filters to the right
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-end; // Align items to the right on smaller screens
+  }
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
 // Main view container padding
 .main-view-container {
   padding: 1rem;

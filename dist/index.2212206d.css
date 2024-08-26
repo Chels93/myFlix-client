@@ -546,6 +546,25 @@ form .toggle-button {
   font-size: 16px;
 }
 
+.filter-container {
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+@media (width <= 768px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
 .main-view-container {
   padding: 1rem;
 }
