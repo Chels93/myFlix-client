@@ -117,12 +117,6 @@ export const ProfileView = ({
           </div>
           <div className="user-update">
             <UpdateUser user={user} onUserUpdate={handleUpdate} />
-            <button
-              className="btn btn-danger mt-3"
-              onClick={handleDeregisterUser}
-            >
-              Deregister User
-            </button>
           </div>
         </Col>
         <Col xs={12} sm={6}>
