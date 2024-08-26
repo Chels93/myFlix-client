@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "react-bootstrap";
+import "./profile-view.scss";
 
 export const DeregisterUser = ({ user, token }) => {
   const handleDeregisterClick = () => {
@@ -12,24 +14,24 @@ export const DeregisterUser = ({ user, token }) => {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
       }
     )
       .then((response) => {
         if (!response.ok) {
-            return response.text().then((text) => {
-                console.error("Error response text: ", text);
-                throw new Error(text || "Failed to deregister user");
-            });
+          return response.text().then((text) => {
+            console.error("Error response text: ", text);
+            throw new Error(text || "Failed to deregister user");
+          });
         }
         return response.text();
       })
       .then((data) => {
         alert("User deregistered successfully! " + data);
-       localStorage.removeItem("token");
-       localStorage.removeItem("user");
-       window.location.reload();
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error deregistering user: ", error);
@@ -39,7 +41,9 @@ export const DeregisterUser = ({ user, token }) => {
 
   return (
     <div>
-      <button onClick={handleDeregisterClick}>Deregister User</button>
+      <Button onClick={handleDeregisterClick} className="btn-secondary">
+        Deregister User
+      </Button>
     </div>
   );
 };
