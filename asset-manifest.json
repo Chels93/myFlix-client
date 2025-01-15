@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/myFlix-client/static/css/main.75a6b8ef.chunk.css",
+    "main.js": "/myFlix-client/static/js/main.3d7ec335.chunk.js",
+    "main.js.map": "/myFlix-client/static/js/main.3d7ec335.chunk.js.map",
+    "runtime-main.js": "/myFlix-client/static/js/runtime-main.fb665982.js",
+    "runtime-main.js.map": "/myFlix-client/static/js/runtime-main.fb665982.js.map",
+    "static/css/2.0b7f02c2.chunk.css": "/myFlix-client/static/css/2.0b7f02c2.chunk.css",
+    "static/js/2.8b39461f.chunk.js": "/myFlix-client/static/js/2.8b39461f.chunk.js",
+    "static/js/2.8b39461f.chunk.js.map": "/myFlix-client/static/js/2.8b39461f.chunk.js.map",
+    "index.html": "/myFlix-client/index.html",
+    "static/css/2.0b7f02c2.chunk.css.map": "/myFlix-client/static/css/2.0b7f02c2.chunk.css.map",
+    "static/css/main.75a6b8ef.chunk.css.map": "/myFlix-client/static/css/main.75a6b8ef.chunk.css.map",
+    "static/js/2.8b39461f.chunk.js.LICENSE.txt": "/myFlix-client/static/js/2.8b39461f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fb665982.js",
+    "static/css/2.0b7f02c2.chunk.css",
+    "static/js/2.8b39461f.chunk.js",
+    "static/css/main.75a6b8ef.chunk.css",
+    "static/js/main.3d7ec335.chunk.js"
+  ]
+}
